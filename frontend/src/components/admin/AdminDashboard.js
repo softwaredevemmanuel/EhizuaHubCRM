@@ -17,7 +17,7 @@ const AdminDashboard = () => {
             <Sidebar/>
 
             {/* right section  */}
-            <div className="w-full  bg-[#C8D1DA] px-6 flex flex-col gap-8">
+            <div className="w-full  bg-[#C8D1DA] px-6 flex flex-col gap-3">
                 <div className="flex justify-between  text-white py-3 items-start border-b  border-[#DD137B]">
                     <div className="pt-[70px]">
                         <p className="text-[2rem] font-bold">Welcome Admin</p>
