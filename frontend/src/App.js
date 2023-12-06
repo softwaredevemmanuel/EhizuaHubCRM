@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // ADMIN - SECTION
-import Login from './components/admin/Login';
+import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import OfficeLocations from './components/admin/OfficeLocations';
 
@@ -38,7 +38,7 @@ function App() {
       <BrowserRouter>
       <Routes>
           {/* __________ADMIN SECTION______________ */}
-          <Route path='/' element={<Login/>} />
+          <Route path='/' element={<AdminLogin/>} />
           <Route path='dashboard/hr' element={<AdminDashboard/>} />
           <Route path='office-locations/hr' element={<OfficeLocations/>} />
 
