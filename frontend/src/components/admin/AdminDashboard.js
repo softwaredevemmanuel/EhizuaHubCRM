@@ -21,7 +21,7 @@ const AdminDashboard = () => {
                 <div className="flex justify-between  text-white py-3 items-start border-b  border-[#DD137B]">
                     <div className="pt-[70px]">
                         <p className="text-[2rem] font-bold">Welcome Admin</p>
-                        <p>Streamlining Management, One Click at a Time again now</p>
+                        <p>Streamlining Management, One Click at a Time before</p>
                     </div>
 
                     <div className="bg-black text-white flex flex-col items-center justify-center px-2">
