@@ -11,7 +11,7 @@ const EhizuaStudents = () => {
       <div>
       <div className='flex items-center justify-center  gap-4 md:ml-[-20px] px-6' >
       <h2 className='text-[30px] w-full  lg:text-[34px] md:ml-[-16px] pt-7 pb-1 lg:pb-0  text-[#F13178] ml-[-20px] font-bold' >Location</h2>
-      
+ 
       
       </div>
       <div className='border-b-2 mt-3  md:ml-[-10px] ml-1   border-[#F13178]'></div>
@@ -29,7 +29,7 @@ const EhizuaStudents = () => {
                 <h3>EHIZUA HUB</h3>
                 <h3>AWOYAYA</h3>
                 </div>
-        </Link>
+              </Link>
         
         <Link className='bg-[#2E5881] px-5 flex items-center gap-7 h-[150px] rounded-[14px] md:w-[250px] w-[320px]'>
               <img className='w-[80px]' src={hub3} alt="" />
