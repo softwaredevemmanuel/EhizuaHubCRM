@@ -9,7 +9,7 @@ const EhizuaStudents = () => {
       <Sidebar />
       <div className="w-full lg:h-[1000px] h-[1500px] md:h-[1200px] bg-[#C8D1DA] pl-6 flex flex-col gap-3">
         <div>
-          <div className='flex items-center justify-center  gap-4 md:ml-[-20px] px-6' >
+          <div className='flex items-center justify-center  gap-4 md:ml-[-20px] px-4' >
             <h2 className='text-[30px] w-full  lg:text-[34px] md:ml-[-16px] pt-7 pb-1 lg:pb-0  text-[#F13178] ml-[-20px] font-bold' >Location</h2>
 
 
