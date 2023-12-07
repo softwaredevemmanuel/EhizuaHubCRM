@@ -20,6 +20,7 @@ import HrStaffMemo from './components/admin/staff/Memo';
 import HrStudentfCourse from './components/admin/students/Course';
 import HrStudentfMemo from './components/admin/students/Memo';
 import HrStudentSection from './components/admin/students/EhizuaStudents';
+import HrAllStudent from './components/admin/students/AllEhizuaStudents';
 import HrStudentAttendance from './components/admin/students/Attendance';
 import HrStudentComplaints from './components/admin/students/Complaints';
 
@@ -55,6 +56,7 @@ function App() {
           <Route path='student-course/hr' element={<HrStudentfCourse/>} />
           <Route path='student-memo/hr' element={<HrStudentfMemo/>} />
           <Route path='ehizua-students/hr' element={<HrStudentSection/>} />
+          <Route path='all-students/hr' element={<HrAllStudent/>} />
           <Route path='student-attendance/hr' element={<HrStudentAttendance/>} />
           <Route path='student-complaints/hr' element={<HrStudentComplaints/>} />
 
