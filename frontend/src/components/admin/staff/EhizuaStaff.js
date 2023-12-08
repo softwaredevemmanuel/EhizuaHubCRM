@@ -1,150 +1,123 @@
 import React from 'react'
 import Sidebar from '../Sidebar'
-
-
+import {Link} from 'react-router-dom'
+import {  FaPlus  } from "react-icons/fa";
+import { MdArrowDropDown } from "react-icons/md";
+import { useState } from 'react'
 const EhizuaStaff = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isPosition, setIsPosition] = useState(false);
+
+  const showPositions = () => {
+     setIsPosition(!isPosition);
+    setIsOpen(false);
+    
+  };
+
+  const showLocations = () => {
+    setIsOpen(!isOpen);
+    setIsPosition(false);
+    
+  };
+
+  const data = [
+    [' 1', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 2', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 3', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 4', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 5', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 7', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 8', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 9', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 10', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 11', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 12', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    [' 13', 'Okereke Emmanuel', '09015653022', 'Yes', 'Example@gmail.com', 'View More'],
+    
+  ];
+
+
+
   return (
     <section className="flex-col flex md:flex-row justify-between w-full h-full">
-    <Sidebar/>
-    <div className="w-full  md:bg-[#C8D1DA] bg-[#134574]  flex flex-col gap-3 md:pl-5">
-    <div className='pl-6'>
-            <h4 className='w-full pt-12 font-bold text-[#f13178]  mb:pb-3 text-[22px] '>REGISTER STAFF FORM</h4>
-            <div className='border-b-2 border-[#f13178] '></div>
+        <Sidebar/>
+        <div className="w-full  bg-[#C8D1DA] flex flex-col gap-3 pl-5">
+          <div>
+            <h4 className='w-full pt-12 font-bold text-[#1A3751] pb-3 text-[22px]'>LIST OF STAFF</h4>
+            <div className='border-b-2 border-[#f13178]'></div>
            
           </div>
-          <div className=" bg-[#134574] text-white md:w-[1119px] md:rounded-lg mx-auto p-4">
-      <form  className="max-w-md mx-auto">
-        {/* Personal Information */}
-        <div className="md:mb-2 mb-4 md:flex md:flex-row md:items-center md:text-center md:w-[800px] md:gap-14">
-          <label htmlFor="firstname" className='md:ml-[-300px]'>First Name:</label>
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            //value={formData.firstname}
-           // onChange={handleInputChange}
-            className="md:w-[600px] rounded-md p-3 w-full border "
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="lastname">Last Name:</label>
-          <input
-            type="text"
-            id="lastname"
-            name="lastname"
-            //value={formData.lastname}
-           // onChange={handleInputChange}
-            className="w-full border p-2"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder='email'
-            //value={formData.lastname}
-           // onChange={handleInputChange}
-            className="w-full border p-2"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="phone number">Phone Number:</label>
-          <input
-            type="number"
-            id="phone number"
-            name="phone number"
-            //value={formData.lastname}
-           // onChange={handleInputChange}
-            className="w-full border p-2"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label htmlFor="lastname">Job Description:</label>
-          <input
-            type="text"
-            id="job description"
-            name="job description"
-            //value={formData.lastname}
-           // onChange={handleInputChange}
-            className="w-full border p-2"
-            required
-          />
-        </div>
-
-        {/* Other fields... */}
-
-        <div className="mb-4 flex flex-row items-center gap-2">
-        <input
-            type="checkbox"
-            id="hubInstructor"
-            name="hubInstructor"
-            //checked={formData.hubInstructor}
-           // onChange={handleInputChange}
-           className='w-[20px] h-[20px]'
-          />
-          <label htmlFor="hubInstructor">Hub Instructor</label>
-
-          <input
-            type="checkbox"
-            id="schoolInstructor"
-            name="schoolInstructor"
-            //checked={formData.hubInstructor}
-           // onChange={handleInputChange}
-           className='w-[20px] h-[20px]'
-          />
-          <label htmlFor="SchoolInstructor">School Instructor</label>
-        
-        </div>
-
-        {/* Other checkboxes and select fields... */}
-
-        <div className="mb-4">
-          <label htmlFor="salary">Salary:</label>
-          <input
-            type="text"
-            id="salary"
-            name="salary"
-            //value={formData.salary}
-           // onChange={handleInputChange}
-            className="w-full border p-2"
-            required
-          />
-        </div>
-
-        {/* Other input fields... */}
-
-        <div className="mb-4">
-          <label htmlFor="nextOfKinAddress">Next of Kin Address:</label>
-          <textarea
-            id="nextOfKinAddress"
-            name="nextOfKinAddress"
-            //value={formData.nextOfKinAddress}
-            //onChange={handleInputChange}
-            rows="4"
-            className="w-full border p-2"
-            required
-          />
-        </div>
-
-        {/* Submit Button */}
-        <button type="submit" className="bg-[#f13178] text-white p-6 rounded-md">
-          Submit
-        </button>
-      </form>
+          <div className=' w-[150px] flex flex-row bg-[#f13178] p-3 rounded-[6px] text-white font-bold items-center mt-4'>
+            <Link to='/register-staff/hr'>Create Staff</Link>
+            <FaPlus size={25}  className='pl-3  font-[30px]'/>
+           </div>
+           <div className='flex flex-row gap-12 md:gap-52 lg:gap-60'>
+           <div className='flex flex-row items-center relative'>
+            <h6 className='font-bold md:w-[250px] w-[200px]'>All Location</h6>
+            <MdArrowDropDown size={20}  className='text-[#f13178] ml-[-110px] md:ml-[-160px]'
+            onClick={showPositions}
+            />
+                  {isPosition && (
+              <div className="absolute bg-[#134574] top-6 left-2 md:w-[200px] w-[200px] lg:w-[210px] md:ml-20 ml-[-6px] flex flex-col gap-[18px] rounded-lg px-3 py-2 text-center text-white">
+              
+                <p className='flex flex-row w-[200px] text-[19px] items-center'>Ehizua hub Awoyaya</p>
+                <p className='flex flex-row items-center text-[19px]'>Ehizua hub Benin</p>
+                <p className='flex flex-row items-center text-[19px]'>Ehizua hub Abuja</p>
+              
+              </div>
+            )}
+            </div>
+            <div className='flex flex-row items-center relative'>
+            <h6 className='font-bold'>Position</h6>
+            <MdArrowDropDown size={20}  className='text-[#f13178]'
+             onClick={showLocations}
+             />
+                   {isOpen && (
+              <div className="absolute bg-[#134574] top-[-10px] md:ml-16 mt-8 left-[1px] mr-20 w-[210px] md:w-[220px] md:px-4 md:py-4 lg:w-[240px] flex flex-col rounded-lg px-2 py-2 gap-[10px] text-center text-white">
+                
+                <p className='flex flex-row items-center w-[200px] text-[18px]'>FrontEnd web Dev.</p>
+                <p className='flex flex-row items-center w-[200px] text-[18px]'>BackEnd web Dev.</p>
+                <p className='flex flex-row items-center w-[200px] text-[18px]'>UI/UX Director</p>
+                <p className='flex flex-row items-center w-[200px] text-[18px]'>HR</p>
+                <p className='flex flex-row items-center w-[200px] text-[18px]'>Ehizua Hub Director</p>
+                <p className='flex flex-row items-center w-[200px] text-[18px]'>CyberSecurity Instructor</p>
+                <p className='flex flex-row items-center w-[200px] text-[18px] '>Data Analytics Instructor</p>
+              
+              </div>
+            )}
+            </div>
+            </div>
+            <div className='overflow-x-auto'>
+      <table className="w-[750px] md:w-[600px] lg:w-[900px] bg-white border border-gray-500 h-[500px]">
+        <thead>
+          <tr>
+            <th className="border p-2  left-0 bg-white z-10">ID</th>
+            <th className="border p-2  left-0 bg-white z-10">Full-Name</th>
+            <th className="border p-2">Phone</th>
+            <th className="border p-2">Verified</th>
+            <th className="border p-2">Email</th>
+            <th className="border p-2">Action</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, index) => (
+            <tr key={index} className=''>
+              {row.map((cell, cellIndex) => (
+                <td key={cellIndex} className="border p-3">
+                  {cell}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    </div>
-  
-</section>
+          
+        </div>
+      
+    </section>
   )
 }
 

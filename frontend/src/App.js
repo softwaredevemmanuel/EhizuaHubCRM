@@ -15,6 +15,7 @@ import HrInventory from './components/admin/staff/Inventory';
 import HrStaffLeave from './components/admin/staff/Leave';
 import HrStaffLoan from './components/admin/staff/Loan';
 import HrStaffMemo from './components/admin/staff/Memo';
+import HrRegisterStaff from './components/admin/staff/RegisterStaff';
 
 // ADMIN - STUDENT SECTION
 import HrStudentfCourse from './components/admin/students/Course';
@@ -51,6 +52,7 @@ function App() {
           <Route path='staff-leave/hr' element={<HrStaffLeave/>} />
           <Route path='staff-loan/hr' element={<HrStaffLoan/>} />
           <Route path='staff-memo/hr' element={<HrStaffMemo/>} />
+          <Route path='register-staff/hr' element={<HrRegisterStaff/>} />
 
           {/* __________ADMIN - STUDENT SECTION ______________ */}
           <Route path='student-course/hr' element={<HrStudentfCourse/>} />
