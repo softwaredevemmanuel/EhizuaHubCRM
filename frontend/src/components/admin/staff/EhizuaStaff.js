@@ -42,7 +42,7 @@ const EhizuaStaff = () => {
   return (
     <section className="flex-col flex md:flex-row justify-between w-full h-full">
         <Sidebar/>
-        <div className="w-full  bg-[#C8D1DA] flex flex-col gap-3 pl-5">
+        <div className="w-full lg:ml-72   bg-[#C8D1DA] flex flex-col gap-3 pl-5">
           <div>
             <h4 className='w-full pt-12 font-bold text-[#1A3751] pb-3 text-[22px]'>LIST OF STAFF</h4>
             <div className='border-b-2 border-[#f13178]'></div>
