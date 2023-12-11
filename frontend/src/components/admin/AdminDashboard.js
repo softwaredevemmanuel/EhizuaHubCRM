@@ -1,23 +1,87 @@
+
+import dashboard from "../../assets/Dashboard.svg"
+import logo from "../../assets/ehizuahublogo.png"
+import { FaTools } from "react-icons/fa";
+import { CiMenuFries } from "react-icons/ci";
+import { IoClose } from "react-icons/io5";
+import { RiHomeOfficeFill } from "react-icons/ri";
+import { CiMemoPad } from "react-icons/ci";
+import { HiClipboardList } from "react-icons/hi";
+import { MdCelebration, MdMenuBook } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
 import { PiStudent } from "react-icons/pi";
 import { FaUserMinus } from "react-icons/fa6";
 import { BsPatchQuestionFill } from "react-icons/bs";
-import { MdCelebration } from "react-icons/md";
+import { GiReceiveMoney } from "react-icons/gi";
+import { FaBuilding } from "react-icons/fa";
+import { CiDiscount1 } from "react-icons/ci";
+import { MdDashboard } from "react-icons/md";
+import { useState,Fragment } from "react"
 import { Link } from "react-router-dom";
 
+
+import { Dialog, Menu, Transition } from '@headlessui/react'
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline'
+import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import Sidebar from "./Sidebar";
 
+const staff = [
+    { id: "1", icon: <CiMemoPad />, name: "Memo", url: "staff-memo/hr" },
+    { id: "2", icon: <HiClipboardList />, name: "Attendance", url: "staff-attendance/hr" },
+    { id: "3", icon: <IoMdPerson />, name: "Staff Section", url: "ehizua-staff/hr" },
+    { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff-complaints/hr" },
+    { id: "5", icon: <FaTools />, name: "Inventory", url: "inventory/hr" },
+    { id: "6", icon: <GiReceiveMoney />, name: "Loan", url: "staff-loan/hr" },
+    { id: "7", icon: <FaUserMinus />, name: "Leave section", url: "staff-leave/hr" },
+
+]
+const school = [
+    { id: "1", icon: <CiMemoPad />, name: "Memo", url: "school-memo/hr" },
+    { id: "2", icon: <FaBuilding />, name: "Patner Schools", url: "partner-schools/hr" },
+    { id: "3", icon: <CiDiscount1 />, name: "Course Discounts", url: "school-course-discount/hr" },
+    { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "school-complaints/hr" },
+
+]
+
+const students = [
+    { id: "1", icon: <MdMenuBook />, name: "Courses and Curriculum", url: "student-course/hr" },
+    { id: "2", icon: <CiMemoPad />, name: "Memo", url: "student-memo/hr" },
+    { id: "3", icon: <PiStudent />, name: "student Section", url: "ehizua-students/hr" },
+    { id: "4", icon: <HiClipboardList />, name: "Attendance", url: "student-attendance/hr" },
+    { id: "5", icon: <BsPatchQuestionFill />, name: "Complaints", url: "student-complaints/hr" },
+]
 
 
-const AdminDashboard = () => {
+const teams = [
+  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
+  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
+  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+]
+const userNavigation = [
+  { name: 'Your profile', href: '#' },
+  { name: 'Sign out', href: '#' },
+]
 
-    return (
-        <section className="flex-col flex md:flex-row justify-between w-full h-full">
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
-            <Sidebar/>
+export default function  AdminDashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
-            {/* right section  */}
-            <div className="w-full  bg-[#C8D1DA] px-6 flex flex-col gap-3">
+  return (
+    <div className="">
+    <Sidebar/>
+ 
+     
+        
+
+             {/* right section  */}
+            <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3">
                 <div className="flex justify-between  text-white py-3 items-start border-b  border-[#DD137B]">
                     <div className="pt-[70px]">
                         <p className="text-[2rem] font-bold">Welcome Admin</p>
@@ -88,8 +152,11 @@ const AdminDashboard = () => {
             </div>
 
 
-        </section>
-    )
-}
+     
 
-export default AdminDashboard
+
+
+   
+    </div>
+  )
+}
