@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 // ADMIN - SECTION
-import AdminLogin from './components/admin/AdminLogin';
+// import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import OfficeLocations from './components/admin/OfficeLocations';
-
+import Sidebar from './components/admin/Sidebar';
 
 // ADMIN - STAFF SECTION
 import HrStaffAttendence from './components/admin/staff/Attendence';
@@ -30,52 +30,54 @@ import HrSchoolMemo from './components/admin/partnerSchools/Memo';
 import HrPartnerSchool from './components/admin/partnerSchools/PartnerSchools';
 import HrSchoolCourseDiscount from './components/admin/partnerSchools/CourseDiscount';
 import HrSchoolComplaints from './components/admin/partnerSchools/Complaints';
+import Navbar from './components/admin/Navbar';
 
 
 
-function App() {
+const App = () => {
+  const user = true
+
   return (
-    <div>
-      
-      <BrowserRouter>
+
+    <Router>
+            {user ?  <Sidebar/> : <Navbar />}
+
       <Routes>
-          {/* __________ADMIN SECTION______________ */}
-          <Route path='/' element={<AdminLogin/>} />
-          <Route path='dashboard/hr' element={<AdminDashboard/>} />
-          <Route path='office-locations/hr' element={<OfficeLocations/>} />
 
-          {/* __________ADMIN - STAFF SECTION ______________ */}
-          <Route path='staff-attendance/hr' element={<HrStaffAttendence/>} />
-          <Route path='staff-complaints/hr' element={<HrStaffComplaints/>} />
-          <Route path='ehizua-staff/hr' element={<HrStaffSection/>} />
-          <Route path='inventory/hr' element={<HrInventory/>} />
-          <Route path='staff-leave/hr' element={<HrStaffLeave/>} />
-          <Route path='staff-loan/hr' element={<HrStaffLoan/>} />
-          <Route path='staff-memo/hr' element={<HrStaffMemo/>} />
-          <Route path='register-staff/hr' element={<HrRegisterStaff/>} />
+        <Route path="/" element={<Navigate to="/dashboard/hr" />} />
+        <Route path="/dashboard/hr" element={<AdminDashboard />} />
+        <Route path="/office-locations/hr" element={<OfficeLocations />} />
 
-          {/* __________ADMIN - STUDENT SECTION ______________ */}
-          <Route path='student-course/hr' element={<HrStudentfCourse/>} />
-          <Route path='student-memo/hr' element={<HrStudentfMemo/>} />
-          <Route path='ehizua-students/hr' element={<HrStudentSection/>} />
-          <Route path='all-students/hr' element={<HrAllStudent/>} />
-          <Route path='student-attendance/hr' element={<HrStudentAttendance/>} />
-          <Route path='student-complaints/hr' element={<HrStudentComplaints/>} />
-
-          {/* __________ADMIN - SCHOOL SECTION ______________ */}
-          <Route path='school-memo/hr' element={<HrSchoolMemo/>} />
-          <Route path='partner-schools/hr' element={<HrPartnerSchool/>} />
-          <Route path='school-course-discount/hr' element={<HrSchoolCourseDiscount/>} />
-          <Route path='school-complaints/hr' element={<HrSchoolComplaints/>} />
+        {/* __________ADMIN - STAFF SECTION ______________ */}
+        <Route path='staff-attendance/hr' element={<HrStaffAttendence />} />
+        <Route path='staff-complaints/hr' element={<HrStaffComplaints />} />
+        <Route path='ehizua-staff/hr' element={<HrStaffSection />} />
+        <Route path='inventory/hr' element={<HrInventory />} />
+        <Route path='staff-leave/hr' element={<HrStaffLeave />} />
+        <Route path='staff-loan/hr' element={<HrStaffLoan />} />
+        <Route path='staff-memo/hr' element={<HrStaffMemo />} />
+        <Route path='register-staff/hr' element={<HrRegisterStaff />} />
 
 
+        {/* __________ADMIN - STUDENT SECTION ______________ */}
+        <Route path='student-course/hr' element={<HrStudentfCourse />} />
+        <Route path='student-memo/hr' element={<HrStudentfMemo />} />
+        <Route path='ehizua-students/hr' element={<HrStudentSection />} />
+        <Route path='all-students/hr' element={<HrAllStudent />} />
+        <Route path='student-attendance/hr' element={<HrStudentAttendance />} />
+        <Route path='student-complaints/hr' element={<HrStudentComplaints />} />
 
+        {/* __________ADMIN - SCHOOL SECTION ______________ */}
+        <Route path='school-memo/hr' element={<HrSchoolMemo />} />
+        <Route path='partner-schools/hr' element={<HrPartnerSchool />} />
+        <Route path='school-course-discount/hr' element={<HrSchoolCourseDiscount />} />
+        <Route path='school-complaints/hr' element={<HrSchoolComplaints />} />
 
       </Routes>
-      
-      
-      </BrowserRouter>
-    </div>
+
+    </Router>
+
+
   );
 }
 

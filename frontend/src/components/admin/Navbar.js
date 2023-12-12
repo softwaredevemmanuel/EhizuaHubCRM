@@ -73,7 +73,7 @@ function classNames(...classes) {
 
 
 
-const Sidebar = () => {
+const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
@@ -257,134 +257,7 @@ const Sidebar = () => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col gap-y-5 bg-[#134574] px-6 pb-4 py-3 overflow-y-auto h-full">
           <div className="w-full  bg-white rounded-[4px] px-[11px] py-[18px]"><img src={logo} alt="" /></div>
-          <nav className="flex flex-1 flex-col">
-            {/* <ul role="list" className="-mx-2 space-y-1"> */}
-            <ul className="-mx-2 space-y-1">
-              {dashboards.map((item) => (
-                <li key={item.id}>
-                  <Link to={item.url}
-                    href={item.href}
-
-                    className={classNames(
-                      item.current
-                        ? 'bg-blue-300 text-white'
-                        : 'text-indigo-200 hover:text-white hover:bg-blue-300',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                    )}
-                  >
-                    <div className={classNames(
-                      item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white flex items-center',
-                      'h-6 w-6 shrink-0 flex items-center'
-                    )}>{item.icon}</div>
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            <div className="text-xs font-semibold leading-6 text-indigo-200">LOCATION</div>
-            {/* <ul role="list" className="-mx-2 space-y-1"> */}
-            <ul className="-mx-2 space-y-1">
-              {location.map((item) => (
-                <li key={item.id}>
-                  <Link to={item.url}
-                    href={item.href}
-                    className={classNames(
-                      item.current
-                        ? 'bg-blue-400 text-white'
-                        : 'text-indigo-200 hover:text-white hover:bg-blue-400',
-                      'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                    )}
-                  >
-                    <div className={classNames(
-                      item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white flex items-center',
-                      'h-6 w-6 shrink-0 flex items-center'
-                    )}>{item.icon}</div>
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div class="text-xs font-semibold leading-6 text-indigo-200">STAFF SECTION</div>
-            {/* <ul role="list" className="flex flex-1 flex-col gap-y-7"> */}
-            <ul className="flex flex-1 flex-col gap-y-7">
-              <li>
-                {/* <ul role="list" className="-mx-2 space-y-1"> */}
-                <ul className="-mx-2 space-y-1">
-                  {staff.map((item) => (
-                    <li key={item.id}>
-                      <Link to={item.url}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-blue-500 text-white'
-                            : 'text-indigo-200 hover:text-white hover:bg-blue-500',
-                          'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <div className={classNames(
-                          item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white flex items-center',
-                          'h-6 w-6 shrink-0 flex items-center'
-                        )}>{item.icon}</div>
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-
-              <li>
-                <div className="text-xs font-semibold leading-6 text-indigo-200">STUDENTS SECTION</div>
-                {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
-                <ul className="-mx-2 mt-2 space-y-1">
-                  {students.map((item) => (
-                    <li key={item.name}>
-                      <Link to={item.url}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-blue-600 text-white flex items-center'
-                            : 'text-indigo-200 hover:text-white hover:bg-blue-600 flex items-center',
-                          'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold items-center'
-                        )}
-                      >
-                        <div className={classNames(
-                          item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white  flex items-center',
-                          'h-6 w-6 shrink-0 flex items-center'
-                        )}>{item.icon}</div>
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <div className="text-xs font-semibold leading-6 text-indigo-200">SCHOOL SECTION</div>
-
-                {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
-                <ul className="-mx-2 mt-2 space-y-1">
-                  {school.map((item) => (
-                    <li key={item.id}>
-                      <Link to={item.url}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-indigo-700 text-white'
-                            : 'text-indigo-200 hover:text-white hover:bg-indigo-700',
-                          'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <div className={classNames(
-                          item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white flex items-center',
-                          'h-6 w-6 shrink-0 flex items-center'
-                        )}>{item.icon}</div>
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-
-            </ul>
-          </nav>
+          
         </div>
       </div>
 
@@ -486,4 +359,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default Navbar

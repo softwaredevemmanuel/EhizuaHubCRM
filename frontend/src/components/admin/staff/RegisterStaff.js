@@ -1,11 +1,9 @@
 import React from 'react'
-import Sidebar from '../Sidebar'
 
 
 const RegisterStaff = () => {
   return (
     <section className="flex-col flex md:flex-row justify-between w-full h-full">
-    <Sidebar/>
     <div className="w-full lg:ml-72   md:bg-[#C8D1DA] bg-[#134574]  flex flex-col gap-3 md:pl-5">
     <div className='pl-6'>
             <h4 className='w-full pt-12 font-bold text-[#f13178]  mb:pb-3 text-[22px] '>REGISTER STAFF FORM</h4>
@@ -145,6 +143,7 @@ const RegisterStaff = () => {
     </div>
   
 </section>
+
   )
 }
 
