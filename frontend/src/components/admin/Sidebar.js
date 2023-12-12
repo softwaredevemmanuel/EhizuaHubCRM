@@ -26,7 +26,7 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 
 
 const dashboards = [
-  { id: "1", icon: <MdDashboard />, name: "Dashboard", url: "dashboard/hr" }
+  { id: "1", icon: <MdDashboard />, name: "Dashboard", url: "dashboard" }
 ]
 
 const location = [

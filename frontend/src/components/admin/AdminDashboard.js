@@ -15,7 +15,7 @@ export default function AdminDashboard() {
     return (
         <div className="">
             {user ? (
-                <AdminLogin />
+                <AdminLogin/>
 
             ) : (
                 <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3">
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
                         <Link className=" bg-[#134574] max-w-[195px] px-2 lg:max-w-[263px] w-full text-center items-center rounded-[6px] py-4 font-bold flex gap-4 justify-center">
                             <BsPatchQuestionFill size={38} />
                             <div className="flex flex-col items-center lg:items-start">
-                                <p>Leave Request</p>
+                                <p>Complaints</p>
                                 <p>4</p>
                             </div>
                         </Link>
