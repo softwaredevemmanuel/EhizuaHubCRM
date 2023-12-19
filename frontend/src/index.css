@@ -81,3 +81,18 @@
 }
 
 }
+
+/* @keyframes moveLeftToRight {
+  from {
+    transform: translateX(-10%);
+  }
+  to {
+    transform: translateX(150%);
+  }
+}
+
+.scrolling-text {
+  white-space: nowrap;
+  overflow: hidden;
+  animation: moveLeftToRight 10s linear infinite;
+} */
