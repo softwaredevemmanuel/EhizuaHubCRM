@@ -106,7 +106,7 @@ const Sidebar = () => {
 
        {/* desktop view side nav */}
         <div className={classNames(!hidden? "hidden md:flex flex-col bg-[#134574] px-6 w-[230px] py-3 gap-3 h-screen overflow-y-scroll"  :"hidden md:flex flex-col bg-[#134574] px-6  py-3 gap-3 h-screen overflow-y-scroll" )}>
-           <div  onClick={toggle} className="hidden md:flex absolute right-[19px] top-[14px] cursor-pointer text-white  z-20 ">
+           <div  onClick={toggle} className="hidden md:flex absolute right-[32px] top-[14px] cursor-pointer text-white  z-20 ">
               <FaBars size={27}/> 
           </div>
           <div className={classNames(hidden?  " bg-white w-full hidden p-2" :"md:max-w-[120px]  bg-white p-2 rounded-lg")}>
