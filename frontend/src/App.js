@@ -12,7 +12,8 @@ import CreateEnterpriseLocation from './Pages/admin/offices/CreateEnterprise';
 
 
 // ADMIN - STAFF SECTION
-import HrStaffAttendence from './Pages/admin/staff/Attendence';
+import HrStaffAttendence from './Pages/admin/staff/Attendance/Attendence';
+import HrStaffAttendenceDetails from './Pages/admin/staff/Attendance/AttendanceDetails';
 import HrStaffComplaints from './Pages/admin/staff/Complaints';
 import HrStaffSection from './Pages/admin/staff/EhizuaStaff';
 import HrInventory from './Pages/admin/staff/Inventory';
@@ -36,7 +37,7 @@ import HrStudentfCourse from './Pages/admin/students/Courses/Course';
 import HrStudentfMemo from './Pages/admin/students/Memo/Memo';
 import HrStudentCenter from './Pages/admin/students/Details/StudentsCenter';
 import HrStudentAttendance from './Pages/admin/students/Attendance';
-import HrStudentComplaints from './Pages/admin/students/Complaints';
+import HrStudentComplaints from './Pages/admin/students/Complaints/Complaints';
 import HrStudentMemo from './Pages/admin/students/Memo/Memo';
 import HrCreateStudentMemo from './Pages/admin/students/Memo/CreateMemo';
 import HrStudentMemoDetails from './Pages/admin/students/Memo/MemoDetails';
@@ -46,24 +47,30 @@ import HrCreateStudent from './Pages/admin/students/Details/CreateStudent';
 import HrUpdateStudent from './Pages/admin/students/Details/UpdateStudent';
 import HrCreateStudentCourse from './Pages/admin/students/Courses/CreateCourse';
 import HrCourseDetails from './Pages/admin/students/Courses/Details';
+import HrCourseDiscount from './Pages/admin/students/Discount/CourseDiscount';
+import HrCreateCourseDiscount from './Pages/admin/students/Discount/CreateDiscount';
+import HrUpdateCourseDiscount from './Pages/admin/students/Discount/UpdateDiscount';
+
 
 
 
 
 // ADMIN - SCHOOL SECTION
 import HrPartnerSchool from './Pages/admin/partnerSchools/schools/PartnerSchools';
-import HrSchoolCourseDiscount from './Pages/admin/partnerSchools/CourseDiscount';
-import HrSchoolComplaints from './Pages/admin/partnerSchools/Complaints';
+import HrSchoolComplaints from './Pages/admin/partnerSchools/complaints/Complaints';
 import Login from './Pages/Login';
 import Navbar from './Pages/admin/Navbar';
 import StaffSidebar from './Pages/staff/StaffSidebar';
-import HrSchoolMemo from './Pages/admin/partnerSchools/memo/Memo'
-import HrSchoolMemoDetails from './Pages/admin/partnerSchools/memo/MemoDetails'
-import HrCreateSchoolMemo from './Pages/admin/partnerSchools/memo/CreateMemo'
-import HrCreateSchool from './Pages/admin/partnerSchools/schools/CreateSchool'
-import HrCreateSchoolStudent from './Pages/admin/partnerSchools/schools/CreateSchoolStudent'
-import HrCreateSchoolCourse from './Pages/admin/partnerSchools/schools/CreateCourse'
-import HrSchoolDetails from './Pages/admin/partnerSchools/schools/SchoolDetails'
+import HrSchoolMemo from './Pages/admin/partnerSchools/memo/Memo';
+import HrSchoolMemoDetails from './Pages/admin/partnerSchools/memo/MemoDetails';
+import HrCreateSchoolMemo from './Pages/admin/partnerSchools/memo/CreateMemo';
+import HrCreateSchool from './Pages/admin/partnerSchools/schools/CreateSchool';
+import HrCreateSchoolStudent from './Pages/admin/partnerSchools/schools/CreateSchoolStudent';
+import HrCreateSchoolCourse from './Pages/admin/partnerSchools/schools/CreateCourse';
+import HrSchoolDetails from './Pages/admin/partnerSchools/schools/SchoolDetails';
+import HrSchoolStudentDetails from './Pages/admin/partnerSchools/schools/StudentDetails';
+import HrSchoolNewComplaints from './Pages/admin/partnerSchools/complaints/NewComplaints';
+import HrSchoolComplaintsDetails from './Pages/admin/partnerSchools/complaints/ComplaintsDetails';
 
 // STAFF SECTION
 import StaffDashboard from './Pages/staff/StaffDashboard';
@@ -92,7 +99,7 @@ import StudentDashboard from './Pages/student/StudentDashboard';
 
 
 const App = () => {
-  const user = 'Student'
+  const user = 'Admin'
 
   return (
 
@@ -127,6 +134,7 @@ const App = () => {
             <Route path='example' element={<Example />} />
             <Route path='memo-details' element={<MemoDetails />} />
             <Route path='create-memo' element={<CreateMemo />} />
+            <Route path='staff-attendance-details/hr' element={<HrStaffAttendenceDetails/>} />
 
 
             {/* __________ADMIN - STUDENT SECTION ______________ */}
@@ -144,11 +152,14 @@ const App = () => {
             <Route path='update-student/hr' element={<HrUpdateStudent />} />
             <Route path='create-student-course/hr' element={<HrCreateStudentCourse />} />
             <Route path='course-details/hr' element={<HrCourseDetails />} />
+            <Route path='course-discount/hr' element={<HrCourseDiscount />} />
+            <Route path='create-course-discount/hr' element={<HrCreateCourseDiscount />} />
+            <Route path='update-course-discount/hr' element={<HrUpdateCourseDiscount />} />
+
 
             {/* __________ADMIN - SCHOOL SECTION ______________ */}
             <Route path='school-memo/hr' element={<HrSchoolMemo />} />
             <Route path='partner-schools/hr' element={<HrPartnerSchool />} />
-            <Route path='school-course-discount/hr' element={<HrSchoolCourseDiscount />} />
             <Route path='school-complaints/hr' element={<HrSchoolComplaints />} />
             <Route path='school-memo/hr' element={<HrSchoolMemo />} />
             <Route path='school-memo-details/hr' element={<HrSchoolMemoDetails />} />
@@ -157,6 +168,9 @@ const App = () => {
             <Route path='create-school-student/hr' element={<HrCreateSchoolStudent />} />
             <Route path='create-school-course/hr' element={<HrCreateSchoolCourse />} />
             <Route path='school-details/hr' element={<HrSchoolDetails />} />
+            <Route path='school-student-details/hr' element={<HrSchoolStudentDetails />} />
+            <Route path='school-new-complaints/hr' element={<HrSchoolNewComplaints />} />
+            <Route path='school-complaints-details/hr' element={<HrSchoolComplaintsDetails />} />
           </Routes>
         </div>
       )}

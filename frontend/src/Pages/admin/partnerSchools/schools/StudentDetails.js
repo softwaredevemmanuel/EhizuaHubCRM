@@ -61,10 +61,23 @@ const StudentsDetails = () => {
 
             <div className='flex justify-between '>
                 <p className='text-[#F13178] text-[20px] mt-2 font-extrabold' >Student Details</p>
-                <Link to='/student-section/hr' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                <Link to='/school-details/hr' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
             </div>
             <div className='border-[#F13178] border-b '></div>
+            <div className='md:flex gap-8 pt-4'>
+                <p className='pt-0 text-[#F13178] font-bold'>Filter</p>
+                <div className='flex gap-2'>
+                    <select className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none'>
+                        <option> Current Session </option>
+                        <option> 2023 First Term </option>
+                        <option> 2023 Second Term </option>
+                        <option> 2023 Third Term </option>
+                    </select>
+
+                </div>
+
+            </div>
 
             <div className='grid md:grid-cols-2 gap-1'>
                 <div className='bg-slate-100 w-full h-full pb-8 text-[#2b4053]'>
@@ -85,69 +98,61 @@ const StudentsDetails = () => {
 
                         <div className='flex gap-1 px-2 pt-8 '>
                             <p className='font-extrabold'>Course: </p>
-                            <p className=''>FullStack Web Development </p>
+                            <p className=''>Web Development, Animation, Robotics </p>
+                        </div>
+
+                        <div className='flex gap-1 px-2 pt-2'>
+                            <p className='font-extrabold'>Class: </p>
+                            <p className=''> JSS 3</p>
                         </div>
 
                         <div className='flex gap-1 px-2 pt-2'>
                             <p className='font-extrabold'>Email: </p>
                             <p className=''>eokereke47@gmail.com  </p>
                         </div>
-                        <div className='flex gap-2 px-2 pt-1'>
-                            <p className='font-extrabold'>Phone: </p>
-                            <p>08037819461</p>
+
+                        <div className='flex gap-1 px-2 pt-2'>
+                            <p className='font-extrabold'>Password: </p>
+                            <p className=''>Pass123qwe</p>
                         </div>
-                        <div className='flex gap-2 px-2 pt-1'>
-                            <p className='font-extrabold'>Email: </p>
-                            <p> eokereke47@gmail.com </p>
-                        </div>
+
                         <div className='flex gap-4 px-2 pt-1'>
                             <p className='font-extrabold'>Duration: </p>
-                            <p>32 Weeks</p>
+                            <p>9 Weeks</p>
                         </div>
-                        <div className='flex gap-4 px-2 pt-1'>
-                            <p className='font-extrabold'>Course Fee: </p>
-                            <p>N600,000.00 </p>
-                        </div>
-                        <div className='flex  gap-4 px-2 pt-1'>
-                            <p className='font-extrabold'>Initial Deposit: </p>
-                            <p>N400,000.00 </p>
-                        </div>
-                        <div className='flex gap-4 px-2 pt-1'>
-                            <p className='font-extrabold'>Balance: </p>
-                            <p>N200,000.00 </p>
-                        </div>
-                        <div className='flex  gap-4 px-2 pt-1'>
-                            <p className='font-extrabold'>Date Enrolled: </p>
-                            <p>20/06/23</p>
-                        </div>
-                        <div className='flex  gap-4 px-2 pt-1'>
-                            <p className='font-extrabold'>Date of Completion: </p>
-                            <p>20/01/24</p>
-                        </div>
-                        <div className='flex  gap-4 px-2 pt-1'>
-                            <p><span className='font-extrabold'>Home Address:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                                mo lestiae quas vel sint commodi repudiandae
-                            </p>
-                        </div>
+
+
                         <div className='flex gap-4 px-2 pt-1'>
                             <p className='font-extrabold'>Parents / Guidiance Phone Number: </p>
                             <p>08037819461</p>
                         </div>
-                        <div className='flex gap-4 px-2 pt-1'>
-                            <p> <span className='font-extrabold'>Parents / Guidiance Home Address:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-                                mo lestiae quas vel sint commodi repudiandae
-                            </p>
+                        <div className='flex gap-1 px-2 pt-2'>
+                            <p className='font-extrabold'>Parents / Guidiance Email: </p>
+                            <p className=''>eokereke47@gmail.com  </p>
                         </div>
+
                     </div>
 
                 </div>
 
                 <div className='bg-[#ffffff] w-full pb-8 px-2'>
-                    <p className="justify-center text-center pt-8 text-[#2b4053]">Student Performance</p>
+                    <p className="justify-center text-center pt-8 text-[#2b4053] font-extrabold">Student Performance</p>
+                    <div className="flex">
+                        <p className="pt-8 text-[#2b4053] px-4 font-extrabold">Course</p>
+                        <div className='pt-8'>
+                            <select className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none bg-slate-200 px-4'>
+                                <option> Animation </option>
+                                <option> Web Development </option>
+                            </select>
 
-                    <>
-                        <canvas ref={chartRef} />
-                    </>
+                        </div>
+
+                    </div>
+
+
+                    <div className="pt-4">
+                        <canvas ref={chartRef} className="w-full"/>
+                    </div>
 
                 </div>
             </div>

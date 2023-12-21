@@ -10,6 +10,7 @@ import { MdOutlineLibraryBooks } from "react-icons/md";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { GiDuration } from "react-icons/gi";
+import { CiEdit } from "react-icons/ci";
 
 
 
@@ -40,7 +41,7 @@ const SchoolDetails = () => {
             <div className="w-full  bg-[#C8D1DA] flex flex-col gap-3">
                 <div className='flex justify-between '>
                     <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Living Spring Secondary School</p>
-                    <Link to='/student-course/hr' className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                    <Link to='/partner-schools/hr' className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
                 </div>
             </div>
@@ -56,10 +57,10 @@ const SchoolDetails = () => {
                     </div>
                 </button>
 
-                <button className="bg-[#F13178] px-2 text-center items-center rounded-lg font-bold flex justify-center h-[40px] w-fit sm:mt-0 mt-2">
+                <button className="bg-[#F13178] px-2 text-center items-center rounded-lg flex justify-center h-[30px] w-fit sm:mt-0 mt-2">
                     <div className="flex">
-                        <p className="text-white pl-2">Download Curriculum </p>
-                        <FaDownload size={28} className="pl-2 mr-2 text-white" />
+                        <p className="text-white pl-2 font-bold">Edit </p>
+                        <CiEdit size={28} className="pl-2 mr-2 text-white " />
 
                     </div>
                 </button>
@@ -139,7 +140,7 @@ const SchoolDetails = () => {
                 <div className='overflow-x-auto mt-1'>
                     <div className='p-1 h-[500px]'>
 
-                        <table className="w-[900px] bg-white border border-gray-500 mb-8">
+                        <table className="w-[1000px] bg-white border border-gray-500 mb-8">
                             <thead>
                                 <tr>
                                     <th className="border p-2  left-0 bg-white z-10">No</th>
@@ -154,15 +155,18 @@ const SchoolDetails = () => {
                             </thead>
                             <tbody>
                                 {data.map((row, index) => (
-                                    <tr key={index} className=''>
+                                    <tr key={index} className='hover:bg-gray-200'>
                                         {row.map((cell, cellIndex) => (
                                             <td key={cellIndex} className="border p-3">
-                                                {cell}
+                                                <Link to="/school-student-details/hr">
+                                                    {cell}
+                                                </Link>
                                             </td>
                                         ))}
                                     </tr>
                                 ))}
                             </tbody>
+
                         </table>
 
 

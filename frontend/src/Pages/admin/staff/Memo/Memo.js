@@ -39,35 +39,35 @@ const Memo = () => {
           <div className='border-[#F13178] border-b '></div>
 
 
-          <Link to="/memo-details" className='pl-5 rounded-xl "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-1 pr-5'>
+          <Link to="/memo-details" className='pl-5 rounded-xl "w-[412px] h-[50px] bg-slate-400 flex items-center justify-between mt-1 pr-5'>
             <div className='flex'>
-              <p className='text-white ml-2 text-md'>Notice of general meeting</p>
+              <p className='text-[#134574] ml-2 text-md'>Notice of general meeting</p>
             </div>
 
             <div className='flex gap-4'>
-              <p className='text-white sm:pl-4 hidden sm:block'>Ehizua Hub Awoyaya</p>
+              <p className='text-[#134574] sm:pl-4 hidden sm:block'>Ehizua Hub Awoyaya</p>
             </div>
 
           </Link>
 
-          <Link to="/memo-details" className='pl-5 rounded-xl "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-1 pr-5'>
+          <Link to="/memo-details" className='pl-5 rounded-xl "w-[412px] h-[50px] bg-slate-400 flex items-center justify-between mt-1 pr-5'>
             <div className='flex'>
-              <p className='text-white ml-2 text-md'>Notice of general meeting</p>
+              <p className='text-[#134574] ml-2 text-md'>Notice of general meeting</p>
             </div>
 
             <div className='flex gap-4'>
-              <p className='text-white sm:pl-4 hidden sm:block'>Ehizua Hub Awoyaya</p>
+              <p className='text-[#134574] sm:pl-4 hidden sm:block'>Ehizua Hub Awoyaya</p>
             </div>
 
           </Link>
 
-          <Link to="/memo-details" className='pl-5 rounded-xl "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-1 pr-5'>
+          <Link to="/memo-details" className='pl-5 rounded-xl "w-[412px] h-[50px] bg-slate-400 flex items-center justify-between mt-1 pr-5'>
             <div className='flex'>
-              <p className='text-white ml-2 text-md'>Notice of general meeting</p>
+              <p className='text-[#134574] ml-2 text-md'>Notice of general meeting</p>
             </div>
 
             <div className='flex gap-4'>
-              <p className='text-white sm:pl-4 hidden sm:block'>Ehizua Hub Awoyaya</p>
+              <p className='text-[#134574] sm:pl-4 hidden sm:block'>Ehizua Hub Awoyaya</p>
             </div>
 
           </Link>

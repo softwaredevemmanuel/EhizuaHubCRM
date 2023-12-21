@@ -47,7 +47,6 @@ const staff = [
 const school = [
   { id: "1", icon: <CiMemoPad />, name: "Memo", url: "school-memo/hr" },
   { id: "2", icon: <FaBuilding />, name: "Patner Schools", url: "partner-schools/hr" },
-  { id: "3", icon: <CiDiscount1 />, name: "Course Discounts", url: "school-course-discount/hr" },
   { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "school-complaints/hr" },
 
 ]
@@ -58,6 +57,7 @@ const students = [
   { id: "3", icon: <PiStudent />, name: "student Section", url: "student-center/hr" },
   { id: "4", icon: <HiClipboardList />, name: "Attendance", url: "student-attendance/hr" },
   { id: "5", icon: <BsPatchQuestionFill />, name: "Complaints", url: "student-complaints/hr" },
+  { id: "3", icon: <CiDiscount1 />, name: "Course Discounts", url: "course-discount/hr" },
 ]
 
 
