@@ -28,6 +28,7 @@ import AllLeave from './Pages/admin/staff/Leave/Leaves';
 import StaffLeaveDetails from './Pages/admin/staff/Leave/Details';
 import MemoDetails from './Pages/admin/staff/Memo/MemoDetails';
 import CreateMemo from './Pages/admin/staff/Memo/CreateMemo';
+import HrStaffReport from './Pages/admin/staff/Reports';
 
 
 
@@ -105,7 +106,6 @@ const App = () => {
 
     <Router>
 
-
       {(user === 'Admin') && (
         <div>
           <Sidebar />
@@ -135,6 +135,7 @@ const App = () => {
             <Route path='memo-details' element={<MemoDetails />} />
             <Route path='create-memo' element={<CreateMemo />} />
             <Route path='staff-attendance-details/hr' element={<HrStaffAttendenceDetails/>} />
+            <Route path='staff-report/hr' element={<HrStaffReport/>} />
 
 
             {/* __________ADMIN - STUDENT SECTION ______________ */}

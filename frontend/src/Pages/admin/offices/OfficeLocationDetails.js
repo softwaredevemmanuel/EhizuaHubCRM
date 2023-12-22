@@ -2,15 +2,19 @@ import React, { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IoIosArrowRoundBack } from "react-icons/io";
 
-import { IoIosArrowDropdown } from "react-icons/io";
-import { FaPlus } from "react-icons/fa";
+import { FaCirclePlus } from "react-icons/fa6";
 
-import pic from "../../../assets/profile-34.png"
+import pic from "../../../assets/Ehizua-Hub.png"
+import staff from "../../../assets/profile-34.png"
 
 
 import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/24/outline'
-import Ehizuahub from '../../../assets/Ehizua-Hub.png'
+
+import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineAttachEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaUserTie } from "react-icons/fa";
+
 
 
 const OfficeLocationDetails = () => {
@@ -26,7 +30,7 @@ const OfficeLocationDetails = () => {
     }
 
 
-    const ViewStaff =()=>{
+    const ViewStaff = () => {
         setOpen(true)
     }
 
@@ -40,26 +44,89 @@ const OfficeLocationDetails = () => {
                 </div>
             </div>
             <div className='border-[#F13178] border-b '></div>
+            <div className='grid grid-cols-2 w-fit justify-end'>
+                <div className='flex justify-center items-center gap-3 bg-slate-300 h-[40px]'>
+                    <Link to='' className=" bg-[#F13178] px-2 rounded-md font-bold flex justify-center h-[30px] w-full mx-1">
+                        <div className="flex items-center justify-center">
+                            <p className="text-white pl-2 text-sm">Position </p>
+                            <FaCirclePlus size={24} className="pl-2 mr-2 text-white" />
+                        </div>
+                    </Link>
+                </div>
 
-            <div className='bg-[#134574] h-full rounded-lg pb-4'>
+                <div className='flex justify-center items-center gap-3 bg-slate-300 h-[40px]'>
+                    <Link to='' className=" bg-[#F13178] px-2 rounded-md font-bold flex justify-center h-[30px] w-full mx-1">
+                        <div className="flex items-center justify-center">
+                            <p className="text-white pl-2 text-sm">Staff</p>
+                            <FaCirclePlus size={24} className="pl-2 mr-2 text-white" />
+
+                        </div>
+                    </Link>
+                </div>
+            </div>
+
+
+            <div className='text-[#134574] bg-slate-400 h-full rounded-lg pb-1'>
                 <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
-                    <img src={Ehizuahub} className="w-full sm:w-[300px] max-w-full max-h-full p-1 md:my-auto" />
-                    <div className='w-full sm:col-span-2 px-4 sm:px-0 md:pr-2'>
-                        <p className='text-white font-bold text-center justify-center pt-2'>Ehizua Hub Awoyaya</p>
-                        <p className='text-slate-300 pt-2 '></p>
-                        <p className='text-slate-300 pt-2 text-xs'>Duration: 12 Weeks</p>
-                        <p className='text-slate-300 pt-2 text-xs'>Course Fee: ₦ 300,000.00</p>
+                    <div className="grid grid-cols-2 rounded-md text-[#134574] gap-1 max-w-[980px] w-full m-1 bg-slate-500 p-1 h-[140px] mb-auto">
+                        <div className='flex justify-center items-center gap-3 bg-slate-400 h-[40px] '>
+                            <p className=' font-extrabold'>8</p>
+                            <p>Positions</p>
+                        </div>
+                        <div className='flex justify-center items-center gap-3 bg-slate-400 h-[40px] '>
+                            <p className=' font-extrabold'>8</p>
+                            <p>Positions</p>
+                        </div>
+                     
+                        <div className='flex justify-center items-center gap-3 bg-slate-400 h-[40px]'>
+                            <p className=' font-extrabold'>20</p>
+                            <p>Staff</p>
+                        </div>
+                        <div className='flex justify-center items-center gap-3 bg-slate-400 h-[40px]'>
+                            <p className=' font-extrabold'>20</p>
+                            <p>Staff</p>
+                        </div>
+                   
+                        <div className='flex justify-center items-center gap-3 bg-slate-400 h-[40px]'>
+                            <p className=' font-extrabold text-red-700'>2</p>
+                            <p className='text-red-700'>Vacancy</p>
+                        </div>
+                        <div className='flex justify-center items-center gap-3 bg-slate-400 h-[40px]'>
+                            <p className=' font-extrabold'>0</p>
+                            <p>On Leave</p>
+                        </div>
+
+                    </div>
+
+                    <div className='w-full sm:col-span-2 px-4 sm:px-2 md:pr-2 bg-[#2b6091] text-white text-sm'>
+                        <p className='font-bold text-center justify-center pt-2'>School Details</p>
+                        <div className='flex gap-2'>
+                            <IoLocationOutline className='mt-3' />
+                            <p className='pt-2 font-bold'>Address: </p>
+                            <p className='pt-2'>6 Honorable Fatai Eletu Street, Container Bus stop Awoyaya, Lagos State </p>
+                        </div>
+                        <div className='flex gap-2'>
+                            <MdOutlineAttachEmail className='mt-3' />
+                            <p className='pt-2 font-bold'>Email Address: </p>
+                            <p className='pt-2'>eokereke47@gmail.com </p>
+                        </div>
+                        <div className='flex gap-2'>
+                            <FaPhoneAlt className='mt-3' />
+                            <p className='pt-2 font-bold'>Phone Number: </p>
+                            <p className='pt-2'>08037819461 </p>
+                        </div>
+
                     </div>
                 </div>
 
 
             </div>
 
-            <div className='flex justify-between '>
-                    <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Staff</p>
+            <div className='flex items-center justify-center '>
+                <p className='text-[#134574] text-[20px] mt-8 font-extrabold' >Staff</p>
 
-                </div>
-                <div className='border-[#F13178] border-b '></div>
+            </div>
+            <div className='border-slate-100 border-b '></div>
 
 
             <Transition.Root show={open} as={Fragment}>
@@ -89,12 +156,12 @@ const OfficeLocationDetails = () => {
                             >
                                 <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-slate-100 px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                                     <div>
-                                       
+
                                         <div className=" text-center text-[#134574]">
                                             <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-[#134574]">
                                                 Staff Details
                                             </Dialog.Title>
-                                            <img src={pic} alt='item.Image' className=' w-[75px] top-[-39px]' />
+                                            <img src={staff} alt='item.Image' className=' w-[75px] top-[-39px]' />
 
                                             <div className="mt-2 flex gap-2">
                                                 <p className="text-sm">Name:</p>
@@ -116,10 +183,10 @@ const OfficeLocationDetails = () => {
                                                 <p className="text-sm">Date of Birth:</p>
                                                 <p className="text-sm">7th October</p>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
-                                 
+
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>
@@ -129,47 +196,40 @@ const OfficeLocationDetails = () => {
 
 
 
-            {/* <div className=' grid lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 items-center justify-center mt-8 gap-2'>
-                <button onClick={ViewStaff} className='bg-[#134574] w-fit relative  flex flex-col h-[160px] px-[10px] rounded-[20px] items-center mt-12'>
-                    <img src={pic} alt='item.Image' className='absolute w-[75px] top-[-39px]' />
-                    <p className='text-white font-medium text-sm pt-16'>Okereke Emmanuel</p>
-                    <p className='text-white font-medium text-xs text-center'>Full Stack Web Instructor / Python</p>
-                </button>
-                
-            </div> */}
 
-          <button onClick={ViewStaff} className='pl-5 rounded-xl "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-1 pr-5'>
-            <div className='flex'>
-              <p className='text-white ml-2 text-md'>Okereke Emmanuel</p>
-            </div>
 
-            <div className='flex gap-4'>
-              <p className='text-white sm:pl-4 hidden sm:block'>Fullstack Web Development Instructor</p>
-            </div>
+            <button onClick={ViewStaff} className='pl-5 rounded-xl "w-[412px] h-[50px] bg-slate-400 flex items-center justify-between mt-1 pr-5'>
+                <div className='flex'>
+                    <p className='text-[#134574] ml-2 text-md'>Okereke Emmanuel</p>
+                </div>
 
-          </button>
+                <div className='flex gap-4'>
+                    <p className='text-[#134574] sm:pl-4 hidden sm:block'>Fullstack Web Development Instructor</p>
+                </div>
 
-          <button onClick={ViewStaff} className='pl-5 rounded-xl "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-1 pr-5'>
-            <div className='flex'>
-              <p className='text-white ml-2 text-md'>Okereke Emmanuel</p>
-            </div>
+            </button>
 
-            <div className='flex gap-4'>
-              <p className='text-white sm:pl-4 hidden sm:block'>Fullstack Web Development Instructor</p>
-            </div>
+            <button onClick={ViewStaff} className='pl-5 rounded-xl "w-[412px] h-[50px] bg-slate-400 flex items-center justify-between mt-1 pr-5'>
+                <div className='flex'>
+                    <p className='text-[#134574] ml-2 text-md'>Okereke Emmanuel</p>
+                </div>
 
-          </button>
+                <div className='flex gap-4'>
+                    <p className='text-[#134574] sm:pl-4 hidden sm:block'>Fullstack Web Development Instructor</p>
+                </div>
 
-          <button onClick={ViewStaff} className='pl-5 rounded-xl "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-1 pr-5'>
-            <div className='flex'>
-              <p className='text-white ml-2 text-md'>Okereke Emmanuel</p>
-            </div>
+            </button>
 
-            <div className='flex gap-4'>
-              <p className='text-white sm:pl-4 hidden sm:block'>Fullstack Web Development Instructor</p>
-            </div>
+            <button onClick={ViewStaff} className='pl-5 rounded-xl "w-[412px] h-[50px] bg-slate-400 flex items-center justify-between mt-1 pr-5'>
+                <div className='flex'>
+                    <p className='text-[#134574] ml-2 text-md'>Okereke Emmanuel</p>
+                </div>
 
-          </button>
+                <div className='flex gap-4'>
+                    <p className='text-[#134574] sm:pl-4 hidden sm:block'>Fullstack Web Development Instructor</p>
+                </div>
+
+            </button>
 
 
 

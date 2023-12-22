@@ -51,8 +51,8 @@ const SchoolDetails = () => {
 
                 <button className=" px-2 text-center items-center rounded-lg font-bold flex justify-center h-[40px] w-fit">
                     <div className="flex">
-                        <p className="text-[#F13178] pl-2">Instructor Details </p>
-                        <LiaChalkboardTeacherSolid size={28} className="pl-2 mr-2 text-[#F13178]" />
+                        <p className="text-[#134574] pl-2">Instructor Details </p>
+                        <LiaChalkboardTeacherSolid size={28} className="pl-2 mr-2 text-[#134574]" />
 
                     </div>
                 </button>
@@ -68,44 +68,44 @@ const SchoolDetails = () => {
 
 
 
-            <div className='bg-[#134574] h-full rounded-lg pb-4'>
+            <div className='text-[#134574] bg-slate-400 h-full rounded-lg pb-4'>
                 <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
                     <img src={frontend} className="w-full sm:w-[300px] max-w-full max-h-full p-1 md:my-auto" />
                     <div className='w-full sm:col-span-2 px-4 sm:px-0 md:pr-2'>
-                        <p className='text-white font-bold text-center justify-center pt-2'>School Details</p>
-                        <div className='flex gap-2 text-slate-300'>
+                        <p className='font-bold text-center justify-center pt-2'>School Details</p>
+                        <div className='flex gap-2'>
                             <IoLocationOutline className='mt-3' />
-                            <p className='pt-2'>Address: </p>
-                            <p className='text-slate-300 pt-2'>6 Honorable Fatai Eletu Street, Container Bus stop Awoyaya, Lagos State </p>
+                            <p className='pt-2 font-bold'>Address: </p>
+                            <p className='pt-2'>6 Honorable Fatai Eletu Street, Container Bus stop Awoyaya, Lagos State </p>
                         </div>
-                        <div className='flex gap-2 text-slate-300'>
+                        <div className='flex gap-2'>
                             <MdOutlineAttachEmail className='mt-3' />
-                            <p className='pt-2'>Email Address: </p>
-                            <p className='text-slate-300 pt-2'>eokereke47@gmail.com </p>
+                            <p className='pt-2 font-bold'>Email Address: </p>
+                            <p className='pt-2'>eokereke47@gmail.com </p>
                         </div>
-                        <div className='flex gap-2 text-slate-300'>
+                        <div className='flex gap-2'>
                             <FaPhoneAlt className='mt-3' />
-                            <p className='pt-2'>Phone Number: </p>
-                            <p className='text-slate-300 pt-2'>08037819461 </p>
+                            <p className='pt-2 font-bold'>Phone Number: </p>
+                            <p className='pt-2'>08037819461 </p>
                         </div>
-                        <div className='flex gap-2 text-slate-300'>
+                        <div className='flex gap-2'>
                             <MdOutlineLibraryBooks className='mt-3' />
-                            <p className='pt-2'>Courses: </p>
-                            <p className='text-slate-300 pt-2'>Animation, Web Development, Robotics </p>
+                            <p className='pt-2 font-bold'>Courses: </p>
+                            <p className='pt-2'>Animation, Web Development, Robotics </p>
                         </div>
-                        <div className='flex gap-2 text-slate-300'>
+                        <div className='flex gap-2'>
                             <GiDuration className='mt-3' />
-                            <p className='pt-2'>Duration: </p>
-                            <p className='text-slate-300 pt-2'>1 x a Week </p>
+                            <p className='pt-2 font-bold'>Duration: </p>
+                            <p className='pt-2'>1 x a Week </p>
                         </div>
-                        <div className='flex gap-2 text-slate-300'>
+                        <div className='flex gap-2'>
                             <TbCurrencyNaira className='mt-3' />
-                            <p className='pt-2'>Fee Per Child: </p>
-                            <p className='text-slate-300 pt-2'> ₦20,000 </p>
+                            <p className='pt-2 font-bold'>Fee Per Child: </p>
+                            <p className='pt-2'> ₦20,000 </p>
                         </div>
-                        <div className='flex gap-2 text-slate-300'>
+                        <div className='flex gap-2'>
                             <MdOutlineVerifiedUser className='mt-3' />
-                            <p className='pt-2'>Is-Verified: </p>
+                            <p className='pt-2 font-bold'>Is-Verified: </p>
                             <p className='text-green-400 pt-2'> Yes </p>
                         </div>
 
@@ -116,7 +116,7 @@ const SchoolDetails = () => {
 
             </div>
             <div className='md:flex gap-8 pt-4'>
-                <p className='pt-1 text-[#F13178]'>Sort By</p>
+                <p className='pt-1 text-[#134574]'>Sort By</p>
                 <div className='flex gap-2'>
                     <select className=' rounded-lg h-[30px]  w-[200px] text-slate-500 outline-none'>
                         <option> Class </option>

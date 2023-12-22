@@ -34,7 +34,7 @@ const StaffLeaveDetails = () => {
 
 
 
-                    <div className='pl-5 rounded-xl "w-[412px] h-full bg-[#134574] mt-2 pr-5'>
+                    <div className='pl-5 rounded-xl "w-[412px] h-full bg-slate-400 mt-2 pr-5'>
                         <div className='grid sm:grid-cols-2 gap-4'>
                             <div className='bg-slate-300 mt-8 pb-2 pl-2 rounded-md text-[#134574]'>
                                 <div className='flex gap-8 pt-2'>

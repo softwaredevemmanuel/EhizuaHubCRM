@@ -22,7 +22,7 @@ const UpdateStudent = () => {
             <div className='border-[#F13178] border-b '></div>
 
             <form className='bg-slate-200 sm:h-[800px] rounded-md pb-8'>
-            <div className='sm:flex gap-4 mt-6 px-8'>
+                <div className='sm:flex gap-4 mt-6 px-8'>
                     <p className='text-sm text-gray-600 pt-2'>Is Verified</p>
                     <input type='checkbox' className='rounded-md w-[30px] h-[30px] outline-none pl-4' />
 

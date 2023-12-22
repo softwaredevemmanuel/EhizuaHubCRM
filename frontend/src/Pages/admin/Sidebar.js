@@ -12,6 +12,8 @@ import { GiReceiveMoney } from "react-icons/gi";
 import { FaBuilding } from "react-icons/fa";
 import { CiDiscount1 } from "react-icons/ci";
 import { MdDashboard } from "react-icons/md";
+import { TbReport } from "react-icons/tb";
+
 import { useState, Fragment } from "react"
 import { Link } from "react-router-dom";
 
@@ -36,6 +38,7 @@ const location = [
 
 const staff = [
   { id: "1", icon: <CiMemoPad />, name: "Memo", url: "staff-memo/hr" },
+  { id: "1", icon: <TbReport />, name: "Weekly Report", url: "staff-report/hr" },
   { id: "2", icon: <HiClipboardList />, name: "Attendance", url: "staff-attendance/hr" },
   { id: "3", icon: <IoMdPerson />, name: "Staff Section", url: "ehizua-staff/hr" },
   { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff-complaints/hr" },

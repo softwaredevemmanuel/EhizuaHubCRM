@@ -80,6 +80,7 @@ const Attendance = () => {
 
 
             </div>
+            
             <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-fit pb-44">
 
 
