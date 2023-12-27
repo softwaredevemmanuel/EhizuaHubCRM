@@ -8,6 +8,8 @@ import { IoMdPerson } from "react-icons/io";
 import logo from "../../assets/ehizuahublogo.png";
 import { Link } from "react-router-dom";
 import { FaBars} from "react-icons/fa6";
+import { PiExam } from "react-icons/pi";
+
 
 
 const staff = [
@@ -15,30 +17,16 @@ const staff = [
   {
     id: "2",
     icon: <HiClipboardList />,
-    name: "Attendance",
+    name: "Curriculum",
     url: "staff-attendance/hr",
   },
   {
     id: "3",
-    icon: <IoMdPerson />,
-    name: "Staff Section",
+    icon: <PiExam />,
+    name: "Test",
     url: "ehizua-staff/hr",
   },
-  {
-    id: "4",
-    icon: <BsPatchQuestionFill />,
-    name: "Complaints",
-    url: "staff-complaints/hr",
-  },
-  { id: "5", icon: <FaTools />, name: "Inventory", url: "inventory/hr" },
-  { id: "6", icon: <GiReceiveMoney />, name: "Loan", url: "staff-loan/hr" },
-  {
-    id: "7",
-    icon: <FaUserMinus />,
-    name: "Leave section",
-    url: "staff-leave/hr",
-  },
-
+  
  
 
 
@@ -62,7 +50,6 @@ const Sidebar = () => {
    }
   return (
     <section className="">
-
       <div className="relative h-full">
         {
           reveal?
