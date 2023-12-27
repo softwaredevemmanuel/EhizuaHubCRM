@@ -83,7 +83,7 @@ import StaffReport from './Pages/staff/StaffReport';
 import StaffSalaryAdvance from './Pages/staff/StaffSalaryAdvance';
 import StaffLeave from './Pages/staff/StaffLeave';
 import StaffMemo from './Pages/staff/StaffMemo';
-import StaffAttendance from './Pages/staff/StaffAttendance';
+import StaffAttendance from './Pages/staff/Attendance/StaffAttendance';
 import StaffBirthday from './Pages/staff/StaffBirthday';
 import StaffMemoDetails from './Pages/staff/StaffMemoDetails';
 import StaffLeaveApplication from './Pages/staff/StaffLeaveApplication';
@@ -100,7 +100,7 @@ import StudentDashboard from './Pages/student/StudentDashboard';
 
 
 const App = () => {
-  const user = 'Admin'
+  const user = 'Staff'
 
   return (
 

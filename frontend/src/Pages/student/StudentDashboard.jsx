@@ -26,12 +26,8 @@ const First = () => {
           Description: <br />
           <span className="text-[12px]">
             A crash course on Front-end and Back-end to give you an egde in the
-            Tech World <br />A crash course on Front-end and Back-end to give
-            you an egde in the Tech World
-            <br /> A crash course on Front-end and Back-end to give you an egde
-            in the Tech World
-            <br /> A crash course on Front-end and Back-end to give you an egde
-            in the Tech World{" "}
+            Tech World
+ 
           </span>{" "}
         </h4>
         <button className="bg-[#F13178] max-w-[300px] py-2 px-3 text-white rounded-lg">Register</button>
@@ -57,12 +53,8 @@ const Second = () => {
           Description: <br />
           <span className="text-[12px]">
             A crash course on Front-end and Back-end to give you an egde in the
-            Tech World <br />A crash course on Front-end and Back-end to give
-            you an egde in the Tech World
-            <br /> A crash course on Front-end and Back-end to give you an egde
-            in the Tech World
-            <br /> A crash course on Front-end and Back-end to give you an egde
-            in the Tech World
+            Tech World 
+         
           </span>
         </h4>
         <button className="bg-[#F13178] max-w-[300px] py-2 px-3 text-white rounded-lg">Register</button>
@@ -86,12 +78,8 @@ const Third = ()=>{
                     Description: <br />
                     <span className="text-[12px]">
                       A crash course on Front-end and Back-end to give you an
-                      egde in the Tech World <br />A crash course on Front-end
-                      and Back-end to give you an egde in the Tech World
-                      <br /> A crash course on Front-end and Back-end to give
-                      you an egde in the Tech World
-                      <br /> A crash course on Front-end and Back-end to give
-                      you an egde in the Tech World{" "}
+                      egde in the Tech World 
+                     
                     </span>{" "}
                   </h4>
                   <button className="bg-[#F13178] max-w-[300px] py-2 px-3 text-white rounded-lg">Register</button>

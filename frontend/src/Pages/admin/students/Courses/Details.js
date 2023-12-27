@@ -26,8 +26,8 @@ const CourseDetails = () => {
 
                     <button className=" px-2 text-center items-center rounded-lg font-bold flex justify-center h-[40px] w-fit">
                         <div className="flex">
-                            <p className="text-[#F13178] pl-2">Instructor Details </p>
-                            <LiaChalkboardTeacherSolid size={28} className="pl-2 mr-2 text-[#F13178]" />
+                            <p className="text-[#134574] pl-2">Instructor Details </p>
+                            <LiaChalkboardTeacherSolid size={28} className="pl-2 mr-2 text-[#134574]" />
 
                         </div>
                     </button>
@@ -43,21 +43,21 @@ const CourseDetails = () => {
 
 
 
-            <div className='bg-[#134574] h-full rounded-lg pb-4'>
+            <div className='bg-slate-400 h-full rounded-lg pb-4'>
                 <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
                     <img src={frontend} className="w-full sm:w-[300px] max-w-full max-h-full p-1 md:my-auto" />
-                    <div className='w-full sm:col-span-2 px-4 sm:px-0 md:pr-2'>
-                        <p className='text-white font-bold text-center justify-center pt-2'>Frontend Web Development</p>
-                        <p className='text-slate-300 pt-2 '>Frontend web development involves creating the user interface and user experience of a website or web application. Frontend developers focus on designing and implementing the visual elements that users interact with directly. This includes the layout, navigation, and overall aesthetics of a website.</p>
-                        <p className='text-slate-300 pt-2 text-xs'>Duration: 12 Weeks</p>
-                        <p className='text-slate-300 pt-2 text-xs'>Course Fee: ₦ 300,000.00</p>
+                    <div className='w-full sm:col-span-2 px-4 sm:px-0 md:pr-2 text-[#134574]'>
+                        <p className=' font-bold text-center justify-center pt-2'>Frontend Web Development</p>
+                        <p className=' pt-2 '>Frontend web development involves creating the user interface and user experience of a website or web application. Frontend developers focus on designing and implementing the visual elements that users interact with directly. This includes the layout, navigation, and overall aesthetics of a website.</p>
+                        <p className=' pt-2 text-xs'>Duration: 12 Weeks</p>
+                        <p className=' pt-2 text-xs'>Course Fee: ₦ 300,000.00</p>
                     </div>
                 </div>
 
 
             </div>
 
-            <p className='text-center justify-center text-[#F13178] font-extrabold text-lg'>Course Curriculum</p>
+            <p className='text-center justify-center text-[#134574] font-extrabold text-lg'>Course Curriculum</p>
 
             <div className='bg-slate-200  h-[520px] rounded-lg sm:px-8'>
                 <div className='overflow-x-auto mt-4'>

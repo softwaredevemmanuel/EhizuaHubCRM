@@ -22,7 +22,7 @@ const CreateMemo = () => {
                     <input type='text' placeholder='Title' className='h-12 pl-4 rounded-md w-full sm:w-auto outline-none' />
                 </div>
                 <div>
-                    <select className='h-12 pl-4 rounded-md w-full sm:w-auto outline-none'>
+                    <select className='h-12 pl-4 rounded-md w-full sm:w-auto outline-none  text-slate-400'>
                         <option>Select a School</option>
                         <option>Living Spring</option>
                         <option>Fundamentals Secondary School</option>

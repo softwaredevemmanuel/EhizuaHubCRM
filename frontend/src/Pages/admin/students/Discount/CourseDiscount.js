@@ -38,19 +38,19 @@ const CourseDiscount = () => {
 
 
       
-      <div className='bg-[#134574] h-full rounded-lg'>
+      <div className='bg-slate-400 h-full rounded-lg text-[#134574]'>
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
           <img src={frontend} className="w-full sm:w-[300px] max-w-full max-h-full p-1 md:my-auto" />
           <div className='w-full sm:col-span-2 px-4 sm:px-0 md:pr-2'>
-            <p className='text-white font-bold text-center justify-center pt-2'>Frontend Web Development</p>
-            <p className='text-slate-300 pt-2 '>Frontend web development involves creating the user interface and user experience of a website or web application. Frontend developers focus on designing</p>
-            <p className='text-slate-300 pt-2 text-xs'>Old Price: <span className='line-through'>₦300,000.00</span></p>
-            <p className='text-slate-300 pt-2 text-xs'>Percentage Discount: 90%</p>
-            <p className='text-slate-300 pt-2 text-xs'>Discount Price: ₦ 30,000.00</p>
+            <p className=' font-bold text-center justify-center pt-2'>Frontend Web Development</p>
+            <p className=' pt-2 '>Frontend web development involves creating the user interface and user experience of a website or web application. Frontend developers focus on designing</p>
+            <p className=' pt-2 text-xs'>Old Price: <span className='line-through'>₦300,000.00</span></p>
+            <p className=' pt-2 text-xs'>Percentage Discount: 90%</p>
+            <p className=' pt-2 text-xs'>Discount Price: ₦ 30,000.00</p>
 
 
             <div className='flex items-end justify-end pt-4 pb-4'>
-              <Link to="/update-course-discount/hr" className="bg-[#F13178] px-2 text-center items-center rounded-lg flex justify-center h-[30px] w-fit sm:mt-0 mt-2">
+              <Link to="/update-course-discount/hr" className="bg-slate-500 px-2 text-center items-center rounded-lg flex justify-center h-[30px] w-fit sm:mt-0 mt-2">
                 <div className="flex">
                   <p className="text-white pl-2 font-bold">Edit </p>
                   <CiEdit size={28} className="pl-2 mr-2 text-white " />
@@ -66,19 +66,19 @@ const CourseDiscount = () => {
 
       </div>
       
-      <div className='bg-[#134574] h-full rounded-lg'>
+      <div className='bg-slate-400 h-full rounded-lg text-[#134574]'>
         <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
           <img src={frontend} className="w-full sm:w-[300px] max-w-full max-h-full p-1 md:my-auto" />
           <div className='w-full sm:col-span-2 px-4 sm:px-0 md:pr-2'>
-            <p className='text-white font-bold text-center justify-center pt-2'>Frontend Web Development</p>
-            <p className='text-slate-300 pt-2 '>Frontend web development involves creating the user interface and user experience of a website or web application. Frontend developers focus on designing</p>
-            <p className='text-slate-300 pt-2 text-xs'>Old Price: <span className='line-through'>₦300,000.00</span></p>
-            <p className='text-slate-300 pt-2 text-xs'>Percentage Discount: 90%</p>
-            <p className='text-slate-300 pt-2 text-xs'>Discount Price: ₦ 30,000.00</p>
+            <p className=' font-bold text-center justify-center pt-2'>Frontend Web Development</p>
+            <p className=' pt-2 '>Frontend web development involves creating the user interface and user experience of a website or web application. Frontend developers focus on designing</p>
+            <p className=' pt-2 text-xs'>Old Price: <span className='line-through'>₦300,000.00</span></p>
+            <p className=' pt-2 text-xs'>Percentage Discount: 90%</p>
+            <p className=' pt-2 text-xs'>Discount Price: ₦ 30,000.00</p>
 
 
             <div className='flex items-end justify-end pt-4 pb-4'>
-            <Link to="/update-course-discount/hr" className="bg-[#F13178] px-2 text-center items-center rounded-lg flex justify-center h-[30px] w-fit sm:mt-0 mt-2">
+            <Link to="/update-course-discount/hr" className="bg-slate-500 px-2 text-center items-center rounded-lg flex justify-center h-[30px] w-fit sm:mt-0 mt-2">
                 <div className="flex">
                   <p className="text-white pl-2 font-bold">Edit </p>
                   <CiEdit size={28} className="pl-2 mr-2 text-white " />

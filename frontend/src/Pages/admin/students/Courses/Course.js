@@ -34,60 +34,60 @@ const Course = () => {
 
 
       <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 '>
-        <Link to='/course-details/hr' className='bg-[#134574] w-full md:w-full flex gap-2 p-2  rounded-lg  mt-4'>
-          <MdAnimation size={58} className='text-[#F13178] w-1/3' />
-          <div className='w-2/3'>
-            <p className='p-1 text-white font-extrabold'>2D Animation</p>
-            <p className='p-1 text-white text-xs pt-4'>₦ 300,000</p>
-            <p className='p-1 text-white text-xs'>24 Weeks </p>
+        <Link to='/course-details/hr' className='bg-slate-400 w-full md:w-full flex gap-2 p-2  rounded-lg  mt-4'>
+          <MdAnimation size={58} className='text-slate-500 w-1/3' />
+          <div className='w-2/3 text-[#134574]'>
+            <p className='p-1 font-extrabold'>2D Animation</p>
+            <p className='p-1 text-xs pt-4'>₦ 300,000</p>
+            <p className='p-1 text-xs'>24 Weeks </p>
           </div>
 
 
 
         </Link>
-        <Link to='/course-details/hr' className='bg-[#134574] w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
-          <LuAxis3D size={58} className='text-[#F13178] w-1/3' />
-          <div className='w-2/3'>
-            <p className='p-1 text-white font-extrabold'>3D Animation</p>
-            <p className='p-1 text-white text-xs pt-4'>₦ 300,000</p>
-            <p className='p-1 text-white text-xs'>24 Weeks </p>
+        <Link to='/course-details/hr' className='bg-slate-400 w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
+          <LuAxis3D size={58} className='text-slate-500 w-1/3' />
+          <div className='w-2/3 text-[#134574]'>
+            <p className='p-1 font-extrabold'>3D Animation</p>
+            <p className='p-1 text-xs pt-4'>₦ 300,000</p>
+            <p className='p-1 text-xs'>24 Weeks </p>
           </div>
         </Link>
 
-        <Link to='/course-details/hr' className='bg-[#134574] w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
-          <FaLaptopCode size={58} className='text-[#F13178] w-1/3' />
-          <div className='w-2/3'>
-            <p className='p-1 text-white font-extrabold'>Frontend</p>
-            <p className='p-1 text-white text-xs pt-4'>₦ 300,000</p>
-            <p className='p-1 text-white text-xs'>24 Weeks </p>
+        <Link to='/course-details/hr' className='bg-slate-400 w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
+          <FaLaptopCode size={58} className='text-slate-500 w-1/3' />
+          <div className='w-2/3 text-[#134574]'>
+            <p className='p-1 font-extrabold'>Frontend</p>
+            <p className='p-1 text-xs pt-4'>₦ 300,000</p>
+            <p className='p-1 text-xs'>24 Weeks </p>
           </div>
 
         </Link>
 
-        <Link to='/course-details/hr' className='bg-[#134574] w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
-          <FaDatabase size={58} className='text-[#F13178] w-1/3' />
-          <div className='w-2/3'>
-            <p className='p-1 text-white font-extrabold'>Backend</p>
-            <p className='p-1 text-white text-xs pt-4'>₦ 300,000</p>
-            <p className='p-1 text-white text-xs'>24 Weeks </p>
+        <Link to='/course-details/hr' className='bg-slate-400 w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
+          <FaDatabase size={58} className='text-slate-500 w-1/3' />
+          <div className='w-2/3 text-[#134574]'>
+            <p className='p-1 font-extrabold'>Backend</p>
+            <p className='p-1 text-xs pt-4'>₦ 300,000</p>
+            <p className='p-1 text-xs'>24 Weeks </p>
           </div>
 
         </Link>
-        <Link to='/course-details/hr' className='bg-[#134574] w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
-          <FaLaptopCode size={58} className='text-[#F13178] w-1/3' />
-          <div className='w-2/3'>
-            <p className='p-1 text-white font-extrabold'>Fullstack Web Development</p>
-            <p className='p-1 text-white text-xs pt-4'>₦ 300,000</p>
-            <p className='p-1 text-white text-xs'>24 Weeks </p>
+        <Link to='/course-details/hr' className='bg-slate-400 w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
+          <FaLaptopCode size={58} className='text-slate-500 w-1/3' />
+          <div className='w-2/3 text-[#134574]'>
+            <p className='p-1 font-extrabold'>Fullstack Web Development</p>
+            <p className='p-1 text-xs pt-4'>₦ 300,000</p>
+            <p className='p-1 text-xs'>24 Weeks </p>
           </div>
 
         </Link>
-        <Link to='/course-details/hr' className='bg-[#134574] w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
-          <IoAnalytics size={58} className='text-[#F13178] w-1/3' />
-          <div className='w-2/3'>
-            <p className='p-1 text-white font-extrabold'>Data Analysis</p>
-            <p className='p-1 text-white text-xs pt-4'>₦ 300,000</p>
-            <p className='p-1 text-white text-xs'>24 Weeks </p>
+        <Link to='/course-details/hr' className='bg-slate-400 w-full md:w-full flex gap-2 p-2 rounded-lg  mt-4'>
+          <IoAnalytics size={58} className='text-slate-500 w-1/3' />
+          <div className='w-2/3 text-[#134574]'>
+            <p className='p-1 font-extrabold'>Data Analysis</p>
+            <p className='p-1 text-xs pt-4'>₦ 300,000</p>
+            <p className='p-1 text-xs'>24 Weeks </p>
           </div>
         </Link>
 

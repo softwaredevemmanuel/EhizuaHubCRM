@@ -19,22 +19,22 @@ const StaffSalaryAdvance = () => {
                 <h1 className='text-[20px] font-bold '>SALARY ADVANCE</h1>
               </div>
               <p className="border-[#F13178] border-b mb-4 mr-[-75px]"> </p>
-              
+
               <div className="flex flex-col gap-y-3 lg:ml-5">
-                <div className="grid md:grid-cols-2" >
-                  <div className="md:grid-cols-2">
+                <div className="flex gap-4" >
+                  <div className="md:grid-cols-2 text-[#134574]">
                     <p>Amount</p>
                     <input
                       type="text"
-                      value= 'N30000'
+                      value='N30000'
                       readOnly
-                      className='rounded-xl pl-4 py-4 mt-4 font-medium text-[#000000] focus:outline-none focus:border-none'
+                      className='rounded-lg pl-4 py-4 mt-4 font-medium text-[#134574] focus:outline-none focus:border-none'
                     />
                   </div>
-                  <div>
-                    <p>Salary Percentage</p>
+                  <div className="text-[#134574]">
+                    <p>Percentage</p>
                     <select
-                      className='rounded-xl pl-4 py-4 mt-4 font-medium text-[#000000] focus:outline-none focus:border-none'
+                      className='rounded-lg pl-4 py-4 mt-4 font-medium text-[#134574] focus:outline-none focus:border-none'
                     >
                       <option className="">10 %</option>
                       <option>20 %</option>
@@ -46,7 +46,7 @@ const StaffSalaryAdvance = () => {
 
                 </div>
 
-                <p>Reason</p>
+                <p className="text-[#134574]">Reason</p>
 
                 <textarea
                   style={{ minHeight: '200px' }}

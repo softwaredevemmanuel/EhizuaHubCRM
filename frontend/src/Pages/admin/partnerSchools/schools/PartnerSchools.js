@@ -56,33 +56,33 @@ const PartnerSchools = () => {
           </div>
 
           <div className=' bg-slate-200 h-fit px-2 pb-4 rounded-md'>
-            <Link to="/school-details/hr" className='pl-5 rounded-md "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-2 pr-5'>
+            <Link to="/school-details/hr" className='pl-5 rounded-md "w-[412px] h-[50px] bg-slate-400 text-[#134574] flex items-center justify-between mt-2 pr-5'>
               <div className='flex'>
-                <p className='text-white ml-2 text-md'>Living Spring Secondary School</p>
+                <p className='ml-2 text-md'>Living Spring Secondary School</p>
               </div>
 
               <div className='flex gap-4'>
-                <p className='text-white sm:pl-4 hidden sm:block'>Awoyaya Bus stop</p>
+                <p className='sm:pl-4 hidden sm:block'>Awoyaya Bus stop</p>
               </div>
 
             </Link>
-            <Link to="/school-details/hr" className='pl-5 rounded-md "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-2 pr-5 '>
+            <Link to="/school-details/hr" className='pl-5 rounded-md "w-[412px] h-[50px] bg-slate-400 text-[#134574] flex items-center justify-between mt-2 pr-5 '>
               <div className='flex'>
-                <p className='text-white ml-2 text-md'>Living Spring Secondary School</p>
+                <p className='ml-2 text-md'>Living Spring Secondary School</p>
               </div>
 
               <div className='flex gap-4'>
-                <p className='text-white sm:pl-4 hidden sm:block'>Awoyaya Bus stop</p>
+                <p className='sm:pl-4 hidden sm:block'>Awoyaya Bus stop</p>
               </div>
 
             </Link>
-            <Link to="/school-details/hr" className='pl-5 rounded-md "w-[412px] h-[50px] bg-[#134574] flex items-center justify-between mt-2 pr-5'>
+            <Link to="/school-details/hr" className='pl-5 rounded-md "w-[412px] h-[50px] bg-slate-400 text-[#134574] flex items-center justify-between mt-2 pr-5'>
               <div className='flex'>
-                <p className='text-white ml-2 text-md'>Living Spring Secondary School</p>
+                <p className='ml-2 text-md'>Living Spring Secondary School</p>
               </div>
 
               <div className='flex gap-4'>
-                <p className='text-white sm:pl-4 hidden sm:block'>Awoyaya Bus stop</p>
+                <p className='sm:pl-4 hidden sm:block'>Awoyaya Bus stop</p>
               </div>
 
             </Link>
