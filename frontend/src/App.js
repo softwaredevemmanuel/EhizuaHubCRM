@@ -94,13 +94,14 @@ import CameraCapture from './Pages/admin/students/Details/Camera';
 //STUDENTS SECTION
 import StudentSidebar from './Pages/student/Sidebar';
 import StudentDashboard from './Pages/student/StudentDashboard';
+import Home from './Pages/Home';
 
 
 
 
 
 const App = () => {
-  const user = 'Admin'
+  const user = 'Student'
 
   return (
 
@@ -179,16 +180,19 @@ const App = () => {
 
 
       {user === 'Student' && (
+
+        
         <div className='flex w-full h-full'>
-          {/* <StaffSidebar/> */}
-          <StudentSidebar/>
+          {/* <StudentSidebar/>
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<StudentDashboard />} />
-
-
+          </Routes> */}
+          
+          
+          <Routes>
+            <Route path="/" element={<Home/>}/>
           </Routes>
-
         </div>
 
       )}
