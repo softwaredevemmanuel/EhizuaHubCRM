@@ -11,7 +11,6 @@ import { BsPatchQuestionFill } from "react-icons/bs";
 import { GiReceiveMoney } from "react-icons/gi";
 import { FaBuilding } from "react-icons/fa";
 import { MdCelebration } from "react-icons/md";
-import { CiDiscount1 } from "react-icons/ci";
 import { MdDashboard } from "react-icons/md";
 import { useState, Fragment } from "react"
 import { Link } from "react-router-dom";
@@ -39,20 +38,18 @@ const staff = [
   { id: "1", icon: <CiMemoPad />, name: "Memo", url: "staff_memo_list" },
   { id: "2", icon: <HiClipboardList />, name: "Attendance", url: "staff_attendance" },
   { id: "3", icon: <IoMdPerson />, name: "Details", url: "staff_details" },
-  { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff_complaints" },
+  { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff_complaints-list" },
   { id: "5", icon: <FaTools />, name: "Inventory", url: "staff_inventory" },
-  { id: "6", icon: <GiReceiveMoney />, name: "Loan", url: "staff_loan" },
+  { id: "6", icon: <GiReceiveMoney />, name: "Salary Advance/ Loan", url: "staff_salary_advance" },
   { id: "7", icon: <FaUserMinus />, name: "Report", url: "staff_report" },
-  { id: "8", icon: <FaUserMinus />, name: "Salary Advance", url: "staff_salary_advance" },
   { id: "9", icon: <FaUserMinus />, name: "Leave", url: "staff_leave" },
   { id: "10", icon: <MdCelebration />, name: "Birthdays", url: "staff_birthday" },
 
 ]
 const school = [
-  { id: "1", icon: <CiMemoPad />, name: "Hub Instructor", url: "school-memo/hr" },
-  { id: "2", icon: <FaBuilding />, name: "School Instructor", url: "partner-schools/hr" },
+  { id: "1", icon: <CiMemoPad />, name: "Hub Instructor", url: "hub-instructor" },
+  { id: "2", icon: <FaBuilding />, name: "School Instructor", url: "school-instructor" },
  
-
 ]
 
 const students = [
@@ -199,7 +196,7 @@ const StaffSidebar = () => {
                         </ul>
                       </li>
                       <li>
-                        <div className="text-xs font-semibold leading-6 text-indigo-200">SCHOOL SECTION</div>
+                        <div className="text-xs font-semibold leading-6 text-indigo-200">INSTRUCTOR SECTION</div>
                         {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
                         <ul className="-mx-2 mt-2 space-y-1">
                           {school.map((item) => (
@@ -359,7 +356,7 @@ const StaffSidebar = () => {
           </button>
 
           {/* Separator */}
-          <div className="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true " />
+          <div className="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 ">
             <form className="relative flex flex-1" action="#" method="GET">

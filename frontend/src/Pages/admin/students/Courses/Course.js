@@ -21,16 +21,15 @@ const Course = () => {
       </div>
 
       <div className='border-[#F13178] border-b '></div>
+
       <div className="flex justify-end">
         <Link to="/create-student-course/hr" className="bg-[#F13178] px-2 text-center items-center rounded-[6px] font-bold flex justify-center h-[40px] w-fit">
           <div className="flex">
             <p className="text-white pl-2">Create Course </p>
             <FaCirclePlus size={28} className="pl-2 mr-2 text-white" />
-
           </div>
         </Link>
       </div>
-
 
 
       <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 '>

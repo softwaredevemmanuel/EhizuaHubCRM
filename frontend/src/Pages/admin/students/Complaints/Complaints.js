@@ -34,7 +34,7 @@ const Complaints = () => {
                         <p className=' text-center text-[#134574] bg-slate-300'>New</p>
 
                         <div className=' h-[300px] gap-2'>
-                            <Link to="/school-new-complaints/hr">
+                            <Link to="/all-student-complaints/hr">
                                 <div className='bg-slate-400 h-[145px] items-center justify-center'>
                                     <p className=' text-center text-white pt-2'>3 new message</p>
 

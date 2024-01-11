@@ -22,17 +22,15 @@ const Attendance = () => {
 
     return (
         <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3  pb-8">
-            <div className="w-full  bg-[#C8D1DA] flex flex-col gap-3">
                 <div className='flex justify-between '>
                     <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Staff Attendance</p>
                     <Link to='/staff-memo/hr' className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
-                </div>
             </div>
             <div className='border-[#F13178] border-b '></div>
 
             <div className='grid sm:grid-cols-2 gap-2'>
-                <div className='pt-8 flex gap-4'>
+                <div className='pt-2 flex gap-4'>
                 <p className='text-[#134574] font-bold'>Location</p>
 
                     <select type='date' className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none bg-slate-200 px-4' >
@@ -41,7 +39,7 @@ const Attendance = () => {
                     </select>
 
                 </div>
-                <div className='pt-8 flex gap-4'>
+                <div className='pt-2 flex gap-4'>
                     <p className='text-[#134574] font-bold'>Date</p>
                     <input type='date' className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none bg-slate-200 px-4' />
 

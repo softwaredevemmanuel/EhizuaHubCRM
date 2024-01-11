@@ -38,13 +38,14 @@ const location = [
 
 const staff = [
   { id: "1", icon: <CiMemoPad />, name: "Memo", url: "staff-memo/hr" },
-  { id: "1", icon: <TbReport />, name: "Weekly Report", url: "staff-report/hr" },
-  { id: "2", icon: <HiClipboardList />, name: "Attendance", url: "staff-attendance/hr" },
-  { id: "3", icon: <IoMdPerson />, name: "Staff Section", url: "ehizua-staff/hr" },
-  { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff-complaints/hr" },
-  { id: "5", icon: <FaTools />, name: "Inventory", url: "inventory/hr" },
-  { id: "6", icon: <GiReceiveMoney />, name: "Loan", url: "staff-loan/hr" },
-  { id: "7", icon: <FaUserMinus />, name: "Leave section", url: "leave-management" },
+  { id: "2", icon: <TbReport />, name: "Weekly Report", url: "staff-report-list/hr" },
+  { id: "3", icon: <HiClipboardList />, name: "Attendance", url: "staff-attendance/hr" },
+  { id: "4", icon: <IoMdPerson />, name: "Income/Expenditures", url: "income-expenditure/hr" },
+  { id: "5", icon: <IoMdPerson />, name: "Salary", url: "staff-salary/hr" },
+  { id: "6", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff-complaints/hr" },
+  { id: "7", icon: <FaTools />, name: "Inventory", url: "inventory/hr" },
+  { id: "8", icon: <GiReceiveMoney />, name: "Loan", url: "staff-loan/hr" },
+  { id: "9", icon: <FaUserMinus />, name: "Leave section", url: "leave-management" },
 
 ]
 const school = [
@@ -58,7 +59,6 @@ const students = [
   { id: "1", icon: <MdMenuBook />, name: "Courses and Curriculum", url: "student-course/hr" },
   { id: "2", icon: <CiMemoPad />, name: "Memo", url: "student-memo/hr" },
   { id: "3", icon: <PiStudent />, name: "student Section", url: "student-center/hr" },
-  { id: "4", icon: <HiClipboardList />, name: "Attendance", url: "student-attendance/hr" },
   { id: "5", icon: <BsPatchQuestionFill />, name: "Complaints", url: "student-complaints/hr" },
   { id: "3", icon: <CiDiscount1 />, name: "Course Discounts", url: "course-discount/hr" },
 ]

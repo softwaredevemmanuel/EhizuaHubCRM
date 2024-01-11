@@ -9,6 +9,8 @@ import logo from "../../assets/ehizuahublogo.png";
 import { Link } from "react-router-dom";
 import { FaBars} from "react-icons/fa6";
 import { PiExam } from "react-icons/pi";
+import { GrDocumentPerformance } from "react-icons/gr";
+
 
 
 
@@ -18,13 +20,25 @@ const staff = [
     id: "2",
     icon: <HiClipboardList />,
     name: "Curriculum",
-    url: "staff-attendance/hr",
+    url: "course-curriculum",
   },
   {
     id: "3",
     icon: <PiExam />,
-    name: "Test",
-    url: "ehizua-staff/hr",
+    name: "Test Section",
+    url: "test-section",
+  },
+  {
+    id: "4",
+    icon: <PiExam />,
+    name: "Complaints",
+    url: "complaints",
+  },
+  {
+    id: "4",
+    icon: <PiExam />,
+    name: "Memo",
+    url: "student-memo",
   },
   
  

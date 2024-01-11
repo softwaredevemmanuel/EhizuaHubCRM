@@ -42,7 +42,7 @@ const Home = () => {
             <li>About Us</li>
           </ul>
         </div>
-        <Link className="hidden lg:block bg-[#DE1D80] text-white px-6 rounded-lg py-2">
+        <Link to="/login" className="hidden lg:block bg-[#DE1D80] text-white px-6 rounded-lg py-2">
           Login
         </Link>
         <button className="primary flex lg:hidden"><CiMenuFries size={24} /></button>

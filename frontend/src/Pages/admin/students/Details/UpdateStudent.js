@@ -79,14 +79,7 @@ const UpdateStudent = () => {
 
                 </div>
 
-                <div className='flex gap-4 mt-6 px-8'>
-                    <p className='text-sm text-gray-600  pt-2'>Profile Picture</p>
-                    <button className=' bg-[#F13178] px-2  text-white md:text-[15px]  rounded-lg text-[11px] flex items-center gap-4 font-bold h-[40px]'>
-                        Take Picture
-                        <TiCameraOutline className=" text-white text-[15px] md:text-[20px] " />
-                    </button>
-
-                </div>
+          
 
                 <div className='flex gap-8 justify-center px-8'>
 

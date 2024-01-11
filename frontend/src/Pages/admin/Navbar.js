@@ -36,7 +36,6 @@ const location = [
 
 const staff = [
   { id: "1", icon: <CiMemoPad />, name: "Memo", url: "staff-memo/hr" },
-  { id: "2", icon: <HiClipboardList />, name: "Attendance", url: "staff-attendance/hr" },
   { id: "3", icon: <IoMdPerson />, name: "Staff Section", url: "ehizua-staff/hr" },
   { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff-complaints/hr" },
   { id: "5", icon: <FaTools />, name: "Inventory", url: "inventory/hr" },

@@ -82,7 +82,7 @@ const StudentsDetails = () => {
             <div className='grid md:grid-cols-2 gap-1'>
                 <div className='bg-slate-100 w-full h-full pb-8 text-[#2b4053]'>
                     <div className='flex items-end justify-end px-2 text-white md:h-[52px] h-[45px] rounded-lg'>
-                        <Link to='/update-student/hr' className='bg-[#F13178] md:text-[15px]  text-[11px] flex items-center gap-2 font-bold p-1 rounded-md'>
+                        <Link to='/update-school-student/hr' className='bg-[#F13178] md:text-[15px]  text-[11px] flex items-center gap-2 font-bold p-1 rounded-md'>
                             Edit
                             <MdOutlineEdit className=" text-white text-[15px] md:text-[20px] " />
                         </Link>

@@ -21,7 +21,7 @@ const CreateStudent = () => {
 
             <div className='border-[#F13178] border-b '></div>
 
-            <form className='bg-slate-200 sm:h-[800px] rounded-md pb-8'>
+            <form className='bg-slate-200 sm:h-full rounded-md pb-8'>
                 <div className='sm:flex gap-4 mt-6 px-8'>
                     <p className='text-sm text-gray-600 w-[180px] pt-2'>Name</p>
                     <input type='text' placeholder='First Name' className='rounded-md w-full h-[40px] outline-none pl-4' />
@@ -74,14 +74,7 @@ const CreateStudent = () => {
 
                 </div>
 
-                <div className='flex gap-4 mt-6 px-8'>
-                    <p className='text-sm text-gray-600  pt-2'>Profile Picture</p>
-                    <button className=' bg-[#F13178] px-2  text-white md:text-[15px]  rounded-lg text-[11px] flex items-center gap-4 font-bold h-[40px]'>
-                        Take Picture
-                        <TiCameraOutline className=" text-white text-[15px] md:text-[20px] " />
-                    </button>
-
-                </div>
+           
 
                 <div className='flex gap-8 justify-center px-8'>
 

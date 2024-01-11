@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Preloader from "./components/preloader";
+
 
 // ADMIN - SECTION
 // import AdminLogin from './components/admin/AdminLogin';
@@ -15,9 +17,11 @@ import CreateEnterpriseLocation from './Pages/admin/offices/CreateEnterprise';
 import HrStaffAttendence from './Pages/admin/staff/Attendance/Attendence';
 import HrStaffAttendenceDetails from './Pages/admin/staff/Attendance/AttendanceDetails';
 import HrStaffComplaints from './Pages/admin/staff/Complaints';
-import HrStaffSection from './Pages/admin/staff/EhizuaStaff';
+import HrIncomeExpenditure from './Pages/admin/staff/Expenses/IncomeExpenditure';
+import HrStaffSalary from './Pages/admin/staff/Expenses/Salary';
 import HrInventory from './Pages/admin/staff/Inventory';
-import HrStaffLoan from './Pages/admin/staff/Loan';
+import HrStaffLoan from './Pages/admin/staff/Loan/Loan';
+import HrStaffLoanDetails from './Pages/admin/staff/Loan/Details';
 import HrStaffMemo from './Pages/admin/staff/Memo/Memo';
 import HrRegisterStaff from './Pages/admin/staff/RegisterStaff';
 import HrStaffLeaveManagement from './Pages/admin/staff/Leave/LeaveManagement';
@@ -28,7 +32,9 @@ import AllLeave from './Pages/admin/staff/Leave/Leaves';
 import StaffLeaveDetails from './Pages/admin/staff/Leave/Details';
 import MemoDetails from './Pages/admin/staff/Memo/MemoDetails';
 import CreateMemo from './Pages/admin/staff/Memo/CreateMemo';
-import HrStaffReport from './Pages/admin/staff/Reports';
+import HrAllStaffReports from './Pages/admin/staff/WeeklyReport/AllReports';
+import HrStaffReport from './Pages/admin/staff/WeeklyReport/StaffReport';
+import HrStaffReportDetails from './Pages/admin/staff/WeeklyReport/ReportDetails';
 
 
 
@@ -37,8 +43,9 @@ import HrStaffReport from './Pages/admin/staff/Reports';
 import HrStudentfCourse from './Pages/admin/students/Courses/Course';
 import HrStudentfMemo from './Pages/admin/students/Memo/Memo';
 import HrStudentCenter from './Pages/admin/students/Details/StudentsCenter';
-import HrStudentAttendance from './Pages/admin/students/Attendance';
 import HrStudentComplaints from './Pages/admin/students/Complaints/Complaints';
+import HrAllStudentComplaints from './Pages/admin/students/Complaints/AllComplaints';
+import HrHStuComplaintsDetails from './Pages/admin/students/Complaints/ComplaintsDetails';
 import HrStudentMemo from './Pages/admin/students/Memo/Memo';
 import HrCreateStudentMemo from './Pages/admin/students/Memo/CreateMemo';
 import HrStudentMemoDetails from './Pages/admin/students/Memo/MemoDetails';
@@ -60,7 +67,6 @@ import HrUpdateCourseDiscount from './Pages/admin/students/Discount/UpdateDiscou
 import HrPartnerSchool from './Pages/admin/partnerSchools/schools/PartnerSchools';
 import HrSchoolComplaints from './Pages/admin/partnerSchools/complaints/Complaints';
 import Login from './Pages/Login';
-import Navbar from './Pages/admin/Navbar';
 import StaffSidebar from './Pages/staff/StaffSidebar';
 import HrSchoolMemo from './Pages/admin/partnerSchools/memo/Memo';
 import HrSchoolMemoDetails from './Pages/admin/partnerSchools/memo/MemoDetails';
@@ -69,19 +75,22 @@ import HrCreateSchool from './Pages/admin/partnerSchools/schools/CreateSchool';
 import HrCreateSchoolStudent from './Pages/admin/partnerSchools/schools/CreateSchoolStudent';
 import HrCreateSchoolCourse from './Pages/admin/partnerSchools/schools/CreateCourse';
 import HrSchoolDetails from './Pages/admin/partnerSchools/schools/SchoolDetails';
+import HrUpdateSchoolStudentDetails from './Pages/admin/partnerSchools/schools/UpdateStudent';
 import HrSchoolStudentDetails from './Pages/admin/partnerSchools/schools/StudentDetails';
-import HrSchoolNewComplaints from './Pages/admin/partnerSchools/complaints/NewComplaints';
+import HrSchoolNewComplaints from './Pages/admin/partnerSchools/complaints/AllComplaints';
 import HrSchoolComplaintsDetails from './Pages/admin/partnerSchools/complaints/ComplaintsDetails';
 
 // STAFF SECTION
 import StaffDashboard from './Pages/staff/StaffDashboard';
 import StaffDetails from './Pages/staff/StaffDetails';
-import StaffComplaints from './Pages/staff/StaffComplaints';
-import StaffInventory from './Pages/staff/StaffInventory';
-import StaffLoan from './Pages/staff/StaffLoan';
+import StaffComplaints from './Pages/staff/Complaints/StaffComplaints';
+import StaffComplaintsList from './Pages/staff/Complaints/ComplaintList';
+import StaffComplaintsDetails from './Pages/staff/Complaints/Details';
+import StaffInventory from './Pages/staff/Inventory/StaffInventory';
+import StaffInventoryRequest from './Pages/staff/Inventory/Request';
 import StaffReport from './Pages/staff/StaffReport';
-import StaffSalaryAdvance from './Pages/staff/StaffSalaryAdvance';
-import StaffLeave from './Pages/staff/StaffLeave';
+import StaffSalaryAdvance from './Pages/staff/Salary/StaffSalaryAdvance';
+import StaffLeave from './Pages/staff/Leave/StaffLeave';
 import StaffMemo from './Pages/staff/StaffMemo';
 import StaffAttendance from './Pages/staff/Attendance/StaffAttendance';
 import StaffBirthday from './Pages/staff/StaffBirthday';
@@ -89,19 +98,50 @@ import StaffMemoDetails from './Pages/staff/StaffMemoDetails';
 import StaffLeaveApplication from './Pages/staff/StaffLeaveApplication';
 import Example from './Pages/admin/staff/Leave/Example';
 import CameraCapture from './Pages/admin/students/Details/Camera';
+import HubInstructor from './Pages/staff/HubInstructors/Courses';
+import SchoolInstructor from './Pages/staff/SchoolInstructor/Courses';
+import HICreateCurriculum from './Pages/staff/HubInstructors/CreateCurriculum';
+import HICreateContent from './Pages/staff/HubInstructors/CreateContent';
+import HICreateQuestion from './Pages/staff/HubInstructors/CreateQuestion';
+import HICourseCurriculum from './Pages/staff/HubInstructors/CourseCurriculum';
+import HICreatedContentList from './Pages/staff/HubInstructors/CreatedContentList';
+import HICreatedQuestionList from './Pages/staff/HubInstructors/CreatedQuestionsList';
+import HICourseContent from './Pages/staff/HubInstructors/CourseContent';
+import HIStudentList from './Pages/staff/HubInstructors/StudentsList';
+import HIStudentDetails from './Pages/staff/HubInstructors/StudentDetails';
+import SIStudents from './Pages/staff/SchoolInstructor/ViewStudents';
+import SIStudentDetails from './Pages/staff/SchoolInstructor/StudentDetails';
 
 
 //STUDENTS SECTION
 import StudentSidebar from './Pages/student/Sidebar';
 import StudentDashboard from './Pages/student/StudentDashboard';
 import Home from './Pages/Home';
+import ForgotPassword from "./Pages/ForgotPassword";
+import StudentCourseCurriculum from "./Pages/student/CourseCurriculum";
+import TestSection from "./Pages/student/TestSection";
+import StudentComplaints from "./Pages/student/Complaints";
+import StudentMemo from "./Pages/student/Memo/Memo";
+import StudentMemoDetails from "./Pages/student/Memo/MemoDetails";
 
 
+function App() {
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Set loading to false when your app is ready to load
+    }, 2000); // Adjust the delay time as needed
+  }, []);
+  return (
+    <div>
+      {loading ? <Preloader /> : <AppContent />}
+    </div>
+  );
+}
 
-
-const App = () => {
-  const user = 'Admin'
+const AppContent = () => {
+  const user = 'Student'
 
   return (
 
@@ -111,6 +151,7 @@ const App = () => {
         <div>
           <Sidebar />
           <Routes>
+            <Route path="*" element={<Navigate to="/dashboard" />} />
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<AdminDashboard />} />
             <Route path="/office-locations/hr" element={<OfficeLocations />} />
@@ -121,9 +162,11 @@ const App = () => {
             {/* __________ADMIN - STAFF SECTION ______________ */}
             <Route path='staff-attendance/hr' element={<HrStaffAttendence />} />
             <Route path='staff-complaints/hr' element={<HrStaffComplaints />} />
-            <Route path='ehizua-staff/hr' element={<HrStaffSection />} />
+            <Route path='income-expenditure/hr' element={<HrIncomeExpenditure />} />
+            <Route path='staff-salary/hr' element={<HrStaffSalary />} />
             <Route path='inventory/hr' element={<HrInventory />} />
             <Route path='staff-loan/hr' element={<HrStaffLoan />} />
+            <Route path='loan-details/hr' element={<HrStaffLoanDetails />} />
             <Route path='staff-memo/hr' element={<HrStaffMemo />} />
             <Route path='register-staff/hr' element={<HrRegisterStaff />} />
             <Route path='leave-management' element={<HrStaffLeaveManagement />} />
@@ -135,16 +178,19 @@ const App = () => {
             <Route path='example' element={<Example />} />
             <Route path='memo-details' element={<MemoDetails />} />
             <Route path='create-memo' element={<CreateMemo />} />
-            <Route path='staff-attendance-details/hr' element={<HrStaffAttendenceDetails/>} />
-            <Route path='staff-report/hr' element={<HrStaffReport/>} />
+            <Route path='staff-attendance-details/hr' element={<HrStaffAttendenceDetails />} />
+            <Route path='staff-report-list/hr' element={<HrAllStaffReports />} />
+            <Route path='staff-report/hr' element={<HrStaffReport />} />
+            <Route path='staff-report-details/hr' element={<HrStaffReportDetails />} />
 
 
             {/* __________ADMIN - STUDENT SECTION ______________ */}
             <Route path='student-course/hr' element={<HrStudentfCourse />} />
             <Route path='student-memo/hr' element={<HrStudentfMemo />} />
             <Route path='student-center/hr' element={<HrStudentCenter />} />
-            <Route path='student-attendance/hr' element={<HrStudentAttendance />} />
             <Route path='student-complaints/hr' element={<HrStudentComplaints />} />
+            <Route path='all-student-complaints/hr' element={<HrAllStudentComplaints />} />
+            <Route path='hstu-complaints-details/hr' element={<HrHStuComplaintsDetails />} />
             <Route path='student-memo/hr' element={<HrStudentMemo />} />
             <Route path='create-student-memo/hr' element={<HrCreateStudentMemo />} />
             <Route path='student-memo-details/hr' element={<HrStudentMemoDetails />} />
@@ -173,6 +219,7 @@ const App = () => {
             <Route path='school-student-details/hr' element={<HrSchoolStudentDetails />} />
             <Route path='school-new-complaints/hr' element={<HrSchoolNewComplaints />} />
             <Route path='school-complaints-details/hr' element={<HrSchoolComplaintsDetails />} />
+            <Route path='update-school-student/hr' element={<HrUpdateSchoolStudentDetails />} />
           </Routes>
         </div>
       )}
@@ -181,18 +228,19 @@ const App = () => {
 
       {user === 'Student' && (
 
-        
         <div className='flex w-full h-full'>
-          {/* <StudentSidebar/>
+           <StudentSidebar/>
           <Routes>
+            <Route path="*" element={<Navigate to="/" />} />
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<StudentDashboard />} />
-          </Routes> */}
-          
-          
-          <Routes>
-            <Route path="/" element={<Home/>}/>
-          </Routes>
+            <Route path="/course-curriculum" element={<StudentCourseCurriculum />} />
+            <Route path="/test-section" element={<TestSection />} />
+            <Route path="/complaints" element={<StudentComplaints />} />
+            <Route path="/student-memo" element={<StudentMemo />} />
+            <Route path="/student-memo-details" element={<StudentMemoDetails />} />
+          </Routes> 
+
         </div>
 
       )}
@@ -202,45 +250,64 @@ const App = () => {
 
           <StaffSidebar />
           <Routes>
+            <Route path="*" element={<Navigate to="/dashboard" />} />
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<StaffDashboard />} />
             <Route path="/staff_memo_list" element={<StaffMemo />} />
             <Route path="/staff_attendance" element={<StaffAttendance />} />
             <Route path="/staff_details" element={<StaffDetails />} />
-            <Route path="/staff_complaints" element={<StaffComplaints />} />
+            <Route path="/staff-new_complaints" element={<StaffComplaints />} />
+            <Route path="/staff-complaints-details" element={<StaffComplaintsDetails />} />
+            <Route path="/staff_complaints-list" element={<StaffComplaintsList />} />
             <Route path="/staff_inventory" element={<StaffInventory />} />
-            <Route path="/staff_loan" element={<StaffLoan />} />
+            <Route path="/staff_inventory-request" element={<StaffInventoryRequest />} />
             <Route path="/staff_report" element={<StaffReport />} />
             <Route path="/staff_salary_advance" element={<StaffSalaryAdvance />} />
             <Route path="/staff_leave" element={<StaffLeave />} />
             <Route path="/staff_birthday" element={<StaffBirthday />} />
             <Route path="/staff-memo-details" element={<StaffMemoDetails />} />
             <Route path="/staff-leave-form" element={<StaffLeaveApplication />} />
+            <Route path="/hub-instructor" element={<HubInstructor />} />
+            <Route path="/school-instructor" element={<SchoolInstructor />} />
+            <Route path="/hi-create-curriculum" element={<HICreateCurriculum />} />
+            <Route path="/hi-create-content" element={<HICreateContent />} />
+            <Route path="/hi-create-question" element={<HICreateQuestion />} />
+            <Route path="/hi-course-curriculum" element={<HICourseCurriculum />} />
+            <Route path="/hi-content-list" element={<HICreatedContentList />} />
+            <Route path="/hi-course-content" element={<HICourseContent />} />
+            <Route path="/hi-question-list" element={<HICreatedQuestionList />} />
+            <Route path="/hi-student-list" element={<HIStudentList />} />
+            <Route path="/hi-student-details" element={<HIStudentDetails />} />
+            <Route path="/si-students" element={<SIStudents />} />
+            <Route path='si-student-details' element={<SIStudentDetails />} />
 
           </Routes>
+
+        </div>
+
+      )}
+
+      {user === "false" && (
+        <div>
+
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="/home" element={<Home />} />
+
+          </Routes>
+
         </div>
 
 
       )}
-
-      {user == "false" && (
-        <Login />
-
-
-      )}
-      {user == "camera" && (
+      {user === "camera" && (
         <CameraCapture />
 
 
       )}
-
-
-
-
-
-
-
-
 
 
     </Router>

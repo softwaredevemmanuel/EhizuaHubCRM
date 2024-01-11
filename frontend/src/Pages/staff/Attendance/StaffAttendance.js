@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IoIosArrowRoundBack } from "react-icons/io";
+import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid'
 
 
 
@@ -23,11 +23,31 @@ const StaffAttendance = () => {
   return (
     <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3  pb-8">
       <div className="w-full  bg-[#C8D1DA] flex flex-col gap-3">
-        <div className='flex justify-between '>
-          <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Okereke Emmanuel </p>
-          <Link to='/staff-attendance/hr' className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+      <div className='flex justify-between'>
+                            <nav className="flex mt-6" aria-label="Breadcrumb">
+                                <ol role="list" className="flex items-center space-x-4">
+                                    <li>
+                                        <div>
+                                            <Link to="/dashboard" className="text-[#F13178] hover:text-[#134574]">
+                                                <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                                                <span className="sr-only">Home</span>
+                                            </Link>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div className="flex items-center">
+                                            <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-[#F13178]" aria-hidden="true" />
+                                            <div className="ml-4 text-xs font-bold text-[#F13178]">
+                                                ATTENDANCE
+                                            </div>
 
-        </div>
+                                        </div>
+
+                                    </li>
+
+                                </ol>
+                            </nav>
+                        </div>
       </div>
       <div className='border-[#F13178] border-b '></div>
 
@@ -89,6 +109,7 @@ const StaffAttendance = () => {
 
 
       </div>
+      
       <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-fit pb-44">
 
 
