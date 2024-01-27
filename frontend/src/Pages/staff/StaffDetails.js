@@ -60,7 +60,7 @@ const StaffDetails = () => {
             </div>
 
 
-            <div className='flex justify-between '>
+            <div className='flex justify-between'>
                 <p className='text-[#F13178] text-[20px] mt-2 font-extrabold' >Staff Details</p>
                 <Link to='/student-section/hr' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
             </div>

@@ -3,32 +3,95 @@ import { IoMdPerson } from "react-icons/io";
 import { PiStudent } from "react-icons/pi";
 import { FaUserMinus } from "react-icons/fa6";
 import { BsPatchQuestionFill } from "react-icons/bs";
+import { FaLaptopHouse } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import AdminLogin from "./AdminLogin"
-
+import axios from 'axios';
+import ReactLoading from "react-loading";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 
 
 export default function AdminDashboard() {
-    const [user, setUser] = useState(false)
+    const [admin, setAdmin] = useState(false)
+    const [FirstName, setLastName] = useState('')
+    const [loading, setLoading] = useState(false);
+    const [totalStaff, setTotalStaff] = useState(false);
+
+// Check Token Session of Admin
+    useEffect(() => {
+        let user_token = JSON.parse(localStorage.getItem('User'));
+        // Fetch tutors when the component mounts
+        async function fetchOffices() {
+          try {
+            setLoading(true);
+            const response = await axios.get('http://localhost:5000/api/auth/staff', {
+              headers: {
+                token: user_token.Token,
+              }
+            });
+            setTotalStaff(response.data.totalStaff);
+          } catch (error) {
+            if (error.response.data.error === "Token expired") {
+    
+              toastr.error("Session expired. Please login again");
+              setTimeout(() => {
+                localStorage.clear();
+                window.location.reload();
+              }, 2000);
+            } else {
+              toastr.error('Error retrieving Offices');
+              setLoading(false)
+            }
+          } finally {
+            setLoading(false); // Set loading to false regardless of success or failure
+          }
+        }
+    
+        fetchOffices();
+      }, []);
+
+// Admin Authorization
+    useEffect(() => {
+        let staffToken = JSON.parse(localStorage.getItem('StaffToken'));
+        if (staffToken && staffToken.token) {
+            setAdmin(true);
+
+        }
+    }, []);
+
+
+    useEffect(() => {
+        let user = JSON.parse(localStorage.getItem('User'));
+        if ((user)) {
+            setLastName(user.FirstName);
+        }
+    }, []);
+
+    const logoff = () => {
+        const localStorageData = JSON.parse(localStorage.getItem('StaffToken')) || {};
+        delete localStorageData.token;
+        localStorage.setItem('StaffToken', JSON.stringify(localStorageData));
+        setAdmin(false);
+
+
+    };
 
     return (
         <div className="">
-            {user ? (
+            {!admin ? (
                 <AdminLogin/>
 
             ) : (
                 <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3">
-                    <div className="flex justify-between  text-white py-3 items-start border-b  border-[#DD137B]">
-                        <div className="pt-[70px]">
-                            <p className="text-[2rem] font-bold">Welcome Admin</p>
-                            <p>Streamlining Management, One Click at a Time</p>
-                        </div>
-
-                        <div className="bg-black text-white flex flex-col items-center justify-center px-2">
-                            <p className="">Today</p>
-                            <p className="text-[1.75rem] font-bold">10:35am</p>
-                            <p className="text-[0.8rem] text-gray-500">Mon 22, 20323</p>
+                      <div className="pt-[20px]">
+                        <p className="text-[2rem] font-bold text-[#134574]">Welcome {FirstName}</p>
+                        <div className="sm:flex justify-between">
+                            <p className="text-[#DD137B]">Streamlining Management, One Click At A Time</p>
+                            <div className="bg-slate-500 px-4 py-1 rounded-md text-sm text-white font-bold w-[90px] text-center">
+                                <button onClick={logoff} className=""> Log off</button>
+                            </div>
                         </div>
                     </div>
 
@@ -43,10 +106,10 @@ export default function AdminDashboard() {
                     <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-full pb-44">
 
                         <Link className=" bg-[#134574] max-w-[195px] px-2 lg:max-w-[263px] w-full text-center items-center rounded-[6px] py-4 font-bold flex gap-4 justify-center">
-                            <FaUserMinus size={38} />
+                            <FaLaptopHouse size={38} />
                             <div className="flex flex-col items-center lg:items-start">
-                                <p>Leave Request</p>
-                                <p>4</p>
+                                <p>3</p>
+                                <p>Ehizua Hub Centers</p>
                             </div>
                         </Link>
 
@@ -54,7 +117,7 @@ export default function AdminDashboard() {
                             <IoMdPerson size={38} />
                             <div className="flex flex-col items-center lg:items-start">
                                 <p>Number of staff</p>
-                                <p>4</p>
+                                <p>{totalStaff}</p>
                             </div>
                         </Link>
 
@@ -81,6 +144,14 @@ export default function AdminDashboard() {
                                 <p>4</p>
                             </div>
                         </Link>
+                        <Link className=" bg-[#134574] max-w-[195px] px-2 lg:max-w-[263px] w-full text-center items-center rounded-[6px] py-4 font-bold flex gap-4 justify-center">
+                            <FaUserMinus size={38} />
+                            <div className="flex flex-col items-center lg:items-start">
+                                <p>Leave Request</p>
+                                <p>4</p>
+                            </div>
+                        </Link>
+                       
 
 
                     </div>

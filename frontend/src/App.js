@@ -10,7 +10,12 @@ import OfficeLocations from './Pages/admin/offices/OfficeLocations';
 import Sidebar from './Pages/admin/Sidebar';
 import OfficeLocationDetails from './Pages/admin/offices/OfficeLocationDetails';
 import CreateOfficeLocation from './Pages/admin/offices/CreateOffice';
-import CreateEnterpriseLocation from './Pages/admin/offices/CreateEnterprise';
+import CreateStaff from './Pages/admin/offices/CreateStaff';
+import CreatePosition from './Pages/admin/offices/CreatePosition';
+import UpdateOfficeLocation from "./Pages/admin/offices/UpdateOfficeDetails";
+import History from "./Pages/admin/History";
+import HrStaffDetails from "./Pages/admin/offices/StaffDetails";
+import HrUpdateStaffDetails from "./Pages/admin/offices/UpdateStaffDetails";
 
 
 // ADMIN - STAFF SECTION
@@ -23,7 +28,6 @@ import HrInventory from './Pages/admin/staff/Inventory';
 import HrStaffLoan from './Pages/admin/staff/Loan/Loan';
 import HrStaffLoanDetails from './Pages/admin/staff/Loan/Details';
 import HrStaffMemo from './Pages/admin/staff/Memo/Memo';
-import HrRegisterStaff from './Pages/admin/staff/RegisterStaff';
 import HrStaffLeaveManagement from './Pages/admin/staff/Leave/LeaveManagement';
 import DeclinedLeave from './Pages/admin/staff/Leave/Declined';
 import PendingLeave from './Pages/admin/staff/Leave/Pending';
@@ -141,7 +145,26 @@ function App() {
 }
 
 const AppContent = () => {
-  const user = 'Student'
+  const [user, setUser] = useState('false');
+
+
+  useEffect(() => {
+    let status = JSON.parse(localStorage.getItem('User'));
+    if(status){
+      if ((status.user === 'Admin')) {
+        setUser('Admin');
+      }else if((status.user === 'Staff')) {
+        setUser('Staff');
+      }else if((status.user === 'Student')) {
+        setUser('Student');
+      }else{
+        setUser('false');
+      }
+
+    }
+  
+  }, []);
+
 
   return (
 
@@ -155,9 +178,15 @@ const AppContent = () => {
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<AdminDashboard />} />
             <Route path="/office-locations/hr" element={<OfficeLocations />} />
-            <Route path="/office-staff/hr" element={<OfficeLocationDetails />} />
+            <Route path="/office-details/hr/:officeName" element={<OfficeLocationDetails />} />
             <Route path="/create-office/hr" element={<CreateOfficeLocation />} />
-            <Route path="/create-enterprise/hr" element={<CreateEnterpriseLocation />} />
+            <Route path="/create-staff/hr/:officeName" element={<CreateStaff />} />
+            <Route path="/create-position/hr/:officeName" element={<CreatePosition />} />
+            <Route path="/update-office-location/:officeName" element={<UpdateOfficeLocation />} />
+            <Route path="/history" element={<History/>} />
+            <Route path="/staff-details/hr/:_id" element={<HrStaffDetails/>} />
+            <Route path="/update-staff-details/hr/:_id" element={<HrUpdateStaffDetails/>} />
+
 
             {/* __________ADMIN - STAFF SECTION ______________ */}
             <Route path='staff-attendance/hr' element={<HrStaffAttendence />} />
@@ -168,7 +197,6 @@ const AppContent = () => {
             <Route path='staff-loan/hr' element={<HrStaffLoan />} />
             <Route path='loan-details/hr' element={<HrStaffLoanDetails />} />
             <Route path='staff-memo/hr' element={<HrStaffMemo />} />
-            <Route path='register-staff/hr' element={<HrRegisterStaff />} />
             <Route path='leave-management' element={<HrStaffLeaveManagement />} />
             <Route path='all-leave' element={<AllLeave />} />
             <Route path='pending-leave' element={<PendingLeave />} />
@@ -289,13 +317,12 @@ const AppContent = () => {
 
       {user === "false" && (
         <div>
-
           <Routes>
-            <Route path="/" element={<Navigate to="/login" />} />
+            {/* <Route path="/" element={<Navigate to="/login" />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
             <Route path="*" element={<Navigate to="/login" />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
 
           </Routes>
 

@@ -13,8 +13,10 @@ import { FaBuilding } from "react-icons/fa";
 import { CiDiscount1 } from "react-icons/ci";
 import { MdDashboard } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
+import { FaHistory } from "react-icons/fa";
 
-import { useState, Fragment } from "react"
+
+import { useState, Fragment, useEffect } from "react"
 import { Link } from "react-router-dom";
 
 
@@ -32,7 +34,8 @@ const dashboards = [
 ]
 
 const location = [
-  { id: "1", icon: <RiHomeOfficeFill />, name: "Location", url: "office-locations/hr" }
+  { id: "1", icon: <FaHistory />, name: "History", url: "history" },
+  { id: "2", icon: <RiHomeOfficeFill />, name: "Location", url: "office-locations/hr" }
 ]
 
 
@@ -64,10 +67,7 @@ const students = [
 ]
 
 
-const userNavigation = [
-  { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -78,6 +78,24 @@ function classNames(...classes) {
 
 const Sidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const [FirstName, setFirstName] = useState('')
+  const [title, setTitle] = useState('')
+
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('User'));
+    if ((user)) {
+      setFirstName(user.FirstName);
+      setTitle(user.Title);
+    }
+  }, []);
+
+
+  const logout = () => {
+    localStorage.clear();
+    window.location.reload();
+
+  }
 
   return (
     <div>
@@ -148,7 +166,9 @@ const Sidebar = () => {
                         </li>
                       ))}
                     </ul>
-                    <div className="text-xs font-semibold leading-6 text-indigo-200">LOCATION</div>
+
+                    {/* <div className="text-xs font-semibold leading-6 text-indigo-200">LOCATION</div> */}
+                   
                     {/* <ul role="list" className="-mx-2 space-y-1"> */}
                     <ul className="-mx-2 space-y-1">
                       {location.map((item) => (
@@ -285,7 +305,8 @@ const Sidebar = () => {
               ))}
             </ul>
 
-            <div className="text-xs font-semibold leading-6 text-indigo-200">LOCATION</div>
+            {/* <div className="text-xs font-semibold leading-6 text-indigo-200">LOCATION</div> */}
+            
             {/* <ul role="list" className="-mx-2 space-y-1"> */}
             <ul className="-mx-2 space-y-1">
               {location.map((item) => (
@@ -308,7 +329,7 @@ const Sidebar = () => {
                 </li>
               ))}
             </ul>
-            <div class="text-xs font-semibold leading-6 text-indigo-200">STAFF SECTION</div>
+            <div className="text-xs font-semibold leading-6 text-indigo-200">STAFF SECTION</div>
             {/* <ul role="list" className="flex flex-1 flex-col gap-y-7"> */}
             <ul className="flex flex-1 flex-col gap-y-7">
               <li>
@@ -446,7 +467,7 @@ const Sidebar = () => {
                   />
                   <span className="hidden lg:flex lg:items-center">
                     <span className="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">
-                      Mr Emmanuel
+                    {title} {FirstName}
                     </span>
                     <ChevronDownIcon className="ml-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                   </span>
@@ -461,21 +482,12 @@ const Sidebar = () => {
                   leaveTo="transform opacity-0 scale-95"
                 >
                   <Menu.Items className="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                    {userNavigation.map((item) => (
-                      <Menu.Item key={item.name}>
-                        {({ active }) => (
-                          <a
-                            href={item.href}
-                            className={classNames(
-                              active ? 'bg-gray-50' : '',
-                              'block px-3 py-1 text-sm leading-6 text-gray-900'
-                            )}
-                          >
-                            {item.name}
-                          </a>
-                        )}
-                      </Menu.Item>
-                    ))}
+                    <Menu.Item >
+                      <button onClick={logout} className='block px-3 py-1 text-sm leading-6 text-gray-900'>
+                        Sign out
+                      </button>
+
+                    </Menu.Item>
                   </Menu.Items>
                 </Transition>
               </Menu>

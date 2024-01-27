@@ -6,17 +6,24 @@ import axios from 'axios';
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
 import ReactLoading from "react-loading";
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const CreateOfficeLocation = () => {
+
+const UpdateOfficeLocation = () => {
     const [admin, setAdmin] = useState(false)
     const [officeName, setOfficeName] = useState('');
-    const [state, setState] = useState('');
     const [officePhoneNumber, setOfficePhoneNumber] = useState('');
     const [officeEmail, setOfficeEmail] = useState('');
     const [officeAddress, setOfficeAddress] = useState('');
     const [loading, setLoading] = useState(false);
+    const [officeDetails, setOfficeDetails] = useState(false);
+    const [id, setId] = useState('');
+    const { officeName: contentParam } = useParams();
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         let staffToken = JSON.parse(localStorage.getItem('StaffToken'));
@@ -26,26 +33,57 @@ const CreateOfficeLocation = () => {
         }
     }, []);
 
+  // Get office Details
+  useEffect(() => {
+    async function fetchOfficeDetails() {
+        try {
+            const response = await axios.get('http://localhost:5000/api/auth/office-details',{
+                headers: {
+                    location: contentParam
+                }
+            });
 
-    const createOffice = () => {
+            setOfficeDetails(response.data.message);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+        }
+    }
+    fetchOfficeDetails();
+
+}, []);
+
+
+    useEffect(() => {
+        if (officeDetails) {
+            setId(officeDetails._id || '');
+            setOfficeName(officeDetails.officeName || '');
+            setOfficePhoneNumber(officeDetails.officePhone || '');
+            setOfficeEmail(officeDetails.officeEmail || '');
+            setOfficeAddress(officeDetails.officeAddress || '');
+          
+        }
+      }, [officeDetails]);
+
+    const updateOffice = () => {
         let userEmail = JSON.parse(localStorage.getItem('User'));
 
         if (officeName) {
             setLoading(true);
 
             axios
-                .post('http://localhost:5000/api/auth/register-office', {
+                .put(`http://localhost:5000/api/auth/update-office/${id}`, {
                     
                     email: userEmail.email,
                     officeName,
                     officePhoneNumber,
                     officeEmail,
-                    state,
                     officeAddress
                 })
                 .then((response) => {
                     toastr.success(response.data.message);
-                    clearForm();
+                    navigate(`/office-details/hr/${contentParam}`);
+
                 })
                 .catch((error) => {
                     toastr.error(error.response.data.message);
@@ -54,22 +92,16 @@ const CreateOfficeLocation = () => {
                     setLoading(false);
                 });
         } else {
-            toastr.error('Please fill in all required fields.');
+            toastr.warning('Please fill in all required fields.');
         }
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createOffice();
+        updateOffice();
     };
 
-    const clearForm = () => {
-        setOfficeName('');
-        setOfficeEmail('');
-        setOfficePhoneNumber('');
-        setOfficeAddress('');
-        setState('');
-    };
+
 
     return (
         <div>
@@ -79,8 +111,8 @@ const CreateOfficeLocation = () => {
                 <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-screen">
                     <div className="w-full  bg-[#C8D1DA] flex flex-col gap-3">
                         <div className='flex justify-between '>
-                            <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Create New Office Location</p>
-                            <Link to='/office-locations/hr' className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                            <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Update Office Location</p>
+                            <Link to={`/office-details/hr/${contentParam}`} className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
                         </div>
                     </div>
@@ -93,9 +125,11 @@ const CreateOfficeLocation = () => {
                     )}
 
                     <form onSubmit={handleSubmit}>
-                        <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                            <div>
 
-                            <div className='sm:col-span-2'>
+
+                            <div className='sm:col-span-1'>
                                 <label className='text-[#134574] '>Office Location Name</label>
                                 <input
                                     type='text'
@@ -103,22 +137,10 @@ const CreateOfficeLocation = () => {
                                     className='pl-4 h-[40px] w-full rounded-md outline-none mt-1'
                                     value={officeName}
                                     onChange={(event) => setOfficeName(event.target.value)}
+                                    readOnly
                                 />
                             </div>
-                            <div>
-                                <label className='text-[#134574] '>State</label>
-                                <input
-                                    type='text'
-                                    className='pl-4 h-[40px] w-full rounded-md outline-none mt-1'
-                                    placeholder='Lagos'
-                                    value={state}
-                                    onChange={(event) => setState(event.target.value)}
-                                />
-                            </div>
-                        </div>
 
-
-                        <div className='grid grid-cols-2 mt-2 gap-2'>
                             <div className=''>
                                 <p className='text-[#134574] '>Office Phone Number</p>
                                 <input
@@ -141,23 +163,23 @@ const CreateOfficeLocation = () => {
                                 />
 
                             </div>
-
-                        </div>
-
-                        <div>
+                            </div>
+                            <div>
                             <label className='text-[#134574] '>Office Address</label>
                             <textarea
                                 placeholder='Message'
-                                className='pl-4 h-[100px] w-full rounded-md outline-none mt-1 pt-4'
+                                className='pl-4 h-[170px] w-full rounded-md outline-none mt-1 pt-4'
                                 value={officeAddress}
                                 onChange={(event) => setOfficeAddress(event.target.value)}
                             />
                         </div>
 
+                        </div>
+
                         <div className="flex justify-start">
                             <button className="bg-[#F13178] px-2 mt-4 text-center items-center rounded-[6px] font-bold flex justify-center h-[40px] w-fit">
                                 <div className="flex">
-                                    <p className="text-white px-2">Create</p>
+                                    <p className="text-white px-2">Update</p>
                                 </div>
                             </button>
                         </div>
@@ -180,4 +202,4 @@ const CreateOfficeLocation = () => {
     )
 }
 
-export default CreateOfficeLocation
+export default UpdateOfficeLocation

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TiTick } from "react-icons/ti";
 import { Link } from 'react-router-dom'
 
@@ -7,10 +7,18 @@ import StaffLogin from "./StaffLogin";
 const StaffMemo = () => {
   const [user, setUser] = useState(false)
 
+  useEffect(() => {
+    let staffToken = JSON.parse(localStorage.getItem('StaffToken'));
+    if (staffToken && staffToken.token) {
+      setUser(true);
+
+    }
+}, []);
+
   return (
 
     <div className="">
-      {user ? (
+      {!user ? (
         <StaffLogin />
       ) : (
 
@@ -69,8 +77,6 @@ const StaffMemo = () => {
 
 
       )}
-      {/* right section  */}
-
 
 
     </div>
