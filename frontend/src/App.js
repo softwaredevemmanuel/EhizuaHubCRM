@@ -39,6 +39,7 @@ import CreateMemo from './Pages/admin/staff/Memo/CreateMemo';
 import HrAllStaffReports from './Pages/admin/staff/WeeklyReport/AllReports';
 import HrStaffReport from './Pages/admin/staff/WeeklyReport/StaffReport';
 import HrStaffReportDetails from './Pages/admin/staff/WeeklyReport/ReportDetails';
+import TimeTable from "./Pages/admin/staff/TimeTable/TimeTable";
 
 
 
@@ -115,6 +116,7 @@ import HIStudentList from './Pages/staff/HubInstructors/StudentsList';
 import HIStudentDetails from './Pages/staff/HubInstructors/StudentDetails';
 import SIStudents from './Pages/staff/SchoolInstructor/ViewStudents';
 import SIStudentDetails from './Pages/staff/SchoolInstructor/StudentDetails';
+import StaffForgotId from './Pages/staff/ForgotId';
 
 
 //STUDENTS SECTION
@@ -210,6 +212,7 @@ const AppContent = () => {
             <Route path='staff-report-list/hr' element={<HrAllStaffReports />} />
             <Route path='staff-report/hr' element={<HrStaffReport />} />
             <Route path='staff-report-details/hr' element={<HrStaffReportDetails />} />
+            <Route path='courses-time-table/hr' element={<TimeTable />} />
 
 
             {/* __________ADMIN - STUDENT SECTION ______________ */}
@@ -308,6 +311,7 @@ const AppContent = () => {
             <Route path="/hi-student-details" element={<HIStudentDetails />} />
             <Route path="/si-students" element={<SIStudents />} />
             <Route path='si-student-details' element={<SIStudentDetails />} />
+            <Route path='forgot-id' element={<StaffForgotId />} />
 
           </Routes>
 

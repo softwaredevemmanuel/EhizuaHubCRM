@@ -6,23 +6,27 @@ import logo from "../assets/ehizuahublogo.png";
 import ReactLoading from "react-loading";
 import toastr from 'toastr';
 import 'toastr/build/toastr.min.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
 
 
   const verifyEmail = () => {
     if (email) {
       setLoading(true);
 
-      axios.post("http://localhost:5000/api/staff/forgot_password", {
+      axios.post("http://localhost:5000/api/auth/forgot_password", {
         email: email,
 
       })
         .then(response => {
           toastr.success(response.data)
+          navigate('/login')
 
         })
         .catch(error => {

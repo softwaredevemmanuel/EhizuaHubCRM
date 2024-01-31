@@ -40,6 +40,7 @@ const location = [
 
 
 const staff = [
+  { id: "", icon: <CiMemoPad />, name: "Time-Table", url: "courses-time-table/hr" },
   { id: "1", icon: <CiMemoPad />, name: "Memo", url: "staff-memo/hr" },
   { id: "2", icon: <TbReport />, name: "Weekly Report", url: "staff-report-list/hr" },
   { id: "3", icon: <HiClipboardList />, name: "Attendance", url: "staff-attendance/hr" },

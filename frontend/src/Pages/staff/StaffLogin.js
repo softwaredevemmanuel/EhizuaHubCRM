@@ -8,6 +8,7 @@ import 'toastr/build/toastr.min.css';
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import ReactLoading from "react-loading";
+import { Link } from 'react-router-dom'
 
 
 
@@ -155,7 +156,9 @@ const StaffLogin = () => {
 
                             <div className="w-full max-w-[348px] flex justify-between">
                                 <div></div>
-                                <a className="text-[0.9rem]" href="/forgotpassword">Forgot Id?</a>
+                                <Link to="/forgot-id" className="text-[0.9rem]" href="/forgotpassword">
+                                    Forgot Id?
+                                </Link>
                             </div>
                             <button
                                 onClick={handleSubmit}
