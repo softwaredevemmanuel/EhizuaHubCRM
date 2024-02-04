@@ -56,7 +56,8 @@ const StaffLogin = () => {
             })
                 .then(response => {
                     localStorage.setItem('StaffToken', JSON.stringify({
-                        token: response.data.token
+                        token: response.data.token,
+                        location: response.data.location,
 
                     }));
                     toastr.success(response.data.message);

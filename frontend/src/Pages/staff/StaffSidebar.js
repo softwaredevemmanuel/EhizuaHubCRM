@@ -47,7 +47,8 @@ const staff = [
   { id: "10", icon: <MdCelebration />, name: "Birthdays", url: "staff_birthday" },
 
 ]
-const school = [
+const instructor = [
+  { id: "0", icon: <CiMemoPad />, name: "Time Table", url: "staff-time-table" },
   { id: "1", icon: <CiMemoPad />, name: "Hub Instructor", url: "hub-instructor" },
   { id: "2", icon: <FaBuilding />, name: "School Instructor", url: "school-instructor" },
 
@@ -213,7 +214,7 @@ const StaffSidebar = () => {
                         <div className="text-xs font-semibold leading-6 text-indigo-200">INSTRUCTOR SECTION</div>
                         {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
                         <ul className="-mx-2 mt-2 space-y-1">
-                          {school.map((item) => (
+                          {instructor.map((item) => (
                             <li key={item.id}>
                               <Link to={item.url}
                                 href={item.href}
@@ -330,7 +331,7 @@ const StaffSidebar = () => {
 
                 {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
                 <ul className="-mx-2 mt-2 space-y-1">
-                  {school.map((item) => (
+                  {instructor.map((item) => (
                     <li key={item.id}>
                       <Link to={item.url}
                         href={item.href}

@@ -40,6 +40,7 @@ import HrAllStaffReports from './Pages/admin/staff/WeeklyReport/AllReports';
 import HrStaffReport from './Pages/admin/staff/WeeklyReport/StaffReport';
 import HrStaffReportDetails from './Pages/admin/staff/WeeklyReport/ReportDetails';
 import TimeTable from "./Pages/admin/staff/TimeTable/TimeTable";
+import EditTimeTable from "./Pages/admin/staff/TimeTable/EditTimeTable";
 
 
 
@@ -85,6 +86,7 @@ import HrSchoolStudentDetails from './Pages/admin/partnerSchools/schools/Student
 import HrSchoolNewComplaints from './Pages/admin/partnerSchools/complaints/AllComplaints';
 import HrSchoolComplaintsDetails from './Pages/admin/partnerSchools/complaints/ComplaintsDetails';
 
+
 // STAFF SECTION
 import StaffDashboard from './Pages/staff/StaffDashboard';
 import StaffDetails from './Pages/staff/StaffDetails';
@@ -117,6 +119,7 @@ import HIStudentDetails from './Pages/staff/HubInstructors/StudentDetails';
 import SIStudents from './Pages/staff/SchoolInstructor/ViewStudents';
 import SIStudentDetails from './Pages/staff/SchoolInstructor/StudentDetails';
 import StaffForgotId from './Pages/staff/ForgotId';
+import StaffTimeTable from './Pages/staff/TimeTable/TimeTable';
 
 
 //STUDENTS SECTION
@@ -213,6 +216,7 @@ const AppContent = () => {
             <Route path='staff-report/hr' element={<HrStaffReport />} />
             <Route path='staff-report-details/hr' element={<HrStaffReportDetails />} />
             <Route path='courses-time-table/hr' element={<TimeTable />} />
+            <Route path='edit-time-table/:_id/:location' element={<EditTimeTable />} />
 
 
             {/* __________ADMIN - STUDENT SECTION ______________ */}
@@ -312,6 +316,7 @@ const AppContent = () => {
             <Route path="/si-students" element={<SIStudents />} />
             <Route path='si-student-details' element={<SIStudentDetails />} />
             <Route path='forgot-id' element={<StaffForgotId />} />
+            <Route path='staff-time-table' element={<StaffTimeTable />} />
 
           </Routes>
 

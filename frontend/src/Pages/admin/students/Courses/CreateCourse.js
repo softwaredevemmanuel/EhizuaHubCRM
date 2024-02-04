@@ -106,6 +106,13 @@ const CreateCourse = () => {
             </div>
             <div className='border-[#F13178] border-b '></div>
 
+            {loading && (
+                <div className=" z-50 absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                    <ReactLoading type={"bars"} color={"#ffffff"} height={100} width={100} />
+                </div>
+            )}
+            
+
             <form onSubmit={handleSubmit}>
                 <div className="grid grid-cols-2 gap-4">
                     <div className='pt-1 gap-4'>
