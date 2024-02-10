@@ -114,12 +114,18 @@ import HICourseCurriculum from './Pages/staff/HubInstructors/CourseCurriculum';
 import HICreatedContentList from './Pages/staff/HubInstructors/CreatedContentList';
 import HICreatedQuestionList from './Pages/staff/HubInstructors/CreatedQuestionsList';
 import HICourseContent from './Pages/staff/HubInstructors/CourseContent';
+import HIEditCurriculum from './Pages/staff/HubInstructors/EditCurriculum';
+import HIEditQuestion from './Pages/staff/HubInstructors/EditQuestion';
 import HIStudentList from './Pages/staff/HubInstructors/StudentsList';
 import HIStudentDetails from './Pages/staff/HubInstructors/StudentDetails';
 import SIStudents from './Pages/staff/SchoolInstructor/ViewStudents';
 import SIStudentDetails from './Pages/staff/SchoolInstructor/StudentDetails';
 import StaffForgotId from './Pages/staff/ForgotId';
 import StaffTimeTable from './Pages/staff/TimeTable/TimeTable';
+import StaffNewReport from './Pages/staff/TimeTable/NewReport';
+import StaffReportList from "./Pages/staff/TimeTable/ReportList";
+import ClassReportDetails from "./Pages/staff/TimeTable/ReportDetails";
+
 
 
 //STUDENTS SECTION
@@ -304,19 +310,24 @@ const AppContent = () => {
             <Route path="/staff-leave-form" element={<StaffLeaveApplication />} />
             <Route path="/hub-instructor" element={<HubInstructor />} />
             <Route path="/school-instructor" element={<SchoolInstructor />} />
-            <Route path="/hi-create-curriculum" element={<HICreateCurriculum />} />
-            <Route path="/hi-create-content" element={<HICreateContent />} />
-            <Route path="/hi-create-question" element={<HICreateQuestion />} />
-            <Route path="/hi-course-curriculum" element={<HICourseCurriculum />} />
-            <Route path="/hi-content-list" element={<HICreatedContentList />} />
-            <Route path="/hi-course-content" element={<HICourseContent />} />
-            <Route path="/hi-question-list" element={<HICreatedQuestionList />} />
+            <Route path="/hi-create-curriculum/:course" element={<HICreateCurriculum />} />
+            <Route path="/hi-create-content/:course" element={<HICreateContent />} />
+            <Route path="/hi-create-question/:course" element={<HICreateQuestion />} />
+            <Route path="/hi-course-curriculum/:course" element={<HICourseCurriculum />} />
+            <Route path="/hi-content-list/:course" element={<HICreatedContentList />} />
+            <Route path="/hi-course-content/:id" element={<HICourseContent />} />
+            <Route path="/hi-question-list/:course" element={<HICreatedQuestionList />} />
+            <Route path="/edit-curriculum/:course/:topic" element={<HIEditCurriculum />} />
+            <Route path="/edit-question/:question/:course/:topic" element={<HIEditQuestion />} />
             <Route path="/hi-student-list" element={<HIStudentList />} />
             <Route path="/hi-student-details" element={<HIStudentDetails />} />
             <Route path="/si-students" element={<SIStudents />} />
             <Route path='si-student-details' element={<SIStudentDetails />} />
             <Route path='forgot-id' element={<StaffForgotId />} />
             <Route path='staff-time-table' element={<StaffTimeTable />} />
+            <Route path='class-reports/:course' element={<StaffReportList />} />
+            <Route path='new-report/:course/:start/:end' element={<StaffNewReport />} />
+            <Route path='class-report-details/:_id/:course' element={<ClassReportDetails />} />
 
           </Routes>
 

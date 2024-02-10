@@ -3,7 +3,11 @@ import { FaTools } from "react-icons/fa";
 import { RiHomeOfficeFill } from "react-icons/ri";
 import { CiMemoPad } from "react-icons/ci";
 import { HiClipboardList } from "react-icons/hi";
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
+import { IoTimeSharp } from "react-icons/io5";
 import { MdMenuBook } from "react-icons/md";
+import { IoTime } from "react-icons/io5";
+import { GiTeacher } from "react-icons/gi";
 import { IoMdPerson } from "react-icons/io";
 import { PiStudent } from "react-icons/pi";
 import { FaUserMinus } from "react-icons/fa6";
@@ -14,6 +18,9 @@ import { MdCelebration } from "react-icons/md";
 import { MdDashboard } from "react-icons/md";
 import { useState, Fragment, useEffect } from "react"
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import toastr from 'toastr';
+import ReactLoading from "react-loading";
 
 
 
@@ -47,20 +54,8 @@ const staff = [
   { id: "10", icon: <MdCelebration />, name: "Birthdays", url: "staff_birthday" },
 
 ]
-const instructor = [
-  { id: "0", icon: <CiMemoPad />, name: "Time Table", url: "staff-time-table" },
-  { id: "1", icon: <CiMemoPad />, name: "Hub Instructor", url: "hub-instructor" },
-  { id: "2", icon: <FaBuilding />, name: "School Instructor", url: "school-instructor" },
 
-]
 
-const students = [
-  { id: "1", icon: <MdMenuBook />, name: "Courses and Curriculum", url: "student-course/hr" },
-  { id: "2", icon: <CiMemoPad />, name: "Memo", url: "student-memo/hr" },
-  { id: "3", icon: <PiStudent />, name: "student Section", url: "ehizua-students/hr" },
-  { id: "4", icon: <HiClipboardList />, name: "Attendance", url: "student-attendance/hr" },
-  { id: "5", icon: <BsPatchQuestionFill />, name: "Complaints", url: "student-complaints/hr" },
-]
 
 
 function classNames(...classes) {
@@ -75,6 +70,9 @@ const StaffSidebar = () => {
 
   const [FirstName, setFirstName] = useState('')
   const [title, setTitle] = useState('')
+  const [schoolInstructor, setSchoolInstructor] = useState(false)
+  const [hubInstructor, setHubInstructor] = useState(false)
+
 
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem('User'));
@@ -90,6 +88,28 @@ const StaffSidebar = () => {
     window.location.reload();
 
   }
+
+
+  // Check Instructor Status
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('User'));
+    async function fetchInstructorDetails() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/staff/instructor-status', {
+          headers: {
+            email: user.email
+          }
+        });
+        setHubInstructor(response.data.hubinstructor);
+        setSchoolInstructor(response.data.schoolInstructor);
+      } catch (error) {
+        toastr.error('Error retrieving Courses');
+      }
+    }
+
+    fetchInstructorDetails();
+  }, []);
+
 
   return (
     <div>
@@ -211,53 +231,80 @@ const StaffSidebar = () => {
                         </ul>
                       </li>
                       <li>
-                        <div className="text-xs font-semibold leading-6 text-indigo-200">INSTRUCTOR SECTION</div>
-                        {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
+                        {(hubInstructor || schoolInstructor) && (
+
+                          <div className="text-xs font-semibold leading-6 text-indigo-200">INSTRUCTOR SECTION</div>
+                        )}                        {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
                         <ul className="-mx-2 mt-2 space-y-1">
-                          {instructor.map((item) => (
-                            <li key={item.id}>
-                              <Link to={item.url}
-                                href={item.href}
+
+                          {(hubInstructor || schoolInstructor) && (
+
+                            <li>
+                              <Link to={`staff-time-table`}
+
                                 className={classNames(
-                                  item.current
-                                    ? 'bg-indigo-700 text-white'
-                                    : 'text-indigo-200 hover:text-white hover:bg-indigo-700',
+                                  'text-indigo-200 hover:text-white hover:bg-blue-500',
                                   'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                 )}
                               >
                                 <div className={classNames(
-                                  item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white flex items-center',
+                                  'text-indigo-200 group-hover:text-white flex items-center',
                                   'h-6 w-6 shrink-0 flex items-center'
-                                )}>{item.icon}</div>
-                                {item.name}
+                                )}>
+                                  <IoTimeSharp />
+                                </div>
+                                Time Table
                               </Link>
                             </li>
-                          ))}
+
+                          )}
+
+                          {hubInstructor && (
+
+                            <li>
+                              <Link to={`hub-instructor`}
+
+                                className={classNames(
+                                  'text-indigo-200 hover:text-white hover:bg-blue-500',
+                                  'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                )}
+                              >
+                                <div className={classNames(
+                                  'text-indigo-200 group-hover:text-white flex items-center',
+                                  'h-6 w-6 shrink-0 flex items-center'
+                                )}>
+                                  <LiaChalkboardTeacherSolid />
+                                </div>
+                                Hub Instructor
+                              </Link>
+                            </li>
+                          )}
+
+                          {schoolInstructor && (
+
+                            <li>
+                              <Link to={`school-instructor`}
+
+                                className={classNames(
+                                  'text-indigo-200 hover:text-white hover:bg-blue-500',
+                                  'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                                )}
+                              >
+                                <div className={classNames(
+                                  'text-indigo-200 group-hover:text-white flex items-center',
+                                  'h-6 w-6 shrink-0 flex items-center'
+                                )}>
+                                  <GiTeacher />
+                                </div>
+                                School Instructor
+                              </Link>
+                            </li>
+                          )}
+
+
                         </ul>
                       </li>
-                      <div className="text-xs font-semibold leading-6 text-indigo-200">STUDENTS SECTION</div>
-                      {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
-                      <ul className="-mx-2 mt-2 space-y-1">
-                        {students.map((item) => (
-                          <li key={item.name}>
-                            <Link to={item.url}
-                              href={item.href}
-                              className={classNames(
-                                item.current
-                                  ? 'bg-indigo-700 text-white flex items-center'
-                                  : 'text-indigo-200 hover:text-white hover:bg-indigo-700 flex items-center',
-                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold items-center'
-                              )}
-                            >
-                              <div className={classNames(
-                                item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white  flex items-center',
-                                'h-6 w-6 shrink-0 flex items-center'
-                              )}>{item.icon}</div>
-                              {item.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+
                     </ul>
                   </nav>
                 </div>
@@ -267,8 +314,12 @@ const StaffSidebar = () => {
         </Dialog>
       </Transition.Root>
 
+ 
+
       {/* Static sidebar for desktop */}
       <div className="hidden lg:fixed  lg:z-50 lg:flex lg:w-72 lg:flex-col h-screen overflow-hidden">
+
+
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex flex-col gap-y-5 bg-[#134574] px-6 pb-4 py-3 overflow-y-auto h-full">
           <div className="w-full  bg-white rounded-[4px] px-[11px] py-[18px]"><img src={logo} alt="" /></div>
@@ -326,39 +377,90 @@ const StaffSidebar = () => {
               </li>
 
               <li>
+                <div>
+                  {(hubInstructor || schoolInstructor) && (
 
-                <div className="text-xs font-semibold leading-6 text-indigo-200">INSTRUCTOR SECTION</div>
+                    <div className="text-xs font-semibold leading-6 text-indigo-200">INSTRUCTOR SECTION</div>
+                  )}
 
-                {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
-                <ul className="-mx-2 mt-2 space-y-1">
-                  {instructor.map((item) => (
-                    <li key={item.id}>
-                      <Link to={item.url}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-indigo-700 text-white'
-                            : 'text-indigo-200 hover:text-white hover:bg-indigo-700',
-                          'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                        )}
-                      >
-                        <div className={classNames(
-                          item.current ? 'text-white flex items-center' : 'text-indigo-200 group-hover:text-white flex items-center',
-                          'h-6 w-6 shrink-0 flex items-center'
-                        )}>{item.icon}</div>
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                  {/* <ul role="list" className="-mx-2 mt-2 space-y-1"> */}
+                  <ul className="-mx-2 mt-2 space-y-1">
+
+                    {(hubInstructor || schoolInstructor) && (
+
+                      <li>
+                        <Link to={`staff-time-table`}
+
+                          className={classNames(
+                            'text-indigo-200 hover:text-white hover:bg-blue-500',
+                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                          )}
+                        >
+                          <div className={classNames(
+                            'text-indigo-200 group-hover:text-white flex items-center',
+                            'h-6 w-6 shrink-0 flex items-center'
+                          )}>
+                            <IoTimeSharp />
+                          </div>
+                          Time Table
+                        </Link>
+                      </li>
+
+                    )}
+
+                    {hubInstructor && (
+
+                      <li>
+                        <Link to={`hub-instructor`}
+
+                          className={classNames(
+                            'text-indigo-200 hover:text-white hover:bg-blue-500',
+                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                          )}
+                        >
+                          <div className={classNames(
+                            'text-indigo-200 group-hover:text-white flex items-center',
+                            'h-6 w-6 shrink-0 flex items-center'
+                          )}>
+                            <LiaChalkboardTeacherSolid />
+                          </div>
+                          Hub Instructor
+                        </Link>
+                      </li>
+                    )}
+
+                    {schoolInstructor && (
+
+                      <li>
+                        <Link to={`school-instructor`}
+
+                          className={classNames(
+                            'text-indigo-200 hover:text-white hover:bg-blue-500',
+                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                          )}
+                        >
+                          <div className={classNames(
+                            'text-indigo-200 group-hover:text-white flex items-center',
+                            'h-6 w-6 shrink-0 flex items-center'
+                          )}>
+                            <GiTeacher />
+                          </div>
+                          School Instructor
+                        </Link>
+                      </li>
+                    )}
+
+
+                  </ul>
+                </div>
+
               </li>
 
             </ul>
+
           </nav>
         </div>
       </div>
-
-
 
 
 
@@ -440,6 +542,7 @@ const StaffSidebar = () => {
 
 
       </div>
+
     </div>
   )
 }

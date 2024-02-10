@@ -6,19 +6,21 @@ import axios from 'axios';
 import toastr from 'toastr';
 import ReactLoading from "react-loading";
 import StaffLogin from "../StaffLogin";
+import { useNavigate } from 'react-router-dom';
 
 
 const TimeTable = () => {
     const [user, setUser] = useState(false)
 
-    const [allHubCourses, setHubAllCourse] = useState([]);
+    const [allHubCourses, setAllHubCourse] = useState([]);
     const [timeTableList, setTimeTableList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [reload, setReload] = useState('');
     const [cancelFirstRow, setCancelFirstRow] = useState(true);
     const [staffLocation, setStaffLocation] = useState('');
     const [displayType, setDisplayType] = useState('Horizontal');
-
+    const [coursesArray, setCoursesArray] = useState([]);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -30,7 +32,32 @@ const TimeTable = () => {
         }
     }, []);
 
-  
+    // Check Instructor Status
+    useEffect(() => {
+        let user = JSON.parse(localStorage.getItem('User'));
+        setLoading(true)
+        async function fetchInstructorDetails() {
+            try {
+                const response = await axios.get('http://localhost:5000/api/hub-tutor/instructor-course', {
+                    headers: {
+                        email: user.email
+                    }
+                });
+                // Trim the values in the courses array
+                const trimmedCoursesArray = response.data.courses.map(course => course.trim());
+
+                setCoursesArray(trimmedCoursesArray);
+                setLoading(false)
+            } catch (error) {
+                toastr.error('Error retrieving Courses');
+            }
+        }
+
+
+        fetchInstructorDetails();
+    }, [reload]);
+
+
 
     // Fetch Hub Courses
     useEffect(() => {
@@ -42,7 +69,7 @@ const TimeTable = () => {
                         location: staffLocation
                     }
                 });
-                setHubAllCourse(response.data.message);
+                setAllHubCourse(response.data.message);
                 setLoading(false)
             } catch (error) {
                 toastr.error('Error retrieving Courses');
@@ -70,13 +97,7 @@ const TimeTable = () => {
         }
 
         fetchTimeTable();
-    }, [reload, staffLocation]);
-
- 
-
-
-
-
+    }, [staffLocation, reload]);
 
 
 
@@ -90,13 +111,33 @@ const TimeTable = () => {
         }
     }
 
-  
 
 
 
     useEffect(() => {
 
     }, [displayType])
+
+    const handleClick = (timeTableCourse, start, end) => {
+        let found = false;
+
+        coursesArray.forEach((item) => {
+            if (item.trim() === timeTableCourse.trim()) {
+                found = true; // Set the flag to true when a match is found
+            }
+        });
+
+        // Optionally, you can use the flag to decide whether to do something after the loop
+        if (found) {
+            navigate(`/new-report/${timeTableCourse.trim()}/${start}/${end}`);
+            // Additional logic after finding a match
+        } else {
+            toastr.warning(`You can only access ${coursesArray} course`)
+        }
+    };
+
+
+
     return (
 
         <div className="">
@@ -105,7 +146,8 @@ const TimeTable = () => {
             ) : (
 
                 <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-full pb-12 ">
-                    <div className='flex justify-between '>
+
+                    <div className="flex gap-2 justify-between">
                         <div className="flex gap-2">
 
                             <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Time Table</p>
@@ -120,9 +162,9 @@ const TimeTable = () => {
 
                                 </select>
 
-
                             </div>
                         </div>
+
 
                     </div>
 
@@ -135,178 +177,174 @@ const TimeTable = () => {
                         </div>
                     )}
 
-                   
-
-                    <div className="sm:flex justify-between">
-                      
-                        <div className="flex gap-2 mt-1 justify-center">
-                            {(staffLocation !== '' && allHubCourses.length > 1) && (
-                                <div className="flex gap-2">
-                                    <button onClick={Refresh}>
-                                        <div className='flex gap-2 text-gray-500'>
-                                            <p className=''>Refresh</p>
-
-                                            <LuRefreshCcw size={24} />
-                                        </div>
-                                    </button>
 
 
-                                    
-                                </div>
-
-                            )}
+                    <div className="flex justify-between">
+                        <div className="flex gap-2 text-slate-500 text-xs">
+                            <p>My Course:</p>
+                            {coursesArray && coursesArray.map((courses, index) => (
+                                <Link 
+                                    to={`/class-reports/${courses}`}
+                                    key={index} className=" border-r pr-2 ">
+                                        {courses}
+                                </Link>
+                            ))}
                         </div>
 
+                        <div className="flex gap-2 mt-1 justify-end">
+                            <button onClick={Refresh}>
+                                <div className='flex gap-2 text-gray-500'>
+                                    <p className='text-xs'>Refresh</p>
+
+                                    <LuRefreshCcw size={18} />
+                                </div>
+                            </button>
+
+                        </div>
                     </div>
-
-
 
 
                     {displayType == "Vertical" ? (
 
-                                <div className='overflow-x-auto mt-1'>
-                
-                                    
-                                    <div className="flex w-[1000px]">
+                        <div className='overflow-x-auto mt-1'>
 
-                                        {cancelFirstRow && (
-                                            <div className="grid  text-[#134574] items-center gap-1">
-                                                <div className="bg-slate-400 border-r border-white h-[80px]  flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
-                                                    <p><IoMdTime /></p>
-                                                </div>
-                                                <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
-                                                    <p>Mon</p>
-                                                </div>
-                                                <div className=" bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
-                                                    <p>Tue</p>
-                                                </div>
-                                                <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
-                                                    <p>Wed</p>
-                                                </div>
-                                                <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
-                                                    <p>Thu</p>
-                                                </div>
-                                                <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
-                                                    <p>Fri</p>
-                                                </div>
-                                                <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
-                                                    <p>Sat</p>
-                                                </div>
-                                            </div>
-                                        )}
+                            <div className="flex w-[1000px]">
 
-
-
-
-                                            <div className="flex">
-                                                {timeTableList && timeTableList.map((timeTable, index) => (
-
-                                                    <div key={index}>
-
-                                                            <div className="grid text-[#134574] bg-slate-200 items-center border border-slate-100 gap-1 text-sm">
-                                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
-                                                                    <p>{timeTable.startTime} - {timeTable.endTime}</p>
-                                                                </div>
-                                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
-                                                                    <p>{timeTable.monday}</p>
-                                                                </div>
-                                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
-                                                                    <p>{timeTable.tuesday}</p>
-                                                                </div>
-                                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
-                                                                    <p>{timeTable.wednesday}</p>
-                                                                </div>
-                                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
-                                                                    <p>{timeTable.thursday}</p>
-                                                                </div>
-                                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
-                                                                    <p>{timeTable.friday}</p>
-                                                                </div>
-                                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
-                                                                    <p>{timeTable.saturday}</p>
-                                                                </div>
-                                                            </div>
-
-                                                    </div>
-
-                                                ))}
-
-                                            </div>
-                                         
-
-                                    </div>
-
-
-
-
-                                </div>
-                     
-                    ) : (
-
-
-
-                                <div className="overflow-x-auto mt-1">
-                                    <div className="w-[1000px]">
-                                        <div className="grid grid-cols-7 text-[#134574] bg-slate-400 h-[40px] items-center">
-                                            <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
-                                                <p> Time</p>
-                                            </div>
-                                            <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
-                                                <p> Monday</p>
-                                            </div>
-                                            <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
-                                                <p> Tuesday</p>
-                                            </div>
-                                            <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
-                                                <p> Wednesday</p>
-                                            </div>
-                                            <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
-                                                <p> Thursday</p>
-                                            </div>
-                                            <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
-                                                <p> Friday</p>
-                                            </div>
-                                            <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
-                                                <p> Saturday</p>
-                                            </div>
+                                {cancelFirstRow && (
+                                    <div className="grid  text-[#134574] items-center gap-1">
+                                        <div className="bg-slate-400 border-r border-white h-[80px]  flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
+                                            <p><IoMdTime /></p>
                                         </div>
-
-                                
+                                        <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
+                                            <p>Mon</p>
+                                        </div>
+                                        <div className=" bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
+                                            <p>Tue</p>
+                                        </div>
+                                        <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
+                                            <p>Wed</p>
+                                        </div>
+                                        <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
+                                            <p>Thu</p>
+                                        </div>
+                                        <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
+                                            <p>Fri</p>
+                                        </div>
+                                        <div className="bg-slate-400 border-r border-white h-[80px] flex items-center pl-2 font-bold w-[60px] pr-2 justify-center">
+                                            <p>Sat</p>
+                                        </div>
                                     </div>
+                                )}
+
+
+                                <div className="flex">
                                     {timeTableList && timeTableList.map((timeTable, index) => (
 
-                                        <div key={index} className="w-[1000px]">
+                                        <div key={index}>
 
-                                                <div className="grid grid-cols-7 text-[#134574] bg-slate-200 items-center border border-slate-100 text-sm">
-                                                    <div className="border border-white flex flex-col items-center pl-2 h-full">
-                                                        <p>{timeTable.startTime} - {timeTable.endTime}</p>
-                                                    </div>
-                                                    <div className="border border-white flex flex-col items-center pl-2 h-full">
-                                                        <p>{timeTable.monday}</p>
-                                                    </div>
-                                                    <div className="border border-white flex flex-col items-center pl-2 h-full">
-                                                        <p>{timeTable.tuesday}</p>
-                                                    </div>
-                                                    <div className="border border-white flex flex-col items-center pl-2 h-full">
-                                                        <p>{timeTable.wednesday}</p>
-                                                    </div>
-                                                    <div className="border border-white flex flex-col items-center pl-2 h-full">
-                                                        <p>{timeTable.thursday}</p>
-                                                    </div>
-                                                    <div className="border border-white flex flex-col items-center pl-2 h-full">
-                                                        <p>{timeTable.friday}</p>
-                                                    </div>
-                                                    <div className="border border-white flex flex-col items-center pl-2 h-full">
-                                                        <p>{timeTable.saturday}</p>
-                                                    </div>
+                                            <div className="grid text-[#134574] bg-slate-200 items-center border border-slate-100 gap-1 text-sm">
+                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
+                                                    <p>{timeTable.startTime} - {timeTable.endTime}</p>
                                                 </div>
+                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
+                                                    <p>{timeTable.monday}</p>
+                                                </div>
+                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
+                                                    <p>{timeTable.tuesday}</p>
+                                                </div>
+                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
+                                                    <p>{timeTable.wednesday}</p>
+                                                </div>
+                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
+                                                    <p>{timeTable.thursday}</p>
+                                                </div>
+                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
+                                                    <p>{timeTable.friday}</p>
+                                                </div>
+                                                <div className="border border-white flex flex-col items-center pl-2 h-[80px] w-[300px] pr-2 justify-center">
+                                                    <p>{timeTable.saturday}</p>
+                                                </div>
+                                            </div>
 
                                         </div>
 
                                     ))}
 
                                 </div>
-                 
+
+
+
+
+                            </div>
+
+
+
+
+                        </div>
+
+                    ) : (
+
+                        <div className="overflow-x-auto mt-1">
+                            <div className="w-[1000px]">
+                                <div className="grid grid-cols-7 text-[#134574] bg-slate-400 h-[40px] items-center">
+                                    <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
+                                        <p> Time</p>
+                                    </div>
+                                    <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
+                                        <p> Monday</p>
+                                    </div>
+                                    <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
+                                        <p> Tuesday</p>
+                                    </div>
+                                    <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
+                                        <p> Wednesday</p>
+                                    </div>
+                                    <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
+                                        <p> Thursday</p>
+                                    </div>
+                                    <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
+                                        <p> Friday</p>
+                                    </div>
+                                    <div className="border-r border-white h-[40px] flex items-center pl-2 font-bold">
+                                        <p> Saturday</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            {timeTableList && timeTableList.map((timeTable, index) => (
+                                <div key={index} className="w-[1000px]">
+                                    <div className="grid grid-cols-7 text-[#134574] bg-slate-200 items-center border border-slate-100 text-sm">
+                                        <div className="border border-white flex flex-col items-center justify-center pl-2 h-full font-bold">
+                                            <p>{timeTable.startTime} - {timeTable.endTime}</p>
+                                        </div>
+
+                                        {/* Loop through the days of the week */}
+                                        {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day, dayIndex) => (
+                                            <div key={dayIndex} className="border border-white flex flex-col pl-2 h-full">
+                                                {timeTable[day] && timeTable[day].split(',').map((course, courseIndex) => (
+                                                    <div key={courseIndex}>
+                                                        <button
+                                                            onClick={() => handleClick(course.trim(), timeTable.startTime, timeTable.endTime)}
+                                                            className={`border-r pr-2 ${coursesArray.includes(course.trim()) || course.trim() === 'Python' ? 'text-red-500' : ''
+                                                                }`}
+                                                        >
+                                                            {course.trim()}
+                                                        </button>
+                                                        <p className="text-slate-400">-------------------</p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                </div>
+                            ))}
+
+
+
+                        </div>
+
                     )}
 
 
@@ -314,16 +352,14 @@ const TimeTable = () => {
 
                         <div>
                             <div className="flex justify-center mt-12 ">
-                                <p className="font-bold text-[#F13178] ">No Courses Created for {staffLocation}</p>
-
+                                <div>
+                                    <p className="font-bold text-[#F13178] ">No Courses Created for {staffLocation}</p>
+                                    <p className="text-slate-500 text-xs text-center ">Kindly refresh or check back later</p>
+                                </div>
                             </div>
-                       
+
                         </div>
                     )}
-
-
-
-
 
                 </div>
 

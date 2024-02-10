@@ -246,7 +246,6 @@ const TimeTable = () => {
 
     }
 
-    console.log("hello")
     const createTimeTable = () => {
         let adminEmail = JSON.parse(localStorage.getItem('User'));
 
