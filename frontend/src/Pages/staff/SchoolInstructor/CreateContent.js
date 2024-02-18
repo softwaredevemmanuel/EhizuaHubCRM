@@ -34,12 +34,11 @@ const CreateContent = () => {
         async function fetchMainTopic() {
 
             try {
-                const response = await axios.get('http://localhost:5000/api/hub-tutor/maintopic', {
+                const response = await axios.get('http://localhost:5000/api/school-tutor/maintopic', {
                     headers: {
                         course: courseParams,
                     },
                 });
-                console.log(response.data.message)
                 setMainTopic(response.data.message)
 
 
@@ -59,7 +58,7 @@ const CreateContent = () => {
             try {
                 if (main_topic !== '') { // Check if a topic is selected
 
-                    const response = await axios.get('http://localhost:5000/api/hub-tutor/subtopic', {
+                    const response = await axios.get('http://localhost:5000/api/school-tutor/subtopic', {
                         headers: {
                             course: courseParams,
                             main_topic: main_topic
@@ -84,7 +83,7 @@ const CreateContent = () => {
         if (main_topic && content) {
             setLoading(true); // Start loading indicator
 
-            axios.post("http://localhost:5000/api/hub-tutor/create-content", {
+            axios.post("http://localhost:5000/api/school-tutor/create-content", {
                 main_topic: main_topic,
                 content: content,
                 course: courseParams,
@@ -101,17 +100,13 @@ const CreateContent = () => {
                 })
                 .catch(error => {
                     toastr.error(error.response.data.error);
-                    if (error.response.data.error === "Your account has been suspended. Please contact Ehizua Hub Admin.") {
-                        localStorage.setItem('Tutorlogin', JSON.stringify({
-                            login: false,
-                        }));
-                    }
+               
                 })
                 .finally(() => {
                     setLoading(false); // Stop loading indicator
                 });
         } else {
-            toastr.error('Please fill in all required fields.');
+            toastr.warning('Please fill in all required fields.');
         }
     };
 
@@ -135,7 +130,7 @@ const CreateContent = () => {
 
                     <div className='flex justify-between '>
                         <p className='text-[#F13178] text-sm mt-4 font-extrabold' >Create Content</p>
-                        <Link to='/hub-instructor' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                        <Link to='/school-instructor' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
                     </div>
 

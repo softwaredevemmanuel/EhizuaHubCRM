@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
-import { IoIosArrowRoundBack } from "react-icons/io";
 import { useParams } from 'react-router-dom';
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { Link } from 'react-router-dom'
 import StaffLogin from "../StaffLogin";
 import toastr from 'toastr';
 import ReactLoading from "react-loading";
 import { FaMinusCircle } from "react-icons/fa";
 import { FaPlusCircle } from "react-icons/fa";
-import { LuRefreshCcw } from "react-icons/lu";
 
 
-
-
-const EditCurriculum = () => {
+const CreateCurriculum = () => {
     const [user, setUser] = useState(false)
-    const [content, setContent] = useState([]);
-    const { course: courseParam } = useParams();
-    const { topic: topicParam } = useParams();
-    const [loading, setLoading] = useState(false); // New state for loading indicator
-    const tutorCourse = courseParam.trim()
     const [mainTopic, setMainTopic] = useState('');
-    const [subTopic, setSubTopic] = useState('');
-    const [id, setId] = useState('');
-    const [reload, setReload] = useState('');
-
-
-    const subTopicArray = subTopic.split(', ')
+    const [loading, setLoading] = useState(false);
+    const { course: contentParam } = useParams();
+    const tutorCourse = contentParam.trim()
+    const [code, setCode] = useState('');
+    const [courseCode, setCourseCode] = useState([]);
 
     const [inputs, setInputs] = useState(['']);
 
@@ -46,8 +37,6 @@ const EditCurriculum = () => {
         setInputs(newInputs);
     };
 
-    const contentCurriculum = content.find((item) => item.mainTopic == topicParam);
-
 
     useEffect(() => {
         let staffToken = JSON.parse(localStorage.getItem('StaffToken'));
@@ -57,59 +46,56 @@ const EditCurriculum = () => {
         }
     }, []);
 
-    useEffect(() => {
-        if (contentCurriculum) {
-            setMainTopic(contentCurriculum.mainTopic || '');
-            setSubTopic(contentCurriculum.subTopic);
-            setId(contentCurriculum.id);
-            setInputs(subTopicArray || ['']);
-
-        }
-    }, [contentCurriculum]);
 
 
     useEffect(() => {
-        async function fetchCurriculum() {
-            try {
-                setLoading(true)
-                const response = await axios.get('http://localhost:5000/api/hub-tutor/course-curriculum', {
-                    headers: {
-                        course: tutorCourse
-                    },
-                });
+        async function fetchCourseCode() {
+                try {
 
-                setContent(response.data.content);
-                setLoading(false)
+                    const response = await axios.get('http://localhost:5000/api/school-tutor/school-courses', {
+                        headers: {
+                            course: tutorCourse,
+                        },
+                    });
 
+                    const courseCodeArray = response.data.message[0].courseCode.split(', ').map(code => code.trim());
+                    setCourseCode(courseCodeArray);
 
-            } catch (error) {
-                toastr.error('Error retrieving content');
-            }
+                } catch (error) {
+                    toastr.error('Error retrieving Course Code');
+                }
         }
 
+        fetchCourseCode();
+    }, [tutorCourse]);
 
-        fetchCurriculum();
-    }, [courseParam, reload]);
+    // ....................... Create Curriculum API ...................
 
-    const UpdateCurriculum = () => {
-        if (mainTopic && inputs) {
+    const CreateCurriculum = () => {
+        if (mainTopic && inputs && courseCode) {
             setLoading(true); // Start loading indicator
 
-            axios.put(`http://localhost:5000/api/hub-tutor/update-curriculum/${id}`, {
+            axios.post("http://localhost:5000/api/school-tutor/create-curriculum", {
                 course: tutorCourse,
                 mainTopic: mainTopic,
                 subTopicArray: inputs,
+                courseCode : code
+
 
             })
                 .then(response => {
                     toastr.success(response.data.message);
+
+                    // Clear input fields after successful submission
+                    setMainTopic('');
+                    setInputs(['']);
                 })
                 .catch(error => {
                     toastr.error(error.response.data.message);
+                 
                 })
                 .finally(() => {
                     setLoading(false); // Stop loading indicator
-
                 });
         } else {
             toastr.warning('Please fill in all required fields.');
@@ -119,50 +105,32 @@ const EditCurriculum = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        UpdateCurriculum();
+        CreateCurriculum();
     };
-
-    const Refresh = () => {
-        if (reload === '') {
-            setReload('reload')
-
-        } else {
-            setReload('')
-
-        }
-    }
-
-
     return (
         <div className="">
-
             {!user ? (
                 <StaffLogin />
             ) : (
-                <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-full pb-8">
+                <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-full">
+                    <div className="w-full  bg-[#C8D1DA] px-6 flex flex-col gap-3">
+                        <div className='flex justify-between '>
+                        </div>
+                    </div>
+
                     <div className='flex justify-between '>
-                        <p className='text-[#F13178] text-sm mt-8 font-extrabold' >Edit Curriculum</p>
-                        <Link to={`/hi-course-curriculum/${tutorCourse}`} className='mt-6'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                        <p className='text-[#F13178] text-sm mt-4 font-extrabold ' >Create Curriculum</p>
+                        <Link to='/school-instructor' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
                     </div>
-                    <div className='border-[#F13178] border-b'></div>
+
+                    <div className='border-[#F13178] border-b '></div>
 
                     {loading && (
                         <div className=" z-50 absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
                             <ReactLoading type={"bars"} color={"#ffffff"} height={100} width={100} />
                         </div>
                     )}
-                    <div className="flex gap-2 justify-end">
-                        <button onClick={Refresh}>
-                            <div className='flex gap-2 text-gray-500 text-sm justify-center'>
-
-                                <p className='hidden sm:block'>Refresh</p>
-                                <LuRefreshCcw size={20} />
-
-                            </div>
-                        </button>
-
-                    </div>
 
                     <form className='bg-slate-200 sm:h-fit rounded-md pb-8' onSubmit={handleSubmit}>
                         <div className='sm:flex gap-4 mt-6 px-8 text-[#134574]'>
@@ -172,7 +140,7 @@ const EditCurriculum = () => {
                                 <input
                                     type='text'
                                     readOnly value={tutorCourse}
-                                    className='rounded-md w-full h-[40px] outline-none pl-4 bg-slate-300 text-slate-500 cursor-not-allowed'
+                                    className='rounded-md w-full h-[40px] outline-none pl-4'
                                 />
                             </div>
 
@@ -225,12 +193,30 @@ const EditCurriculum = () => {
 
                         </div>
 
+                        <div className='px-8 mt-2 text-[#134574]'>
+
+                        <p className='text-sm font-bold w-[180px] pt-4 sm:pt-2'>Assign Course Code</p>
+                            <select
+                                value={code}
+                                onChange={(event) => setCode(event.target.value)}
+                                className='outline-none rounded-md h-[40px] pl-4 pt-1 mt-2 w-[180px] text-slate-500'
+
+                            >
+                                <option value=''>Select a sub Topic</option>
+                                {courseCode.map((cCode, index) => (
+                                    <option key={index} value={cCode}>
+                                        {cCode}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
 
 
                         <div className='flex gap-8 justify-center px-8'>
 
                             <button className=' bg-[#F13178] px-2 w-full sm:w-[120px] text-white md:text-[15px]  rounded-lg  mt-6 text-[11px] flex items-center text-center justify-center gap-4 font-bold h-[40px]'>
-                                Update
+                                Create
                             </button>
                         </div>
 
@@ -244,19 +230,19 @@ const EditCurriculum = () => {
 
 
 
-
                     <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-fit pb-44">
+
 
                     </div>
 
 
 
                 </div>
-
-
             )}
+
+
         </div>
     )
 }
 
-export default EditCurriculum
+export default CreateCurriculum

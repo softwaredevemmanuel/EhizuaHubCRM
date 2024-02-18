@@ -56,7 +56,7 @@ const content = selectedQuestion[0]
     useEffect(() => {
         async function fetchQuestion() {
             try {
-                const response = await axios.get('http://localhost:5000/api/hub-tutor/selected-question', {
+                const response = await axios.get('http://localhost:5000/api/school-tutor/selected-question', {
                     headers: {
                         course: tutorCourse,
                         question: questionParams,
@@ -83,7 +83,7 @@ const content = selectedQuestion[0]
         if (question && mainTopic && subTopic) {
             setLoading(true); // Start loading indicator
 
-            axios.put(`http://localhost:5000/api/hub-tutor/update-question/${id}`, {
+            axios.put(`http://localhost:5000/api/school-tutor/update-question/${id}`, {
                 email: email,
                 course: tutorCourse,
                 mainTopic: mainTopic,
@@ -137,7 +137,7 @@ const content = selectedQuestion[0]
                     <div className='flex justify-between '>
                         <p className='text-[#F13178] text-[20px] mt-2 font-extrabold' >{courseParams}</p>
 
-                        <Link to={`/hi-question-list/${tutorCourse}`} className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                        <Link to={`/si-question-list/${tutorCourse}`} className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
                     </div>
 

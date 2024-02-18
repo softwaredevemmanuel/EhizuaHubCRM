@@ -74,7 +74,7 @@ const CreateOfficeLocation = () => {
     return (
         <div>
             {!admin ? (
-                <AdminLogin />
+                <AdminLogin/>
             ) : (
                 <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-screen">
                     <div className="w-full  bg-[#C8D1DA] flex flex-col gap-3">
@@ -179,5 +179,6 @@ const CreateOfficeLocation = () => {
         </div>
     )
 }
+
 
 export default CreateOfficeLocation

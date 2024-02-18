@@ -67,11 +67,7 @@ const CreateCurriculum = () => {
         })
         .catch(error => {
           toastr.error(error.response.data.message);
-          if (error.response.data.error == "Your account has been suspended. Please contact Ehizua Hub Admin.") {
-            localStorage.setItem('Stafflogin', JSON.stringify({
-              login: false,
-            }));
-          }
+    
         })
         .finally(() => {
           setLoading(false); // Stop loading indicator
@@ -98,7 +94,7 @@ const CreateCurriculum = () => {
           </div>
 
           <div className='flex justify-between '>
-            <p className='text-[#F13178] text-[20px] mt-2 font-extrabold' >Create Curriculum</p>
+            <p className='text-[#F13178] text-sm mt-4 font-extrabold ' >Create Curriculum</p>
             <Link to='/hub-instructor' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
           </div>

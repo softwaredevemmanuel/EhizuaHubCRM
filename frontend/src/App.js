@@ -118,13 +118,25 @@ import HIEditCurriculum from './Pages/staff/HubInstructors/EditCurriculum';
 import HIEditQuestion from './Pages/staff/HubInstructors/EditQuestion';
 import HIStudentList from './Pages/staff/HubInstructors/StudentsList';
 import HIStudentDetails from './Pages/staff/HubInstructors/StudentDetails';
-import SIStudents from './Pages/staff/SchoolInstructor/ViewStudents';
-import SIStudentDetails from './Pages/staff/SchoolInstructor/StudentDetails';
 import StaffForgotId from './Pages/staff/ForgotId';
 import StaffTimeTable from './Pages/staff/TimeTable/TimeTable';
 import StaffNewReport from './Pages/staff/TimeTable/NewReport';
 import StaffReportList from "./Pages/staff/TimeTable/ReportList";
 import ClassReportDetails from "./Pages/staff/TimeTable/ReportDetails";
+
+// School Instructor
+import SICreateCurriculum from './Pages/staff/SchoolInstructor/CreateCurriculum';
+import SICreateContent from './Pages/staff/SchoolInstructor/CreateContent';
+import SICreateQuestion from './Pages/staff/SchoolInstructor/CreateQuestion';
+import SICourseCurriculum from './Pages/staff/SchoolInstructor/CourseCurriculum';
+import SIEditCurriculum from './Pages/staff/SchoolInstructor/EditCurriculum';
+import SICourseContentList from './Pages/staff/SchoolInstructor/CreatedContentList';
+import SICourseContent from './Pages/staff/SchoolInstructor/CourseContent';
+import SICreatedQuestionList from './Pages/staff/SchoolInstructor/CreatedQuestionsList';
+import SIEditQuestion from './Pages/staff/SchoolInstructor/EditQuestion';
+import SIStudentDetails from './Pages/staff/SchoolInstructor/StudentDetails';
+import SIStudents from './Pages/staff/SchoolInstructor/ViewStudents';
+
 
 
 
@@ -138,6 +150,10 @@ import TestSection from "./Pages/student/TestSection";
 import StudentComplaints from "./Pages/student/Complaints";
 import StudentMemo from "./Pages/student/Memo/Memo";
 import StudentMemoDetails from "./Pages/student/Memo/MemoDetails";
+import StudentLogin from "./Pages/student/StudentLogin";
+import CourseTopicList from "./Pages/student/Course/CourseTopicList";
+import TopicDetails from "./Pages/student/Course/TopicDetails";
+import Question from "./Pages/student/Course/Questions";
 
 
 function App() {
@@ -161,19 +177,19 @@ const AppContent = () => {
 
   useEffect(() => {
     let status = JSON.parse(localStorage.getItem('User'));
-    if(status){
+    if (status) {
       if ((status.user === 'Admin')) {
         setUser('Admin');
-      }else if((status.user === 'Staff')) {
+      } else if ((status.user === 'Staff')) {
         setUser('Staff');
-      }else if((status.user === 'Student')) {
+      } else if ((status.user === 'Student')) {
         setUser('Student');
-      }else{
+      } else {
         setUser('false');
       }
 
     }
-  
+
   }, []);
 
 
@@ -194,9 +210,9 @@ const AppContent = () => {
             <Route path="/create-staff/hr/:officeName" element={<CreateStaff />} />
             <Route path="/create-position/hr/:officeName" element={<CreatePosition />} />
             <Route path="/update-office-location/:officeName" element={<UpdateOfficeLocation />} />
-            <Route path="/history" element={<History/>} />
-            <Route path="/staff-details/hr/:_id" element={<HrStaffDetails/>} />
-            <Route path="/update-staff-details/hr/:_id" element={<HrUpdateStaffDetails/>} />
+            <Route path="/history" element={<History />} />
+            <Route path="/staff-details/hr/:_id" element={<HrStaffDetails />} />
+            <Route path="/update-staff-details/hr/:_id" element={<HrUpdateStaffDetails />} />
 
 
             {/* __________ADMIN - STAFF SECTION ______________ */}
@@ -235,9 +251,9 @@ const AppContent = () => {
             <Route path='student-memo/hr' element={<HrStudentMemo />} />
             <Route path='create-student-memo/hr' element={<HrCreateStudentMemo />} />
             <Route path='student-memo-details/hr' element={<HrStudentMemoDetails />} />
-            <Route path='student-section/hr' element={<HrStudentsSection />} />
+            <Route path='student-section/:location' element={<HrStudentsSection />} />
             <Route path='student-details/hr' element={<HrStudentDetails />} />
-            <Route path='register-student/hr' element={<HrCreateStudent />} />
+            <Route path='register-student/hr/:location' element={<HrCreateStudent />} />
             <Route path='update-student/hr' element={<HrUpdateStudent />} />
             <Route path='create-student-course/hr' element={<HrCreateStudentCourse />} />
             <Route path='course-details/hr' element={<HrCourseDetails />} />
@@ -270,17 +286,21 @@ const AppContent = () => {
       {user === 'Student' && (
 
         <div className='flex w-full h-full'>
-           <StudentSidebar/>
+          <StudentSidebar />
           <Routes>
             <Route path="*" element={<Navigate to="/" />} />
             <Route path="/" element={<Navigate to="/dashboard" />} />
+            <Route path="/login" element={<StudentLogin />} />
             <Route path="/dashboard" element={<StudentDashboard />} />
+            <Route path="/:course/content-list" element={<CourseTopicList />} />
+            <Route path="/:course/details/:id" element={<TopicDetails />} />
+            <Route path="/:questions/:course/:id" element={<Question />} />
             <Route path="/course-curriculum" element={<StudentCourseCurriculum />} />
             <Route path="/test-section" element={<TestSection />} />
             <Route path="/complaints" element={<StudentComplaints />} />
             <Route path="/student-memo" element={<StudentMemo />} />
             <Route path="/student-memo-details" element={<StudentMemoDetails />} />
-          </Routes> 
+          </Routes>
 
         </div>
 
@@ -321,13 +341,24 @@ const AppContent = () => {
             <Route path="/edit-question/:question/:course/:topic" element={<HIEditQuestion />} />
             <Route path="/hi-student-list" element={<HIStudentList />} />
             <Route path="/hi-student-details" element={<HIStudentDetails />} />
-            <Route path="/si-students" element={<SIStudents />} />
-            <Route path='si-student-details' element={<SIStudentDetails />} />
             <Route path='forgot-id' element={<StaffForgotId />} />
             <Route path='staff-time-table' element={<StaffTimeTable />} />
             <Route path='class-reports/:course' element={<StaffReportList />} />
             <Route path='new-report/:course/:start/:end' element={<StaffNewReport />} />
             <Route path='class-report-details/:_id/:course' element={<ClassReportDetails />} />
+
+            {/* School Instructor */}
+            <Route path='/si-create-curriculum/:course' element={<SICreateCurriculum />} />
+            <Route path="/si-create-content/:course" element={<SICreateContent />} />
+            <Route path="/si-create-question/:course" element={<SICreateQuestion />} />
+            <Route path="/si-course-curriculum/:course" element={<SICourseCurriculum />} />
+            <Route path="/edit-school-curriculum/:course/:topic" element={<SIEditCurriculum />} />
+            <Route path="/si-course-content-list/:course" element={<SICourseContentList />} />
+            <Route path="/si-course-content/:id" element={<SICourseContent />} />
+            <Route path="/si-question-list/:course" element={<SICreatedQuestionList />} />
+            <Route path="/edit-school-question/:question/:course/:topic" element={<SIEditQuestion />} />
+            <Route path="/si-students/:course/:email" element={<SIStudents />} />
+            <Route path='si-student-details' element={<SIStudentDetails />} />
 
           </Routes>
 

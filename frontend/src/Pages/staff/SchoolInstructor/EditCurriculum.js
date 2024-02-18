@@ -24,7 +24,8 @@ const EditCurriculum = () => {
     const [subTopic, setSubTopic] = useState('');
     const [id, setId] = useState('');
     const [reload, setReload] = useState('');
-
+    const [code, setCode] = useState('');
+    const [courseCode, setCourseCode] = useState([]);
 
     const subTopicArray = subTopic.split(', ')
 
@@ -63,6 +64,7 @@ const EditCurriculum = () => {
             setSubTopic(contentCurriculum.subTopic);
             setId(contentCurriculum.id);
             setInputs(subTopicArray || ['']);
+            setCode(contentCurriculum.courseCode || '');
 
         }
     }, [contentCurriculum]);
@@ -72,7 +74,7 @@ const EditCurriculum = () => {
         async function fetchCurriculum() {
             try {
                 setLoading(true)
-                const response = await axios.get('http://localhost:5000/api/hub-tutor/course-curriculum', {
+                const response = await axios.get('http://localhost:5000/api/school-tutor/course-curriculum', {
                     headers: {
                         course: tutorCourse
                     },
@@ -91,14 +93,37 @@ const EditCurriculum = () => {
         fetchCurriculum();
     }, [courseParam, reload]);
 
+    useEffect(() => {
+        async function fetchCourseCode() {
+                try {
+
+                    const response = await axios.get('http://localhost:5000/api/school-tutor/school-courses', {
+                        headers: {
+                            course: tutorCourse,
+                        },
+                    });
+
+                    const courseCodeArray = response.data.message[0].courseCode.split(', ').map(code => code.trim());
+                    setCourseCode(courseCodeArray);
+
+                } catch (error) {
+                    toastr.error('Error retrieving Course Code');
+                }
+        }
+
+        fetchCourseCode();
+    }, [tutorCourse]);
+
+
     const UpdateCurriculum = () => {
         if (mainTopic && inputs) {
             setLoading(true); // Start loading indicator
 
-            axios.put(`http://localhost:5000/api/hub-tutor/update-curriculum/${id}`, {
+            axios.put(`http://localhost:5000/api/school-tutor/update-curriculum/${id}`, {
                 course: tutorCourse,
                 mainTopic: mainTopic,
                 subTopicArray: inputs,
+                courseCode: code,
 
             })
                 .then(response => {
@@ -142,7 +167,7 @@ const EditCurriculum = () => {
                 <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-full pb-8">
                     <div className='flex justify-between '>
                         <p className='text-[#F13178] text-sm mt-8 font-extrabold' >Edit Curriculum</p>
-                        <Link to={`/hi-course-curriculum/${tutorCourse}`} className='mt-6'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                        <Link to={`/si-course-curriculum/${tutorCourse}`} className='mt-6'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
                     </div>
                     <div className='border-[#F13178] border-b'></div>
@@ -223,6 +248,23 @@ const EditCurriculum = () => {
                                 </div>
                             ))}
 
+                        </div>
+                        <div className='px-8 mt-2 text-[#134574]'>
+
+                            <p className='text-sm font-bold w-[180px] pt-4 sm:pt-2'>Assign Course Code</p>
+                            <select
+                                value={code}
+                                onChange={(event) => setCode(event.target.value)}
+                                className='outline-none rounded-md h-[40px] pl-4 pt-1 mt-2 w-[180px] text-slate-500'
+
+                            >
+                                <option value=''>Select a sub Topic</option>
+                                {courseCode.map((cCode, index) => (
+                                    <option key={index} value={cCode}>
+                                        {cCode}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
 

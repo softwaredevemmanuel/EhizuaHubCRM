@@ -16,12 +16,14 @@ const TopNav = () => {
               <p className='primary text-[0.5rem] text-center'>4</p>
             </div>
           </div>
+          
           <div className="relative cursor-pointer">
             <GoMail size={24} color="#DE1D80" />
             <div className="absolute top-0 right-[-2px] rounded-full h-3 w-3 bg-white flex justify-center items-center">
               <p className='primary text-[0.5rem] text-center'>1</p>
             </div>
           </div>
+
           <div className="w-[50px] h-[50px] border rounded-full">
             <img src="" alt="" />
           </div>

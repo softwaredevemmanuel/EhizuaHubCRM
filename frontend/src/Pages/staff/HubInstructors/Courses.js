@@ -1,11 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaLaptopCode } from "react-icons/fa";
-import { MdAnimation } from "react-icons/md";
-import { LuAxis3D } from "react-icons/lu";
-import { IoAnalytics } from "react-icons/io5";
-
-import { FaDatabase } from "react-icons/fa";
 import { FaCirclePlus } from "react-icons/fa6";
 import { CiViewList } from "react-icons/ci";
 import { FaUserGraduate } from "react-icons/fa";
@@ -14,6 +8,7 @@ import axios from 'axios';
 import toastr from 'toastr';
 import ReactLoading from "react-loading";
 import { useState, useEffect } from "react"
+import StaffLogin from '../StaffLogin';
 
 
 
@@ -21,17 +16,26 @@ import { useState, useEffect } from "react"
 
 
 const HubInstructorCourse = () => {
-
+  const [user, setUser] = useState(false)
   const [loading, setLoading] = useState(false);
   const [coursesAray, setCoursesAray] = useState([]);
   const [staffTitle, setStaffTitle] = useState('');
   const [staffName, setStaffName] = useState('');
 
   useEffect(() => {
+    let staffToken = JSON.parse(localStorage.getItem('StaffToken'));
+    if (staffToken && staffToken.token) {
+      setUser(true);
+
+    }
+  }, []);
+
+  useEffect(() => {
     let user = JSON.parse(localStorage.getItem('User'));
     setStaffTitle(user.Title)
     setStaffName(user.FirstName)
   })
+
 
 
   // Check Instructor Status
@@ -57,6 +61,11 @@ const HubInstructorCourse = () => {
   }, []);
 
   return (
+    <div className="">
+
+    {!user ? (
+      <StaffLogin />
+    ) : (
     <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-screen pb-12">
 
       {loading && (
@@ -172,7 +181,8 @@ const HubInstructorCourse = () => {
 
     </div>
 
-
+)}
+</div>
 
   )
 }

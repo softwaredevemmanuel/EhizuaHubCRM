@@ -96,7 +96,7 @@ const RegisterStaff = () => {
     useEffect(() => {
         async function fetchHubCourses() {
             try {
-                const response = await axios.get('http://localhost:5000/api/auth/all_upskill_courses');
+                const response = await axios.get('http://localhost:5000/api/auth/upskill_courses');
                 setHubAllCourse(response.data.message);
             } catch (error) {
                 toastr.error('Error retrieving Courses');
@@ -155,9 +155,9 @@ const RegisterStaff = () => {
             axios.post("http://localhost:5000/api/auth/create-staff", {
                 title: selectedTitle,
                 user: selectedUser,
-                first_name: firstName,
-                middle_name: middleName,
-                last_name: lastName,
+                firstName: firstName,
+                middleName: middleName,
+                lastName: lastName,
                 email: email,
                 selectedJobType: selectedJobType,
                 dateOfBirth: dateOfBirth,
