@@ -19,7 +19,7 @@ const Memo = () => {
 
       ) : (
         <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-screen">
-          <div className="w-full  bg-[#C8D1DA] px-6 flex flex-col gap-3">
+          {/* <div className="w-full  bg-[#C8D1DA] px-6 flex flex-col gap-3">
 
             <div className='flex justify-between '>
             <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Staff Memo</p>
@@ -74,15 +74,15 @@ const Memo = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-fit pb-44">
 
-          </div>
+          </div> */}
 
+          <div className="p-1">
+            <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
+          </div>
 
 
         </div>
       )}
-      {/* right section  */}
-
-
 
     </div>
   )

@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import StaffLogin from "../StaffLogin";
+import StudentLogin from "../StudentLogin";
+import TopNav from "../TopNav";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid'
 import JoditEditor from 'jodit-react';
@@ -9,106 +10,84 @@ import axios from 'axios';
 import toastr from 'toastr';
 import ReactLoading from "react-loading";
 
-const NewComplaints = () => {
-  const [user, setUser] = useState(false)
-  const [content, setContent] = useState('')
-  const [title, setTitle] = useState('')
-  const { reportType: reportTypeParam } = useParams();
-  const [loading, setLoading] = useState(false); // New state for loading indicator
-  const editor = useRef(null);
 
+const NewFeedComplain = () => {
+    const [user, setUser] = useState(false);
+    const [loading, setLoading] = useState(false)
+    const [content, setContent] = useState('')
+    const [title, setTitle] = useState('')
+    const { reportType: reportTypeParam } = useParams();
+    const editor = useRef(null);
+  
+    useEffect(() => {
+        let studentToken = JSON.parse(localStorage.getItem('StudentToken'));
 
-  const postContent = () => {
-    let localEmail = JSON.parse(localStorage.getItem('User'));
-
-    if ((title || starsClicked) && content) {
-      setLoading(true); // Start loading indicator
-
-      axios.post("http://localhost:5000/api/staff/feedback_complaints", {
-        title: title,
-        reportType: reportTypeParam,
-        content: content,
-        email: localEmail.email,
-        starsArray: starsClicked
-      })
-        .then(response => {
-          toastr.success(response.data.message);
-
-          // Clear input fields after successful submission
-          setTitle('');
-          setContent('');
-          setStarsClicked([]);
-
+        // Check if staffToken exists and has the 'token' property
+        if (studentToken && studentToken.token) {
+            setUser(true);
+        }
+    }, []);
+  
+    const postContent = () => {
+      let localEmail = JSON.parse(localStorage.getItem('User'));
+  
+      if ((title || starsClicked) && content) {
+        setLoading(true); // Start loading indicator
+  
+        axios.post("http://localhost:5000/api/staff/feedback_complaints", {
+          title: title,
+          reportType: reportTypeParam,
+          content: content,
+          email: localEmail.email,
+          starsArray: starsClicked
         })
-        .catch(error => {
-          toastr.error(error.response.data.error);
+          .then(response => {
+            toastr.success(response.data.message);
+  
+            // Clear input fields after successful submission
+            setTitle('');
+            setContent('');
+            setStarsClicked([]);
+  
+          })
+          .catch(error => {
+            toastr.error(error.response.data.error);
+  
+          })
+          .finally(() => {
+            setLoading(false); // Stop loading indicator
+          });
+      } else {
+        toastr.error('Please fill in all required fields.');
+      }
+    };
+  
+    const handleSubmit = event => {
+      event.preventDefault();
+      postContent();
+    };
+  
+    const [starsClicked, setStarsClicked] = useState([]);
+  
+    const handleStarClick = (starNumber) => {
+      const clickedStars = Array.from({ length: starNumber }, (_, index) => `star ${index + 1}`);
+      setStarsClicked(clickedStars);
+    };
 
-        })
-        .finally(() => {
-          setLoading(false); // Stop loading indicator
-        });
-    } else {
-      toastr.error('Please fill in all required fields.');
-    }
-  };
+    return (
+        <div className="overflow-y-scroll w-full h-screen hide-bar">
+            {!user ? (
+                <StudentLogin />
+            ) : (
+                <div className="relative z-0 w-full bg-[#C8D1DA] px-5 flex flex-col gap-3">
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    postContent();
-  };
+                    <TopNav />
 
-  const [starsClicked, setStarsClicked] = useState([]);
-
-  const handleStarClick = (starNumber) => {
-    const clickedStars = Array.from({ length: starNumber }, (_, index) => `star ${index + 1}`);
-    setStarsClicked(clickedStars);
-  };
-
-
-  return (
-    <div className="">
-      {user ? (
-        <StaffLogin />
-      ) : (
-        <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-screen">
-          <div className='flex justify-between'>
-            <nav className="flex mt-3" aria-label="Breadcrumb">
-              <ol role="list" className="flex items-center space-x-4">
-                <li>
-                  <div>
-                    <Link to="/dashboard" className="text-[#F13178] hover:text-[#134574]">
-                      <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
-                      <span className="sr-only">Home</span>
-                    </Link>
-                  </div>
-                </li>
-                <li>
-                  <div className="flex items-center">
-                    <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-[#F13178]" aria-hidden="true" />
-                    <Link to='/staff_complaints-list' className="ml-4 text-xs font-bold text-[#F13178] hover:text-[#134574]">
-                      COMPLAINTS
-                    </Link>
-                    <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-[#F13178]" aria-hidden="true" />
-                    <div className="ml-4 text-xs font-bold text-[#F13178]">
-                      NEW {reportTypeParam.toUpperCase()}
-                    </div>
-                  </div>
-
-                </li>
-
-              </ol>
-            </nav>
-            <Link to='/staff_complaints-list' className='mt-3'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
-
-          </div>
-
-          <div className='border-[#F13178] border-b '></div>
-
-          {loading && (
-            <div className=" z-50 absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-              <ReactLoading type={"bars"} color={"#ffffff"} height={100} width={100} />
-            </div>
-          )}
+                    {loading && (
+                        <div className=" z-50 absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                            <ReactLoading type={"bars"} color={"#ffffff"} height={100} width={100} />
+                        </div>
+                    )}
 
           <div className=" bg-slate-400 w-full">
             <form onSubmit={handleSubmit}>
@@ -188,6 +167,7 @@ const NewComplaints = () => {
                   tabIndex={1} // tabIndex of textarea
                   onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
                   onChange={newContent => { }}
+                  
                 />
 
               </div>
@@ -205,16 +185,14 @@ const NewComplaints = () => {
           </div>
 
 
+
+
+
+                </div>
+            )}
         </div>
-      )
-      }
-      {/* right section  */}
-
-
-
-    </div >
-
-  )
+    );
 }
 
-export default NewComplaints
+export default NewFeedComplain
+

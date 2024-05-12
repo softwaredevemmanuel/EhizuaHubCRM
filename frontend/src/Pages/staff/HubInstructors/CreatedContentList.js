@@ -14,7 +14,7 @@ const CreatedContentList = () => {
     const { course: courseParam } = useParams();
     const [loading, setLoading] = useState(false); // New state for loading indicator
 
-
+    const trimmedCourse = courseParam.trim()
 
 
     useEffect(() => {
@@ -84,7 +84,7 @@ const CreatedContentList = () => {
                                                 <div key={subIndex}>
                                                     <ul className='px-4 list-disc mt-2 text-[#134574]'>
                                                         <li className='custom-list-item'>
-                                                            <Link to={`/hi-course-content/${subContent.id}`}>
+                                                            <Link to={`/hi-course-content/${trimmedCourse}/${subContent.id}`}>
                                                                 {subContent.subTopic}
                                                             </Link>
                                                         </li>

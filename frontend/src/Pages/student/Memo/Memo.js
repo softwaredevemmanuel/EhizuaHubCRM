@@ -16,7 +16,7 @@ const StudentMemo = () => {
 
                     <TopNav />
 
-                    <div className='p-1'>
+                    {/* <div className='p-1'>
                         <table className="w-full bg-white border border-gray-500 mb-8">
                             <thead>
                                 <tr className='text-[#134574] bg-slate-400'>
@@ -347,6 +347,10 @@ const StudentMemo = () => {
 
                             </tbody>
                         </table>
+                    </div> */}
+
+                    <div className="p-1">
+                        <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
                     </div>
 
 

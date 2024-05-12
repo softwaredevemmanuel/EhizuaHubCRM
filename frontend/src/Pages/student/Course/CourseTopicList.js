@@ -11,6 +11,7 @@ const CourseTopicList = () => {
     const [user, setUser] = useState(false);
     const { course: courseParams } = useParams();
     const [content, setContent] = useState([]);
+    const [testStatus, setTestStatus] = useState([]);
     const [loading, setLoading] = useState(false);
 
 
@@ -51,9 +52,42 @@ const CourseTopicList = () => {
 
     }, [courseParams]);
 
+    // Check if a topic test has been taken
+    useEffect(() => {
+        setLoading(true)
+        async function fetchTestStatus() {
+            let localEmail = JSON.parse(localStorage.getItem('User'));
+
+
+            try {
+
+                const response = await axios.get('http://localhost:5000/api/students/test-status', {
+                    headers: {
+                        course: courseParams,
+                        email: localEmail.email,
+                    },
+                });
+
+                setTestStatus(response.data.message);
+                setLoading(false)
+                console.log(response.data.message)
+
+            } catch (error) {
+                toastr.error('Error retrieving content');
+                setLoading(false)
+
+            }
+        }
+
+        fetchTestStatus();
+
+    }, []);
+
+
+
     const uniqueMainTopics = [...new Set(content.map((item) => item.mainTopic))];
 
-
+console.log(testStatus)
     return (
         <div className="overflow-y-scroll w-full h-screen hide-bar">
             {!user ? (
@@ -86,9 +120,37 @@ const CourseTopicList = () => {
                                                             <li>
                                                                 <div className="flex items-center justify-between hover:bg-gray-300 rounded-md">
                                                                     <p>{subContent.subTopic}</p>
-                                                                    <div className="bg-slate-400 rounded-md px-1 text-white text-xs">
-                                                                        <div>Take Test</div>
-                                                                    </div>
+
+                                                                    {testStatus.filter((test) => test.subTopic === subContent.subTopic)
+                                                                        .map((subTest, testIndex) => (
+
+                                                                            <div key={testIndex} className="bg-slate-100 rounded-md px-1 text-white text-xs font-bold">
+                                                                                {subTest.percentageScore >= 70 && (
+
+                                                                                    <p className='text-green-600'>{subTest.percentageScore}% A</p>
+                                                                                )}
+                                                                                {(subTest.percentageScore >= 60 && subTest.percentageScore < 70) && (
+
+                                                                                    <p className='text-green-600'>{subTest.percentageScore}% B</p>
+                                                                                )}
+                                                                                {(subTest.percentageScore >= 50 && subTest.percentageScore < 60) && (
+
+                                                                                    <p className='text-slate-600'>{subTest.percentageScore}% C</p>
+                                                                                )}
+                                                                                {(subTest.percentageScore >= 40 && subTest.percentageScore < 50) && (
+
+                                                                                    <p className='text-yellow-600'>{subTest.percentageScore}% D</p>
+                                                                                )}
+                                                                                {(subTest.percentageScore >= 30 && subTest.percentageScore < 40) && (
+
+                                                                                    <p className='text-red-500'>{subTest.percentageScore}% E</p>
+                                                                                )}
+                                                                                {subTest.percentageScore <= 30 && (
+
+                                                                                    <p className='text-red-600'>{subTest.percentageScore}%</p>
+                                                                                )}
+                                                                            </div>
+                                                                        ))}
                                                                 </div>
 
                                                             </li>

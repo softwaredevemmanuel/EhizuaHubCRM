@@ -102,8 +102,7 @@ import StaffMemo from './Pages/staff/StaffMemo';
 import StaffAttendance from './Pages/staff/Attendance/StaffAttendance';
 import StaffBirthday from './Pages/staff/StaffBirthday';
 import StaffMemoDetails from './Pages/staff/StaffMemoDetails';
-import StaffLeaveApplication from './Pages/staff/StaffLeaveApplication';
-import Example from './Pages/admin/staff/Leave/Example';
+import StaffLeaveApplication from './Pages/staff/Leave/StaffLeaveApplication';
 import CameraCapture from './Pages/admin/students/Details/Camera';
 import HubInstructor from './Pages/staff/HubInstructors/Courses';
 import SchoolInstructor from './Pages/staff/SchoolInstructor/Courses';
@@ -116,6 +115,7 @@ import HICreatedQuestionList from './Pages/staff/HubInstructors/CreatedQuestions
 import HICourseContent from './Pages/staff/HubInstructors/CourseContent';
 import HIEditCurriculum from './Pages/staff/HubInstructors/EditCurriculum';
 import HIEditQuestion from './Pages/staff/HubInstructors/EditQuestion';
+import HIEditContent from './Pages/staff/HubInstructors/EditContent';
 import HIStudentList from './Pages/staff/HubInstructors/StudentsList';
 import HIStudentDetails from './Pages/staff/HubInstructors/StudentDetails';
 import StaffForgotId from './Pages/staff/ForgotId';
@@ -147,13 +147,16 @@ import Home from './Pages/Home';
 import ForgotPassword from "./Pages/ForgotPassword";
 import StudentCourseCurriculum from "./Pages/student/CourseCurriculum";
 import TestSection from "./Pages/student/TestSection";
-import StudentComplaints from "./Pages/student/Complaints";
+import StudentComplaints from "./Pages/student/Complaints/Complaints";
 import StudentMemo from "./Pages/student/Memo/Memo";
 import StudentMemoDetails from "./Pages/student/Memo/MemoDetails";
 import StudentLogin from "./Pages/student/StudentLogin";
 import CourseTopicList from "./Pages/student/Course/CourseTopicList";
 import TopicDetails from "./Pages/student/Course/TopicDetails";
 import Question from "./Pages/student/Course/Questions";
+import TestDetails from "./Pages/student/Course/TestDetails";
+import NewFeedComplain from "./Pages/student/Complaints/NewFeedComplain";
+import ComplaintFeedbackDetails from "./Pages/student/Complaints/Details";
 
 
 function App() {
@@ -229,8 +232,7 @@ const AppContent = () => {
             <Route path='pending-leave' element={<PendingLeave />} />
             <Route path='approved-leave' element={<ApprovedLeave />} />
             <Route path='declined-leave' element={<DeclinedLeave />} />
-            <Route path='staff-leave-details' element={<StaffLeaveDetails />} />
-            <Route path='example' element={<Example />} />
+            <Route path='staff-leave-details/:_id' element={<StaffLeaveDetails />} />
             <Route path='memo-details' element={<MemoDetails />} />
             <Route path='create-memo' element={<CreateMemo />} />
             <Route path='staff-attendance-details/hr' element={<HrStaffAttendenceDetails />} />
@@ -294,12 +296,15 @@ const AppContent = () => {
             <Route path="/dashboard" element={<StudentDashboard />} />
             <Route path="/:course/content-list" element={<CourseTopicList />} />
             <Route path="/:course/details/:id" element={<TopicDetails />} />
-            <Route path="/:questions/:course/:id" element={<Question />} />
+            <Route path="/questions/:course/:id" element={<Question />} />
+            <Route path="/:test-details/:course/:id/:subTopic" element={<TestDetails />} />
             <Route path="/course-curriculum" element={<StudentCourseCurriculum />} />
             <Route path="/test-section" element={<TestSection />} />
             <Route path="/complaints" element={<StudentComplaints />} />
             <Route path="/student-memo" element={<StudentMemo />} />
             <Route path="/student-memo-details" element={<StudentMemoDetails />} />
+            <Route path="/students/:reportType" element={<NewFeedComplain />} />
+            <Route path="/student/:reportType/details/:id" element={<ComplaintFeedbackDetails />} />
           </Routes>
 
         </div>
@@ -317,8 +322,8 @@ const AppContent = () => {
             <Route path="/staff_memo_list" element={<StaffMemo />} />
             <Route path="/staff_attendance" element={<StaffAttendance />} />
             <Route path="/staff_details" element={<StaffDetails />} />
-            <Route path="/staff-new_complaints" element={<StaffComplaints />} />
-            <Route path="/staff-complaints-details" element={<StaffComplaintsDetails />} />
+            <Route path="/staff/:reportType" element={<StaffComplaints />} />
+            <Route path="/staff/:reportType/details/:id" element={<StaffComplaintsDetails />} />
             <Route path="/staff_complaints-list" element={<StaffComplaintsList />} />
             <Route path="/staff_inventory" element={<StaffInventory />} />
             <Route path="/staff_inventory-request" element={<StaffInventoryRequest />} />
@@ -335,10 +340,11 @@ const AppContent = () => {
             <Route path="/hi-create-question/:course" element={<HICreateQuestion />} />
             <Route path="/hi-course-curriculum/:course" element={<HICourseCurriculum />} />
             <Route path="/hi-content-list/:course" element={<HICreatedContentList />} />
-            <Route path="/hi-course-content/:id" element={<HICourseContent />} />
+            <Route path="/hi-course-content/:course/:id" element={<HICourseContent />} />
             <Route path="/hi-question-list/:course" element={<HICreatedQuestionList />} />
             <Route path="/edit-curriculum/:course/:topic" element={<HIEditCurriculum />} />
             <Route path="/edit-question/:question/:course/:topic" element={<HIEditQuestion />} />
+            <Route path="/edit-content/:course/:id" element={<HIEditContent />} />
             <Route path="/hi-student-list" element={<HIStudentList />} />
             <Route path="/hi-student-details" element={<HIStudentDetails />} />
             <Route path='forgot-id' element={<StaffForgotId />} />

@@ -23,7 +23,7 @@ const Loan = () => {
             </div>
             <div className='border-[#F13178] border-b '></div>
 
-            <div className='bg-slate-200  h-[520px] rounded-lg sm:px-1'>
+            {/* <div className='bg-slate-200  h-[520px] rounded-lg sm:px-1'>
                 <div className='overflow-x-auto mt-1'>
                     <div className='p-1 h-[500px]'>
 
@@ -83,7 +83,11 @@ const Loan = () => {
 
 
 
-            </div>
+            </div> */}
+
+<div className="p-1">
+            <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
+          </div>
 
 
 

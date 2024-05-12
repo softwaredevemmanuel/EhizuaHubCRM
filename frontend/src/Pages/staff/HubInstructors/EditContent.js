@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo  } from 'react';
 import axios from 'axios';
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { Link } from 'react-router-dom'
@@ -10,21 +10,24 @@ import JoditEditor from 'jodit-react';
 
 
 
-const CreateContent = () => {
+const EditContent = () => {
     const [user, setUser] = useState(false)
     const [content, setContent] = useState('');
     const [loading, setLoading] = useState(false); // New state for loading indicator
     const [main_topic, set_MainTopic] = useState('');
     const [sub_topic, set_SubTopic] = useState('');
     const [videoUrl, setVideoUrl] = useState('');
+    const [id, setId] = useState('');
     const [mainTopic, setMainTopic] = useState([]);
     const [subTopic, setSubTopic] = useState([]);
-    const { course: courseParams } = useParams();
+    const [result, setResult] = useState([]);
+    const { id: idParams } = useParams();
+    const { course: courseParam } = useParams();
     const editor = useRef(null);
-    const [editContent, setEditContent] = useState('');
 
 
 
+    const topicContent = result.find((item) => item.id == idParams);
 
     useEffect(() => {
         let staffToken = JSON.parse(localStorage.getItem('StaffToken'));
@@ -34,7 +37,43 @@ const CreateContent = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (topicContent) {
+            set_MainTopic(topicContent.mainTopic || '');
+            set_SubTopic(topicContent.subTopic);
+            setVideoUrl(topicContent.videoUrl);
+            setId(topicContent.id);
+            setContent(topicContent.content)
 
+        }
+    }, [topicContent]);
+
+
+    useEffect(() => {
+        setLoading(true)
+        async function contentDetails() {
+
+            try {
+                const response = await axios.get('http://localhost:5000/api/hub-tutor/course-content-details', {
+                    headers: {
+                        id: idParams,
+                    },
+                });
+                setResult(response.data.content)
+                setLoading(false)
+
+
+
+            } catch (error) {
+                toastr.error('Error fetching curriculum data');
+                setLoading(false)
+
+            }
+        }
+
+        contentDetails();
+
+    }, [idParams]);
 
     useEffect(() => {
         async function fetchMainTopic() {
@@ -42,10 +81,9 @@ const CreateContent = () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/hub-tutor/maintopic', {
                     headers: {
-                        course: courseParams,
+                        course: courseParam,
                     },
                 });
-                console.log(response.data.message)
                 setMainTopic(response.data.message)
 
 
@@ -56,8 +94,7 @@ const CreateContent = () => {
 
         fetchMainTopic();
 
-    }, [courseParams]);
-
+    }, [courseParam]);
 
 
     useEffect(() => {
@@ -67,7 +104,7 @@ const CreateContent = () => {
 
                     const response = await axios.get('http://localhost:5000/api/hub-tutor/subtopic', {
                         headers: {
-                            course: courseParams,
+                            course: courseParam,
                             main_topic: main_topic
                         },
                     });
@@ -84,32 +121,26 @@ const CreateContent = () => {
 
 
 
-    // ........................ Create Content API ...................
+    // ........................ Update Content  ...................
 
     const createContent = () => {
         if (main_topic && content) {
             setLoading(true); // Start loading indicator
 
-            axios.post("http://localhost:5000/api/hub-tutor/create-content", {
-                main_topic: main_topic,
+            axios.put(`http://localhost:5000/api/hub-tutor/update-content/${id}`, {
+                mainTopic: main_topic,
                 content: content,
-                course: courseParams.trim(),
-                sub_topic: sub_topic,
+                course: courseParam,
+                subTopic: sub_topic,
                 videoUrl: videoUrl,
             })
                 .then(response => {
                     toastr.success(response.data.message);
 
-                    // Clear input fields after successful submission
-                    set_MainTopic('');
-                    setContent('');
-                    set_SubTopic('');
-                    setVideoUrl('');
-
                 })
                 .catch(error => {
                     toastr.error(error.response.data.error);
-
+            
                 })
                 .finally(() => {
                     setLoading(false); // Stop loading indicator
@@ -138,8 +169,8 @@ const CreateContent = () => {
                     </div>
 
                     <div className='flex justify-between '>
-                        <p className='text-[#F13178] text-sm mt-4 font-extrabold' >Create Content</p>
-                        <Link to='/hub-instructor' className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+                        <p className='text-[#F13178] text-sm mt-4 font-extrabold' >Edit Content</p>
+                        <Link to={`/hi-course-content/${courseParam}/${idParams}`} className='mt-2'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
                     </div>
 
@@ -153,7 +184,7 @@ const CreateContent = () => {
 
                     <form className='bg-slate-200 sm:h-fit rounded-md pb-8 ' onSubmit={handleSubmit}>
                         <div className='sm:flex gap-4 mt-6 px-8 text-[#134574]'>
-                            <p className='font-bold' > {courseParams}</p>
+                            <p className='font-bold' > {courseParam}</p>
                         </div>
                         <div className='sm:flex gap-4 mt-4 px-8 text-[#134574]'>
                             <p className='text-sm w-[240px] pt-2 font-bold'>Main-Topic</p>
@@ -195,7 +226,7 @@ const CreateContent = () => {
                         </div>
 
 
-
+                       
                         <div className='px-4 mt-6'>
 
                             <JoditEditor
@@ -204,16 +235,18 @@ const CreateContent = () => {
                                 tabIndex={1} // tabIndex of textarea
                                 onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
                                 onChange={newContent => { }}
+                                className=''
                             />
 
                         </div>
 
 
 
+
                         <div className='flex gap-8 justify-center px-8'>
 
                             <button className=' bg-[#F13178] px-2 w-full sm:w-[120px] text-white md:text-[15px]  rounded-lg  mt-6 text-[11px] flex items-center text-center justify-center gap-4 font-bold h-[40px]'>
-                                Create
+                                Update
                             </button>
                         </div>
 
@@ -242,4 +275,4 @@ const CreateContent = () => {
     )
 }
 
-export default CreateContent
+export default EditContent

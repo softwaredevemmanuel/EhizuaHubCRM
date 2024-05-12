@@ -16,7 +16,7 @@ const StudentMemoDetails = () => {
 
                     <TopNav />
 
-                    <div className="flex flex-col gap-y-3 lg:ml-5 pb-20">
+                    {/* <div className="flex flex-col gap-y-3 lg:ml-5 pb-20">
 
                         <p className='rounded-xl py-2 lg:pl-8 pl-4 lg:pr-10 pr-4  bg-[#ffffff] lg:leading-10 leading-8'>
                             Dear Team, <br /><br />
@@ -38,11 +38,11 @@ const StudentMemoDetails = () => {
                                 </button>
                             </Link>
                         </div>
+                    </div> */}
+
+                    <div className="p-1">
+                        <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
                     </div>
-
-
-
-
 
 
                 </div>

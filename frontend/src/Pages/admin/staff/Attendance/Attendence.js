@@ -22,14 +22,14 @@ const Attendance = () => {
 
     return (
         <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3  pb-8">
-                <div className='flex justify-between '>
-                    <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Staff Attendance</p>
-                    <Link to='/staff-memo/hr' className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
+            <div className='flex justify-between '>
+                <p className='text-[#F13178] text-[20px] mt-8 font-extrabold' >Staff Attendance</p>
+                <Link to='/staff-memo/hr' className='mt-8'><IoIosArrowRoundBack size={38} className="text-[#F13178]" /></Link>
 
             </div>
             <div className='border-[#F13178] border-b '></div>
 
-            <div className='grid sm:grid-cols-2 gap-2'>
+            {/* <div className='grid sm:grid-cols-2 gap-2'>
                 <div className='pt-2 flex gap-4'>
                 <p className='text-[#134574] font-bold'>Location</p>
 
@@ -82,6 +82,10 @@ const Attendance = () => {
             <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-fit pb-44">
 
 
+            </div> */}
+
+            <div className="p-1">
+                <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
             </div>
 
 

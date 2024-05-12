@@ -235,13 +235,13 @@ export default function StudentDashboard() {
       ) : (
         <div className="relative z-0 w-full bg-white px-5 flex flex-col gap-3">
 
-          <TopNav />
+          <TopNav/>
 
           <div className="flex flex-col gap-1 text-slate-700 text-[1.2rem] font-extrabold py-2 bg-slate-200 px-2">
             <div className="flex justify-between">
               <p> Welcome {firstName}</p>
-              <div className="bg-slate-500 px-4 py-1 rounded-md text-sm text-white font-bold">
-                <button onClick={logoff} className=""> Log off</button>
+              <div className="bg-slate-300 px-2  rounded-md text-white font-bold text-xs flex items-center cursor-not-allowed ">
+                <button  className="cursor-not-allowed">Download Certificate</button>
               </div>
             </div>
             <p className='text-[0.87rem] font-light'>Elevate your learning with one click</p>

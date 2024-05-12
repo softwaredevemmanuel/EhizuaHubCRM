@@ -39,7 +39,7 @@ const CourseCurriculum = () => {
     }, []);
 
     useEffect(() => {
-        async function fetchCourseContent() {
+        async function fetchCourseCurriculum() {
             try {
                 setLoading(true)
                 const response = await axios.get('http://localhost:5000/api/hub-tutor/course-curriculum', {
@@ -58,7 +58,7 @@ const CourseCurriculum = () => {
         }
 
 
-        fetchCourseContent();
+        fetchCourseCurriculum();
     }, [courseParam]);
 
     useEffect(() => {

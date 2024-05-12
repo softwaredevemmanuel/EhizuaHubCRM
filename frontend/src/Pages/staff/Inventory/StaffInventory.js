@@ -45,7 +45,9 @@ const StaffInventory = () => {
         </div>
       </div>
       <div className='border-[#F13178] border-b '></div>
-      <div className="flex justify-end">
+
+
+      {/* <div className="flex justify-end">
         <Link to='/staff_inventory-request' className=" bg-[#F13178] text-white px-2 w-fit  text-center items-center rounded-lg py-1 font-bold flex gap-4 justify-center">
           <div className="flex items-center justify-center">
             <p className="pl-2">New Request</p>
@@ -93,7 +95,12 @@ const StaffInventory = () => {
       <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-fit pb-44">
 
 
-      </div>
+      </div> */}
+
+<div className="p-1">
+            <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
+          </div>
+
 
 
 

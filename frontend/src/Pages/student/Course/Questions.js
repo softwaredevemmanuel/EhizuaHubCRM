@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import StudentLogin from '../StudentLogin';
+import TopNav from '../TopNav';
+import ReactLoading from "react-loading";
+import { useNavigate } from 'react-router-dom';
+import toastr from 'toastr';
+
+
 
 const Question = () => {
+    const [user, setUser] = useState(false);
     const [content, setContent] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,13 +23,24 @@ const Question = () => {
     const [retake, setRetake] = useState(true);
     const [totalQuestions, setTotalQuestions] = useState('');
     const [disable, setDisable] = useState(true);
+    const [testRunning, setTestRunning] = useState(false);
+    const navigate = useNavigate();
 
 
 
 
     // Get the content parameter from the URL using useParams
-    const { id: contentParam } = useParams();
+    const { id: idParam } = useParams();
     const { course: courseParams } = useParams();
+
+    useEffect(() => {
+        let studentToken = JSON.parse(localStorage.getItem('StudentToken'));
+
+        // Check if staffToken exists and has the 'token' property
+        if (studentToken && studentToken.token) {
+            setUser(true);
+        }
+    }, []);
 
     // Get Student course Content
     useEffect(() => {
@@ -43,13 +62,13 @@ const Question = () => {
             }
         }
 
-        
+
         fetchCourseContent();
 
     }, [courseParams]);
 
     // Get the details of the content that corresponds with the id
-    const contentItem = content.find((item) => item.id == contentParam);
+    const contentItem = content.find((item) => item.id == idParam);
 
     // Set and get time before taking the test
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -120,7 +139,7 @@ const Question = () => {
     const time2 = formattedTime;
 
 
-// Check Time Status before displaying Questions
+    // Check Time Status before displaying Questions
     useEffect(() => {
         const result = subtractTimes(time1, time2);
         function timeStringToSeconds(timeString) {
@@ -154,8 +173,9 @@ const Question = () => {
 
 
 
-// Start Timmer
+    // Start Timmer
     const RunTimer = () => {
+        setTestRunning(true)
         const futureTime = new Date(currentTime.getTime() + 10 * 30000); // 1 minutes in milliseconds
         localStorage.setItem('futureTime', futureTime.toLocaleTimeString());
 
@@ -178,8 +198,9 @@ const Question = () => {
 
     }
 
-// Submit Questions
+    // Submit Questions
     const submitQuestion = async event => {
+        setLoading(true)
         // event.preventDefault();
         setStartTest(false)
         setMyTime('00:00:00')
@@ -187,42 +208,52 @@ const Question = () => {
         localStorage.removeItem('futureTime');
         localStorage.removeItem('TestInfo');
         setDisable(false)
-        setSubTopic('')
+        // setSubTopic('')
+        setTestRunning(false)
 
-        const selectedQuestions = [];
+
+        const selectedValueArray = []
 
         question.forEach((questionContent, index) => {
             const selectedValue = document.querySelector(`input[name=question${index}]:checked`)?.value;
-            if (selectedValue) {
-                selectedQuestions.push({
-                    sub_topic: subTopic,
-                    course: course,
-                    email: email,
-                    question: questionContent.question,
-                    ans: selectedValue,
-                });
-            }
+            selectedValueArray.push(selectedValue)
+            console.log(selectedValueArray)
+
+
         });
 
         try {
+            let localEmail = JSON.parse(localStorage.getItem('User'));
 
-            const response = await axios.post('http://localhost:5000/api/students/submit_questions', selectedQuestions);
+            const response = await axios.post('http://localhost:5000/api/students/submit_questions', {
+                selectedValueArray,
+                course: courseParams,
+                subTopic,
+                email: localEmail.email
+            }
 
-            setSuccess(response.data.message);
+            );
+
+            // toastr.success(response.data.message);
             const submitResponse = await axios.get('http://localhost:5000/api/students/check_test_score', {
                 headers: {
-                    sub_topic: subTopic,
-                    course: course,
-                    email: email,
-                    totalQuestions: totalQuestions
-
+                  subTopic,
+                  course: course,
+                  email: localEmail.email,
+                  totalQuestions : totalQuestions
+          
                 },
+          
+              });
+              toastr.success(submitResponse.data.message);
 
-            });
 
-            setSubmitSuccess(submitResponse.data.message);
             setQuestions([])
             setSubTopic('')
+            setLoading(false)
+            navigate(`/${courseParams}/details/${idParam}`)
+
+
 
 
 
@@ -231,8 +262,9 @@ const Question = () => {
         }
     };
 
- 
-// Fetch Questions
+
+
+    // Fetch Questions
     async function fetchQuestion() {
 
         try {
@@ -272,7 +304,7 @@ const Question = () => {
 
         } catch (error) {
             if (error.response.data.message) {
-                setError(error.response.data.message);
+                toastr.error(error.response.data.message);
 
                 setStartTest(false)
                 setMyTime('00:00:00')
@@ -280,10 +312,12 @@ const Question = () => {
                 localStorage.removeItem('futureTime');
                 setDisable(false)
                 setSubTopic('')
-
+                setTestRunning(false)
             }
+
+
             if (error.response.data.retake) {
-                setRetake(error.response.data.retake);
+                toastr.success(error.response.data.retake);
 
                 setStartTest(false)
                 setMyTime('00:00:00')
@@ -291,102 +325,163 @@ const Question = () => {
                 localStorage.removeItem('futureTime');
                 setDisable(false)
                 setSubTopic('')
+                setTestRunning(false)
 
             }
         }
     }
 
     return (
-        <div>
-            <div>
-                <button onClick={RunTimer} disabled={disable} >Start</button>
+        <div className="overflow-y-scroll w-full h-screen hide-bar">
+            {!user ? (
+                <StudentLogin />
+            ) : (
+                <div className="relative z-0 w-full bg-white px-1 sm:px-5 flex flex-col gap-3">
 
+                    <TopNav previousPageName="Course Content" currentPageName="Questions" pageLink={`/${courseParams}/details/${idParam}`} />
 
-                {storedFutureTime ? (
-                    <>
-                        <h2>Time Remaining</h2>
-                        <h1>{myTime}</h1>
-                    </>
-                ) : (
+                    {contentItem && (
+                        <p className='text-center text-slate-500 font-bold '>{contentItem.subTopic} Questions</p>
 
-                    <div>
-                        <h1>{myTime}</h1>
-                    </div>
+                    )}
 
-
-                )}
-
-            </div>
-
-            <div>
-
-                {loading && <p>Loading...</p>}
-                {contentItem && (
-                    <div>
-
-                        <h2>{contentItem.subTopic} Questions</h2>
-                        <div>
-
-                            <form onSubmit={submitQuestion}>
-
-                                {subTopic && <h3>Assessment Test</h3>}
-
-                                {question.map((questionContent, index) => (
-                                    <div key={index}>
-                                        <div>
-                                            <p>{questionContent.question}</p>
-                                            <label>
-                                                <input
-                                                    type="radio"
-                                                    name={`question${index}`}
-                                                    value={questionContent.ans1}
-                                                />
-                                                {questionContent.ans1}
-                                            </label>
-                                            <label>
-                                                <input
-                                                    type="radio"
-                                                    name={`question${index}`}
-                                                    value={questionContent.ans2}
-                                                />
-                                                {questionContent.ans2}
-                                            </label>
-                                            <label>
-                                                <input
-                                                    type="radio"
-                                                    name={`question${index}`}
-                                                    value={questionContent.ans3}
-                                                />
-                                                {questionContent.ans3}
-                                            </label>
-                                            <label>
-                                                <input
-                                                    type="radio"
-                                                    name={`question${index}`}
-                                                    value={questionContent.ans4}
-                                                />
-                                                {questionContent.ans4}
-                                            </label>
-                                        </div>
-                                    </div>
-                                ))}
-                                {subTopic && question.length > 0 && (
-                                    <button type='submit' onClick={submitQuestion}>Submit</button>
-                                )}
-                            </form>
-
-
-                            {success && <p style={{ color: 'green' }}>{success}</p>}
-                            {error && <p style={{ color: 'red' }}>{error}</p>}
-                            {submitSuccess && <p style={{ color: 'green' }}>{submitSuccess}</p>}
-                            {retake && <p style={{ color: 'green' }}>{retake}</p>}
-
-
-
+                    {loading && (
+                        <div className=" z-50 absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                            <ReactLoading type={"bars"} color={"#ffffff"} height={100} width={100} />
                         </div>
+                    )}
+
+
+                    <div className='bg-slate-300 flex justify-between py-2 px-4 rounded-sm'>
+                        {!testRunning ? (
+
+                            <button
+                                onClick={RunTimer}
+                                disabled={disable}
+                                className='text-green-700 font-extrabold text-xl bg-slate-200 px-2 rounded-md '
+                            >
+                                Start
+                            </button>
+                        ) : (
+                            <button
+                                className='text-slate-400 font-extrabold  bg-slate-200 px-2 rounded-md cursor-not-allowed'
+                            >
+                                Running...
+                            </button>
+                        )}
+
+
+                        {storedFutureTime ? (
+                            <div className='text-white font-extrabold text-xl flex gap-4 justify-center items-center'>
+                                <p className='text-xs text-center'>Time Remaining</p>
+                                <p className='text-red-500 bg-white px-2'>{myTime}</p>
+                            </div>
+                        ) : (
+
+                            <div className='text-green-700 font-extrabold text-xl bg-slate-200 px-2 rounded-md' >
+                                <h1>{myTime}</h1>
+                            </div>
+
+
+                        )}
+
                     </div>
-                )}
-            </div>
+
+                    <div>
+
+                        {(contentItem && storedFutureTime) && (
+                            <div>
+                                <div>
+
+                                    <form onSubmit={submitQuestion} className='pb-12'>
+
+                                        {question.map((questionContent, index) => (
+                                            <div key={index} className='mt-4'>
+                                                <div>
+                                                    <p className='font-bold'>{index + 1}. {questionContent.question}</p>
+                                                    <ul className='ml-6'>
+                                                        <li>
+                                                            <label className='flex gap-2'>
+                                                                A.
+                                                                <input
+                                                                    type="radio"
+                                                                    name={`question${index}`}
+                                                                    value={questionContent.ans1}
+                                                                />
+                                                                {questionContent.ans1}
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <label className='flex gap-2'>
+                                                                B.
+                                                                <input
+                                                                    type="radio"
+                                                                    name={`question${index}`}
+                                                                    value={questionContent.ans2}
+                                                                />
+                                                                {questionContent.ans2}
+                                                            </label>
+                                                        </li>
+
+                                                        <li>
+                                                            <label className='flex gap-2'>
+                                                                C.
+                                                                <input
+                                                                    type="radio"
+                                                                    name={`question${index}`}
+                                                                    value={questionContent.ans3}
+                                                                />
+                                                                {questionContent.ans3}
+                                                            </label>
+                                                        </li>
+
+                                                        <li>
+                                                            <label className='flex gap-2'>
+                                                                D.
+                                                                <input
+                                                                    type="radio"
+                                                                    name={`question${index}`}
+                                                                    value={questionContent.ans4}
+                                                                />
+                                                                {questionContent.ans4}
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+
+
+
+
+                                                </div>
+                                            </div>
+                                        ))}
+                                        {subTopic && question.length > 0 && (
+                                            <div className='flex justify-center items-center'>
+
+                                                <button
+                                                    type='submit'
+                                                    onClick={submitQuestion}
+                                                    className='bg-[#DE1D80] text-white font-bold w-[140px] py-1 rounded-md '
+                                                >
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        )}
+                                    </form>
+
+
+                                    {success && <p style={{ color: 'green' }}>{success}</p>}
+                                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                                    {submitSuccess && <p style={{ color: 'green' }}>{submitSuccess}</p>}
+                                    {retake && <p style={{ color: 'green' }}>{retake}</p>}
+
+
+
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

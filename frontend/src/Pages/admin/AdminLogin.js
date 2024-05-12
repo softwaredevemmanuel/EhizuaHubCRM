@@ -21,7 +21,6 @@ const AdminLogin = () => {
 
 
 
-
   useEffect(() => {
     let user = JSON.parse(localStorage.getItem('User'));
     if ((user)) {

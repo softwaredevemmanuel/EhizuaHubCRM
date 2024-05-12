@@ -34,7 +34,7 @@ const StaffSalaryAdvance = () => {
 
             <div className='border-[#F13178] border-b '></div>
 
-            <Transition.Root show={open} as={Fragment}>
+            {/* <Transition.Root show={open} as={Fragment}>
               <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
                 <Transition.Child
                   as={Fragment}
@@ -224,7 +224,12 @@ const StaffSalaryAdvance = () => {
                   </button>
                 </div>
               </div>
-            )}
+            )} */}
+
+<div className="p-1">
+            <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
+          </div>
+
 
           </div>
       )

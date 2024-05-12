@@ -34,7 +34,7 @@ const EhizuaStaff = () => {
 
 
 
-            <div className='grid sm:grid-cols-2 gap-2 '>
+            {/* <div className='grid sm:grid-cols-2 gap-2 '>
                 <div className='pt-1 flex gap-4'>
                     <p className='text-[#134574] font-bold'>Location</p>
 
@@ -259,7 +259,11 @@ const EhizuaStaff = () => {
 
             <div className="grid grid-cols-2 lg:grid-cols-3  rounded-[10px] gap-3 lg:gap-[60px] text-white max-w-[980px] w-fit pb-44">
 
-            </div>
+            </div> */}
+
+<div className="p-1">
+            <p className="text-4xl text-center text-slate-600">Coming up soon....</p>
+          </div>
 
 
 

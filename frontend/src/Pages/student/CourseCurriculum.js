@@ -1,112 +1,101 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import StudentLogin from "./StudentLogin";
 import TopNav from "./TopNav";
-import { FaDownload } from "react-icons/fa";
+import axios from 'axios';
+import toastr from 'toastr';
+import ReactLoading from "react-loading";
+import Curricullum from '../../components/curricullum';
 
 
 const CourseCurriculum = () => {
   const [user, setUser] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [courses, setCourses] = useState([]);
+
+
+  useEffect(() => {
+    let studentToken = JSON.parse(localStorage.getItem('StudentToken'));
+
+    // Check if staffToken exists and has the 'token' property
+    if (studentToken && studentToken.token) {
+      setUser(true);
+    }
+  }, []);
+
+
+  // Students Courses
+  useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('User'));
+    setLoading(true)
+    async function fetchInstructorDetails() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/students/enrolled-course', {
+          headers: {
+            email: user.email
+          }
+        });
+
+        setCourses(response.data.courses);
+        setLoading(false)
+      } catch (error) {
+        toastr.error('Error retrieving Courses');
+        setLoading(false)
+
+      }
+    }
+
+    fetchInstructorDetails();
+  }, []);
+
+  // Get the value of the first course available
+  useEffect(() => {
+    if (courses.length > 0) {
+      const firstCourse = courses[0];
+      setSelectedCourse(firstCourse.course);
+
+    }
+  }, [courses]);
+
 
 
   return (
     <div className="overflow-y-scroll w-full h-screen hide-bar">
-      {user ? (
+      {!user ? (
         <StudentLogin />
       ) : (
         <div className="relative z-0 w-full bg-[#C8D1DA] px-5 flex flex-col gap-3 pb-12">
 
           <TopNav />
+            <div className='flex gap-4'>
+              <p className='text-[#134574] font-bold'>Course</p>
 
-          <div className='flex gap-4'>
-            <p className='text-[#134574] font-bold'>Course</p>
+              <select
+                className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none bg-slate-200 px-4'
+                value={selectedCourse}
+                onChange={(event) => setSelectedCourse(event.target.value)}
 
-            <select
-              className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none bg-slate-200 px-4'>
-              <option value=''>Full Stack Web Development</option>
-              <option value='theory'>Data Analytics</option>
-            </select>
+              >
+                {courses.map((courses, index) => (
+                  <option key={index} value={courses.course}>
+                    {courses.course}
+                  </option>
 
-          </div>
-          <div className='sm:flex justify-end'>
+                ))}
+              </select>
 
-            <button className="bg-[#F13178] px-2 text-center items-center rounded-lg font-bold flex justify-center p-1 w-fit sm:mt-0 mt-2">
-              <div className="flex">
-                <p className="text-white pl-2">Download </p>
-                <FaDownload size={24} className="pl-2 mr-2 text-white" />
-
-              </div>
-            </button>
-          </div>
-
-
-          <div className='bg-slate-200  h-[520px] rounded-lg sm:px-8'>
-            <div className='overflow-x-auto mt-4'>
-              <div className='p-4 h-[500px]'>
-
-                <p className='text-[#F13178] font-bold pt-4'> HTML 101: BEGINERS GUIDE TO CODING</p>
-                <ul className='px-4 list-disc mt-2 text-[#134574]'>
-                  <li className='custom-list-item'>WHAT IS HTML</li>
-                  <li>GETTING SET UP</li>
-                  <li>HTML SYNTAX</li>
-                  <li>PAGE TITLES</li>
-                  <li>PARAGRAPHS AND HEADINGS</li>
-                  <li>NESTING HTML ELEMENTS</li>
-                  <li>BOLD, ITALICS AND UNDERLINES</li>
-                  <li>THE DIV ELEMENT</li>
-                  <li>BLOCK VS INLINE ELEMENTS</li>
-                  <li>LINKING TO OTHER PAGES</li>
-                  <li>OPENING LINKS IN NEW WINDOWS</li>
-                  <li>ADDING IMAGES</li>
-                  <li>LINKING AN IMAGE TO OTHER WEB PAGE</li>
-                  <li>HTML COMMENTS</li>
-                </ul>
-                <p className='text-[#F13178] font-bold pt-4'> HTML 101: BEGINERS GUIDE TO CODING</p>
-                <ul className='px-4 list-disc mt-2 text-[#134574]'>
-                  <li className='custom-list-item'>WHAT IS HTML</li>
-                  <li>GETTING SET UP</li>
-                  <li>HTML SYNTAX</li>
-                  <li>PAGE TITLES</li>
-                  <li>PARAGRAPHS AND HEADINGS</li>
-                  <li>NESTING HTML ELEMENTS</li>
-                  <li>BOLD, ITALICS AND UNDERLINES</li>
-                  <li>THE DIV ELEMENT</li>
-                  <li>BLOCK VS INLINE ELEMENTS</li>
-                  <li>LINKING TO OTHER PAGES</li>
-                  <li>OPENING LINKS IN NEW WINDOWS</li>
-                  <li>ADDING IMAGES</li>
-                  <li>LINKING AN IMAGE TO OTHER WEB PAGE</li>
-                  <li>HTML COMMENTS</li>
-                </ul>
-
-                <p className='text-[#F13178] font-bold pt-4'> HTML 101: BEGINERS GUIDE TO CODING</p>
-                <ul className='px-4 list-disc mt-2 text-[#134574]'>
-                  <li className='custom-list-item'>WHAT IS HTML</li>
-                  <li>GETTING SET UP</li>
-                  <li>HTML SYNTAX</li>
-                  <li>PAGE TITLES</li>
-                  <li>PARAGRAPHS AND HEADINGS</li>
-                  <li>NESTING HTML ELEMENTS</li>
-                  <li>BOLD, ITALICS AND UNDERLINES</li>
-                  <li>THE DIV ELEMENT</li>
-                  <li>BLOCK VS INLINE ELEMENTS</li>
-                  <li>LINKING TO OTHER PAGES</li>
-                  <li>OPENING LINKS IN NEW WINDOWS</li>
-                  <li>ADDING IMAGES</li>
-                  <li>LINKING AN IMAGE TO OTHER WEB PAGE</li>
-                  <li>HTML COMMENTS</li>
-                </ul>
-
-
-              </div>
             </div>
 
+            {loading && (
+                <div className=" z-50 absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                    <ReactLoading type={"bars"} color={"#ffffff"} height={100} width={100} />
+                </div>
+            )}
 
-          </div>
+      
 
 
-
-
-
+          <Curricullum course={selectedCourse} />
 
         </div>
       )}

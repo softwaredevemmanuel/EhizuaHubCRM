@@ -67,7 +67,7 @@ const Sidebar = () => {
       <div className="relative h-full">
         {
           reveal?
-          <div onClick={toggle2} className="flex z-10 md:hidden relative pt-[10px] left-0 h-full bg-[#C8D1DA]  cursor-pointer text-gray-500">
+          <div onClick={toggle2} className="flex z-10 md:hidden absolute pt-[23px] left-0 h-full   cursor-pointer text-[#134574]">
               <FaBars size={27}/>   
           </div>
           :""

@@ -46,7 +46,7 @@ const staff = [
   { id: "1", icon: <CiMemoPad />, name: "Memo", url: "staff_memo_list" },
   { id: "2", icon: <HiClipboardList />, name: "Attendance", url: "staff_attendance" },
   { id: "3", icon: <IoMdPerson />, name: "Details", url: "staff_details" },
-  { id: "4", icon: <BsPatchQuestionFill />, name: "Complaints", url: "staff_complaints-list" },
+  { id: "4", icon: <BsPatchQuestionFill />, name: "Feedback / Complaints", url: "staff_complaints-list" },
   { id: "5", icon: <FaTools />, name: "Inventory", url: "staff_inventory" },
   { id: "6", icon: <GiReceiveMoney />, name: "Salary Advance/ Loan", url: "staff_salary_advance" },
   { id: "7", icon: <FaUserMinus />, name: "Report", url: "staff_report" },

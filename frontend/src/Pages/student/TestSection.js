@@ -1,72 +1,139 @@
 import React, { useState, useEffect, useRef } from 'react';
 import StudentLogin from "./StudentLogin";
 import TopNav from "./TopNav";
-import frontend from '../../assets/frontend.png'
 import { Link } from "react-router-dom";
-import Chart from "chart.js/auto"
+import axios from 'axios';
+import toastr from 'toastr';
+import ChartSection from '../../components/ChatSection'
 
 
 
 const TestSection = () => {
   const [user, setUser] = useState(false);
-  const chartRef1 = useRef(null);
-  const chartRef2 = useRef(null);
-  const chartInstance1 = useRef(null);
-  const chartInstance2 = useRef(null);
+  const [totalScore, setTotalScore] = useState('');
+  const [location, setLocation] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState('');
+  const [courses, setCourses] = useState([]);
+  const [attendance, setAttendance] = useState('');
+  const [reload, setReload] = useState('reload');
 
-  // First chart
-  useEffect(() => {
-    const ctx1 = chartRef1.current.getContext('2d');
-    const barColours1 = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'];
+  const labels = [
+    'Attendance', 'Test', 'Exams', 'Projects', 'Workshops'
+  ]
 
-    chartInstance1.current = new Chart(ctx1, {
-      type: 'bar',
-      data: {
-        labels: ['Label1', 'Label2'],
-        datasets: [
-          {
-            label: 'Data1',
-            data: [70, 50],
-            backgroundColor: barColours1,
-          },
-        ],
-      },
-      options: {
-        indexAxis: 'x',
-      },
-    });
+   // Students Courses
+   useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('User'));
+    setLoading(true)
+    async function fetchInstructorDetails() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/students/enrolled-course', {
+          headers: {
+            email: user.email
+          }
+        });
 
-    return () => {
-      chartInstance1.current.destroy();
-    };
+        setCourses(response.data.courses);
+        setLoading(false)
+      } catch (error) {
+        toastr.error('Error retrieving Courses');
+        setLoading(false)
+
+      }
+    }
+
+    fetchInstructorDetails();
   }, []);
 
-  // Second chart
+
+   // Calculate Total Number of correct answers
+   useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('User'));
+    setLoading(true)
+    async function fetchPecentageTest() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/students/total-passed-score', {
+          headers: {
+            email: user.email,
+            course : selectedCourse
+          }
+        });
+
+        setTotalScore(response.data.score);
+        setLoading(false)
+      } catch (error) {
+        toastr.error('Error retrieving Courses');
+        setLoading(false)
+
+      }
+    }
+
+    fetchPecentageTest();
+  }, [selectedCourse]);
+
+    // Students Details
+    useEffect(() => {
+      let user = JSON.parse(localStorage.getItem('User'));
+      setLoading(true)
+      async function fetchStudentDetails() {
+        try {
+          const response = await axios.get('http://localhost:5000/api/students/student-details', {
+            headers: {
+              email: user.email,
+            }
+          });
+  
+          setLocation(response.data.location);
+          setLoading(false)
+        } catch (error) {
+          toastr.error('Error retrieving Courses');
+          setLoading(false)
+  
+        }
+      }
+  
+      fetchStudentDetails();
+    }, [reload]);
+  
+
+   // Calculate Attendance Percentage
+   useEffect(() => {
+    let user = JSON.parse(localStorage.getItem('User'));
+    setLoading(true)
+    async function fetchPecentageTest() {
+      try {
+        const response = await axios.get('http://localhost:5000/api/students/attendance', {
+          headers: {
+            email: user.email,
+            course : selectedCourse,
+            location : location
+          }
+        });
+
+        setAttendance(response.data.attendance);
+        setLoading(false)
+      } catch (error) {
+        toastr.error('Error retrieving Courses');
+        setLoading(false)
+
+      }
+    }
+
+    fetchPecentageTest();
+  }, [selectedCourse, location]);
+
+  // Get the value of the first course available
   useEffect(() => {
-    const ctx2 = chartRef2.current.getContext('2d');
-    const barColours2 = ['rgba(255, 205, 86, 0.2)', 'rgba(75, 192, 192, 0.2)'];
+    if (courses.length > 0) {
+      const firstCourse = courses[0];
+      setSelectedCourse(firstCourse.course);
 
-    chartInstance2.current = new Chart(ctx2, {
-      type: 'pie',
-      data: {
-        labels: ['Test', 'Assessment'],
-        datasets: [
-          {
-            label: 'Data2',
-            data: [12, 50],
-            backgroundColor: barColours2,
-          },
-        ],
-      },
-      options: {
-        indexAxis: 'y',
-      },
-    });
+    }
+  }, [courses]);
 
-    return () => {
-      chartInstance2.current.destroy();
-    };
-  }, []);
+ 
+
 
 
   return (
@@ -82,30 +149,27 @@ const TestSection = () => {
             <p className='text-[#134574] font-bold'>Course</p>
 
             <select
-              className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none bg-slate-200 px-4'>
-              <option value=''>Full Stack Web Development</option>
-              <option value='theory'>Data Analytics</option>
-            </select>
+                className='rounded-lg h-[30px] w-[200px] text-slate-500 outline-none bg-slate-200 px-4'
+                value={selectedCourse}
+                onChange={(event) => setSelectedCourse(event.target.value)}
+
+              >
+                {courses.map((courses, index) => (
+                  <option key={index} value={courses.course}>
+                    {courses.course}
+                  </option>
+
+                ))}
+              </select>
 
           </div>
 
 
-          <div className=' pb-2 px-2 grid sm:grid-cols-2 h-fit'>
-            <div className='flex justify-center'>
-            <div className='w-fit'>
-              <p className="justify-center text-center pt-2 text-[#2b4053]">Students Performance</p>
-              <canvas ref={chartRef1} />
-            </div>
-            </div>
 
-            <div className='flex justify-center'>
-            <div className='w-[200px]'>
-              <p className="justify-center text-center pt-2 text-[#2b4053]">Students Performance</p>
-              <canvas ref={chartRef2} />
-            </div>
-            </div>
-          </div>
 
+         <ChartSection course={selectedCourse} attendance={attendance} labels={labels} testScore ={totalScore}/>
+
+         
 
           <div className='bg-slate-200  h-[520px] rounded-lg sm:px-8 mb-12'>
             <div className='overflow-x-auto mt-4'>

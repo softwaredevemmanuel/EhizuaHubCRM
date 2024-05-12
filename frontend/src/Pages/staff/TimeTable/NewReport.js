@@ -89,6 +89,7 @@ const NewReport = () => {
         }
     };
 
+    console.log(selectedCourseStudent)
 
     useEffect(() => {
         let staffToken = JSON.parse(localStorage.getItem('StaffToken'));
@@ -98,6 +99,7 @@ const NewReport = () => {
 
         }
     }, []);
+
 
 
     // Fetch Course Students
@@ -355,8 +357,8 @@ const NewReport = () => {
                                                     <input
                                                         type='checkbox'
                                                         value={student.student}
-                                                        checked={selectedCourseStudent.includes(`${student.firstName} ${student.lastName}`)}
-                                                        onChange={() => handleStudentCheckboxChange(`${student.firstName} ${student.lastName}`)}
+                                                        checked={selectedCourseStudent.includes(`${student.email}`)}
+                                                        onChange={() => handleStudentCheckboxChange(`${student.email}`)}
                                                     />
                                                     <label htmlFor={`course-${index}`} className="text-xs pl-2">{student.firstName} {student.lastName}</label>
                                                 </div>

@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
-import StaffLogin from "../StaffLogin";
+import StudentLogin from "../StudentLogin";
+import TopNav from "../TopNav";
+import { Link } from "react-router-dom";
 import { FaCirclePlus } from "react-icons/fa6";
-import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid'
-import { CiStar } from "react-icons/ci";
-import { FaStar } from "react-icons/fa";
-import { IoMailUnreadOutline } from "react-icons/io5";
+import ReactLoading from "react-loading";
 import axios from 'axios';
 import toastr from 'toastr';
-import ReactLoading from "react-loading";
 
-const Complaints = () => {
-    const [user, setUser] = useState(false)
-    const [feedback, setFeedback] = useState('feedback')
-    const [complaints, setComplaints] = useState('complaints')
+
+const Complaint = () => {
+    const [user, setUser] = useState(false);
+    const feedback ='feedback'
+    const complaints = 'complaints'
     const [complaintsResponse, setComplaintsResponse] = useState([])
     const [feedbackResponse, setFeedbackResponse] = useState([])
     const [loading, setLoading] = useState(false)
-    const [content, setContent] = useState([])
 
 
+
+
+    useEffect(() => {
+        let studentToken = JSON.parse(localStorage.getItem('StudentToken'));
+
+        // Check if staffToken exists and has the 'token' property
+        if (studentToken && studentToken.token) {
+            setUser(true);
+        }
+    }, []);
+
+    
     // Fetch Complaints
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('User'));
@@ -46,42 +55,14 @@ const Complaints = () => {
     }, []);
 
 
-
     return (
-        <div className="">
-            {user ? (
-                <StaffLogin />
+        <div className="overflow-y-scroll w-full h-screen hide-bar">
+            {!user ? (
+                <StudentLogin />
             ) : (
-                <div className="lg:ml-72  bg-[#C8D1DA] px-5 flex flex-col gap-3 h-screen">
-                    <div className='flex justify-between'>
-                        <nav className="flex mt-6" aria-label="Breadcrumb">
-                            <ol role="list" className="flex items-center space-x-4">
-                                <li>
-                                    <div>
-                                        <Link to="/dashboard" className="text-[#F13178] hover:text-[#134574]">
-                                            <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
-                                            <span className="sr-only">Home</span>
-                                        </Link>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="flex items-center">
-                                        <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-[#F13178]" aria-hidden="true" />
-                                        <div className="ml-4 text-xs font-bold text-[#F13178]">
-                                            COMPLAINTS
-                                        </div>
+                <div className="relative z-0 w-full bg-[#C8D1DA] px-5 flex flex-col gap-3">
 
-                                    </div>
-
-                                </li>
-
-                            </ol>
-                        </nav>
-                    </div>
-
-                    <div className='border-[#F13178] border-b '></div>
-
-
+                    <TopNav />
 
                     {loading && (
                         <div className=" z-50 absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
@@ -95,12 +76,12 @@ const Complaints = () => {
                             <div className="grid grid-cols-3">
                                 <p className=' text-center bg-[#F13178]'></p>
                                 <p className=' text-center text-[#FFF] bg-[#F13178]'>Complaints</p>
-                                <Link to={`/staff/${complaints}`} className="flex justify-end text-[#FFF] bg-[#F13178] ">
+                                <Link to={`/students/${complaints}`} className="flex justify-end text-[#FFF] bg-[#F13178] ">
                                     <p className=' '> New</p>
                                     <FaCirclePlus size={26} className="pl-2 mr-2 " />
                                 </Link>
                             </div>
-                            <div className='bg-slate-500 h-[300px] pt-2 overflow-y-auto'>
+                            <div className='bg-slate-300 h-[500px] pt-2 overflow-y-auto'>
 
 
                                 {/* <Link to='/staff-complaints-details'>
@@ -130,7 +111,7 @@ const Complaints = () => {
                                             <p className="font-bold text-xs pr-2">Complaints:</p>
                                             <div dangerouslySetInnerHTML={{ __html: comp.content.slice(0, 30) }} />
                                             <p className="font-bold text-xs pr-2">.....</p>
-                                            <Link to={`/staff/${complaints}/details/${comp.complaintId}`}>
+                                            <Link to={`/student/${complaints}/details/${comp.complaintId}`}>
                                                 <p className=' underline text-green-800 text-xs '>View More</p>
                                             </Link>
                                         </div>
@@ -146,13 +127,13 @@ const Complaints = () => {
                             <div className="grid grid-cols-3">
                                 <p className=' text-center bg-[#134574]'></p>
                                 <p className=' text-center text-[#FFF] bg-[#134574]'>Feedback</p>
-                                <Link to={`/staff/${feedback}`} className="flex justify-end text-[#FFF] bg-[#134574] ">
+                                <Link to={`/students/${feedback}`} className="flex justify-end text-[#FFF] bg-[#134574] ">
                                     <p className=' '> New</p>
                                     <FaCirclePlus size={26} className="pl-2 mr-2 " />
                                 </Link>
                             </div>
 
-                            <div className='bg-slate-500 h-[300px] pt-2 overflow-y-auto'>
+                            <div className='bg-slate-500 h-[500px] pt-2 overflow-y-auto'>
 
                                 {feedbackResponse.map((feed, index) => (
 
@@ -162,7 +143,7 @@ const Complaints = () => {
                                                 <p className="font-bold text-xs">Comment:</p>
                                                 <div dangerouslySetInnerHTML={{ __html: feed.content }} />
                                             </div>
-                                            <Link to={`/staff/${feedback}/details/${feed.feedbackId}`}>
+                                            <Link to={`/student/${feedback}/details/${feed.feedbackId}`}>
                                                 <p className=' underline text-[#134574] text-sm '>View Details</p>
                                             </Link>
 
@@ -211,16 +192,14 @@ const Complaints = () => {
                     </div>
 
 
+
+
+
                 </div>
-            )
-            }
-            {/* right section  */}
-
-
-
-        </div >
-
-    )
+            )}
+        </div>
+    );
 }
 
-export default Complaints
+export default Complaint
+
